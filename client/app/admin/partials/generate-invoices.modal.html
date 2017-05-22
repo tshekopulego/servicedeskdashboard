@@ -1,0 +1,47 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">{{axn}}</h3>
+	</div>
+	<div class="modal-body">
+		<form novalidate="novalidate" role="form" name="generateInvoicesForm" ng-submit="generateInvoices(query,generateInvoicesForm.$valid)">
+			<div class="box-body">
+
+				<div class="form-group" ng-class="{'has-error': generateInvoicesForm.startDate.$invalid && submitted,'has-success': generateInvoicesForm.startDate.$valid && submitted}">
+					<label class="control-label" for="startDate">Start Date:</label>
+					<div>
+						<div class="col-xs-11" style="padding: 0px;">
+							<input type="text" name="startDate" id="startDate" ng-model="query.startDate" class="form-control" datepicker-popup="dd-MMMM-yyyy" is-open="openedStart" min-date="minDate" max-date="query.endDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required/>
+						</div>
+						<div class="col-xs-1" style="padding: 0px;">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+						</div>
+						<p ng-show="generateInvoicesForm.startDate.$invalid && submitted" class="help-block">The Start Date is required.</p>
+					</div>
+				</div>
+
+				<div class="form-group" ng-class="{'has-error': generateInvoicesForm.endDate.$invalid && submitted,'has-success': generateInvoicesForm.endDate.$valid && submitted}">
+					<label class="control-label" for="endDate">End Date:</label>
+					<div>
+						<div class="col-xs-11" style="padding: 0px;">
+							<input type="text" name="endDate" id="endDate" ng-model="query.endDate" class="form-control" datepicker-popup="dd-MMMM-yyyy" is-open="openedEnd" min-date="query.startDate" max-date="{{today}}" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required/>
+						</div>
+						<div class="col-xs-1" style="padding: 0px 0px 10px;">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+						</div>
+					</div>
+					<p ng-show="generateInvoicesForm.endDate.$invalid && submitted" class="help-block">The End Date is required.</p>
+				</div>
+
+				<div class="box-footer">
+					<button type="submit" class="btn btn-small btn-primary">{{axn}}</button>
+					<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+				</div>
+			</div>
+		</form>
+	</div>
+
+</div>

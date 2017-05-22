@@ -1,0 +1,56 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Edit Office Park</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/officeparks">Office Parks</a>
+				</li>
+				<li class="active">
+					<strong>Edit Office Park</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="ibox">
+						<div class="ibox-content">
+							<form novalidate="novalidate" name="editOfficeParkForm" ng-submit="editOfficePark(officepark,editOfficeParkForm.$valid)" role="form">
+
+								<div class="form-group" ng-class="{'has-error': editOfficeParkForm.officeParkName.$invalid && submitted,'has-success': !editOfficeParkForm.officeParkName.$invalid && submitted}">
+									<label class="control-label" for="officeParkName">Office Park:</label>
+									<input id="officeParkName" name="officeParkName" ng-model="officepark.officeParkName" class="form-control"/>
+									<p ng-show="editOfficeParkForm.officeParkName.$invalid && submitted" class="help-block">The Office Park Name is required</p>
+								</div>
+
+								<div class="form-group" ng-class="{'has-error': editOfficeParkForm.officeParkAddress.$invalid && submitted,'has-success': !editOfficeParkForm.officeParkAddress.$invalid && submitted}">
+									<label class="control-label" for="officeParkAddress">Office Park Address:</label>
+									<input id="officeParkAddress" name="officeParkAddress" ng-model="officepark.officeParkAddress" class="form-control"/>
+									<p ng-show="editCompanyForm.officeParkAddress.$invalid && submitted" class="help-block">The Office Park Address is required</p>
+								</div>
+
+								<div class="box-footer">
+									<button type="submit" class="btn btn-small btn-primary">Submit</button>
+									<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+								</div>
+							</form>
+						</div>
+					</div><!-- /.box -->
+				</div>
+			</div>
+		</section>
+	</aside>
+</div>

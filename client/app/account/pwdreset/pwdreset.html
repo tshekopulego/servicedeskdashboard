@@ -1,0 +1,75 @@
+<div class="container" ng-show="resetStateIs('valid_token')">
+	<div class="bs-callout bs-callout-info" >
+		<h4>Password reset</h4>
+		<p>You changed succesfully your password.</p>
+	</div>
+</div>
+
+<div class="container" ng-show="resetStateIs('invalid_token')">
+	<div class="alert alert-danger" >
+		<h4>Password reset</h4>
+		<p>Somthing went wrong. Your attend to reset your password has failed.</p>
+		<a href="/pwdreset" class="text-right">Try again to change your password</a>
+	</div>
+</div>
+
+<div class="container" ng-show="resetStateIs('mailsent')">
+	<div class="alert alert-info" >
+		<h4>Almost there</h4>
+		<p>A mail with a rest token and some instructions was sent to <b>{{reset.email}}</b>.</p>
+		<p>Check your inbox.</p>
+	</div>
+</div>
+
+<div class="passwordBox animated fadeInDown">
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="ibox-content">
+
+				<h2 class="font-bold">Forgot password?</h2>
+
+				<div class="row">
+
+					<div class="col-lg-12">
+						<form class="form m-t" name="resetform" ng-submit="sendPwdResetMail(resetform)" novalidate>
+
+							<div class="body bg-gray">
+								<p class="text-center">No problem, submit your email address and a new password below and we'll mail you recovery instructions.</p>
+
+								<div class="form-group" ng-class="{'has-error': resetform.email.$invalid && submitted,'has-success': resetform.email.$valid && submitted}">
+									<label>Email address</label>
+									<input type="email" name="email" class="form-control" ng-model="reset.email" required mongoose-error/>
+								</div>
+
+								<div class="form-group has-error">
+									<p class="help-block" ng-show="resetform.email.$error.email && submitted">Doesn't look like a valid email.</p>
+									<p class="help-block" ng-show="resetform.email.$error.required && submitted">Please enter your email.</p>
+									<p class="help-block">{{ errors.other }}</p>
+								</div>
+
+								<div class="help-block has-error" ng-show="resetform.email.$error.unknownMailAddress">
+									<p>The email address you entered is not known.</p>
+									<p>Check the address and send it again.</p>
+								</div>
+
+								<div class="form-group" ng-class="{'has-success': resetform.password.$valid && submitted,'has-error': resetform.password.$invalid && submitted }">
+									<label>New password</label>
+									<input type="password" name="password" class="form-control" ng-model="reset.newPassword" ng-minlength="3" required mongoose-error/>
+									<p class="help-block" ng-show="(resetform.password.$error.minlength || resetform.password.$error.required) && submitted">Password must be at least 3 characters.</p>
+									<p class="help-block" ng-show="resetform.password.$error.mongoose">{{ errors.password }}</p>
+								</div>
+
+								<button class="btn btn-login btn-block" ng-disabled="pwdResetMailSend" type="submit">Send Recovery Email</button>
+								<a class="btn-block text-center" href="/login">Login</a>
+								<a class="btn-block text-center" href="/signup">Register</a>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p class="m-t"> <small>Skhomotech &copy; 2016</small> </p>
+</div>

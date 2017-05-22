@@ -1,0 +1,20 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">Issue Details</h3>
+	</div>
+	<div class="modal-body">
+		<ul>
+			<li>Ref Number: {{issue.issueRefNumber}} {{issue.lastName}}</li>
+			<li>Category: {{issue.issueCategory.categoryName}}</li>
+			<li>Description: {{issue.issueDescription}}</li>
+			<li>Status: {{issue.issueStatus.issueStatusName}}</li>
+			<li>Priority: {{issue.issuePriority}}</li>
+			<li>Channel: {{issue.issueChannel}}</li>
+			<li>Added: {{issue.added | date:'medium'}}</li>
+		</ul>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()">OK</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

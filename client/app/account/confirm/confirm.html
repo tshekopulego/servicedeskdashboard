@@ -1,0 +1,24 @@
+<maq-header></maq-header>
+<div class="wrapper row-offcanvas row-offcanvas-left" ng-controller="NavbarCtrl">
+	<maq-navbar></maq-navbar>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+
+				<div class="alert alert-info" ng-show="isLoggedIn()&&!confirmToken">
+					<h4>Email address confirmation</h4>
+					<p>Look in your mail inbox after an <b>activation message</b>. If you don't find one, push this button:</p>
+					<a href="" ng-click="sendConfirmationMail()"  ng-disabled="confirmationMailSend()" class="btn btn-primary pull-right" >Send new account activation email.</a>
+					<p>Just in cas, check your spam folder.</p>
+				</div>
+
+				<div class="alert alert-danger" ng-show="errors.message">
+					<h4>Email address confirmation failed</h4>
+					<p>The validation token is invalid or has expired. You should signin and ask for a new one.</p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

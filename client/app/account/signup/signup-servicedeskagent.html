@@ -1,0 +1,55 @@
+<div class="passwordBox animated fadeInDown">
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="ibox-content">
+
+				<h2 class="font-bold text-center">Register Service Desk Agent Account</h2>
+
+				<div class="row">
+
+					<div class="col-lg-12">
+						<form class="form" name="registerForm" ng-submit="registerClient(registerForm)" novalidate="novalidate" role="form">
+							<div class="body bg-gray">
+								<div class="form-group" ng-class="{ 'has-success': registerForm.phoneNumber.$valid && submitted, 'has-error': registerForm.phoneNumber.$invalid && submitted }">
+									<label>Phone Number</label>
+
+									<input type="text" name="phoneNumber" class="form-control" ng-model="user.phoneNumber" required ui-mask="9999999999" ui-mask-placeholder ui-mask-placeholder-char="-"/>
+									<p class="help-block" ng-show="registerForm.phoneNumber.$error.required && submitted">
+										A Phone Number is required
+									</p>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-success': registerForm.password.$valid && submitted, 'has-error': registerForm.password.$invalid && submitted }">
+									<label>Password</label>
+
+									<input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength="3" required mongoose-error/>
+									<p class="help-block" ng-show="(registerForm.password.$error.minlength || registerForm.password.$error.required) && submitted">
+										Password must be at least 3 characters.
+									</p>
+									<p class="help-block" ng-show="registerForm.password.$error.mongoose">
+										{{ errors.password }}
+									</p>
+								</div>
+
+								<div class="form-group" ng-class="{ 'has-success': registerForm.confirmPassword.$dirty && (!registerForm.confirmPassword.$error.passwordsMatch && submitted), 'has-error': registerForm.confirmPassword.$dirty && (registerForm.confirmPassword.$error.passwordsMatch && submitted)}">
+									<label>Confirm Password</label>
+
+									<input type="password" name="confirmPassword" class="form-control" ng-model="user.confirmPassword" ui-validate="{passwordsMatch: 'passwordsMatch($value)'}" ui-validate-watch="'user.password'"/>
+									<p class="help-block" ng-show="registerForm.confirmPassword.$dirty && (registerForm.confirmPassword.$error.passwordsMatch && submitted)">
+										Passwords don't match
+									</p>
+								</div>
+
+							</div>
+
+							<button class="btn btn-login btn-block" type="submit">Sign up</button>
+							<p class="text-center"><a href="/login">I already have an account</a></p>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

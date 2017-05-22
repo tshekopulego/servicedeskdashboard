@@ -1,0 +1,55 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Add Office Park</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/users">Office Park</a>
+				</li>
+				<li class="active">
+					<strong>Add Office Park</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="ibox">
+					<div class="ibox-content">
+						<form novalidate="novalidate" name="addOfficeParkForm" ng-submit="addOfficePark(officepark,addOfficeParkForm,addOfficeParkForm.$valid)" role="form">
+
+							<div class="form-group" ng-class="{'has-error': addOfficeParkForm.officeParkName.$error.required && submitted,'has-success': !addOfficeParkForm.officeParkName.$error.required && submitted}">
+								<label class="control-label" for="officeParkName">Office Park Name:</label>
+								<input type="text" id="officeParkName" name="officeParkName" ng-model="officepark.officeParkName" class="form-control"/>
+								<p ng-show="addOfficeParkForm.officeParkName.$error.required  && submitted" class="help-block">The Office Park Name is required</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': addOfficeParkForm.officeParkAddress.$error.required && submitted,'has-success': !addOfficeParkForm.officeParkAddress.$error.required && submitted}">
+								<label class="control-label" for="officeParkAddress">Office Park Address:</label>
+								<input type="text" id="officeParkAddress" name="companyAddress" ng-model="officepark.officeParkAddress" class="form-control"/>
+								<p ng-show="addOfficeParkForm.officeParkAddress.$error.required  && submitted" class="help-block">The Office Park Address is required</p>
+							</div>
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-small btn-primary">Submit</button>
+								<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+							</div>
+						</form>
+					</div><!-- /.box -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

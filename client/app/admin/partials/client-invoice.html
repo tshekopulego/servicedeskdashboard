@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-xs-12">
+        <!-- Main content -->
+        <section class="content" style="border: medium none; margin: 0; box-shadow: none;">
+            <!-- title row -->
+            <div class="row" style="margin: 10px 0px 20px; border-bottom: 1px solid #EEE;">
+                <div class="col-xs-6">
+                    <h2>
+                        <img src="assets/images/dash-logo.png" alt="">
+                    </h2>
+                    <small>Invoice {{ preparedStartDate | date:'mediumDate' }} to {{ preparedEndDate | date:'mediumDate' }}</small><br/>
+                </div><!-- /.col -->
+                <div class="col-xs-6 pull-right">
+                    <p class="text-right">
+                        Service Delovery Report<br/>
+                        Rivonia, Sandton<br/>
+                        Tel: 011 500 3434<br/>
+                        Email: info@skhomotech.co.za
+                    </p>
+                </div>
+            </div>
+
+            <div class="row invoice-info">
+                <div class="col-xs-4 invoice-col invoice-col-bordered">
+                    Invoice To:
+                    <address>
+                        Client Name</strong><br>
+                        Address<br>
+                        Phone Number<br/>
+                    </address>
+                </div><!-- /.col -->
+                <div class="col-xs-4 col-xs-offset-4 invoice-col">
+                    <br/>
+                    <b>Invoice ID:</b> {{order._id}}<br/>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Qty</th>
+                                <th>Description</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>data</td>
+                                <td>data</td>
+                                <td>data</td>
+                                <td class="text-right">data</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Thank you for your business</td>
+                                <td colspan="2" class="text-right"><b>Total: Kshs.</b> 10,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+            <div class="row">
+                <div class="col-xs-12">
+                    ALL INVOICES MUST BE PAID FOURTEEN (14) DAYS FROM DATE OF
+                    INVOICE. SERVICES MAY NOT BE RENDERED INCASE THE INVOICE IS
+                    NOT PAID IN TIME. CHEQUES SHOULD BE ADDRESSED TO DASH
+                    DELIVERY SERVICES, A/C NUMBER 0052091214001, CHASE BANK,
+                    HURLINGHAM BRANCH
+                </div>
+            </div>
+
+        </section><!-- /.content -->
+    </div>
+</div>

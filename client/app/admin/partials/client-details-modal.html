@@ -1,0 +1,21 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">Client Details</h3>
+	</div>
+	<div class="modal-body">
+		<ul>
+			<li ng-if="user.role != 'client' || user.clientType == 'Individual'">Name: {{user.firstName}} {{user.lastName}}</li>
+			<li ng-if="user.clientType == 'Company'">Name: {{user.companyName}}</li>
+			<li>Email: {{user.email}}</li>
+			<li ng-if="user.role == 'client'">Phone Number: {{user.phoneNumber}}</li>
+			<li ng-if="user.role == 'client'">Client Location: {{user.clientLocation}}</li>
+			<li ng-if="user.role == 'client'">Billing Type: {{user.billingType}}</li>
+			<li ng-if="user.clientPackage">Package: {{user.clientPackage.packageName}}</li>
+			<li>Added: {{user.added | date:'medium'}}</li>
+		</ul>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()">OK</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

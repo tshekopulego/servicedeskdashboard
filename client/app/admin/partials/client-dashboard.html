@@ -1,0 +1,215 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+		<div class="row">
+			<div class="col-lg-2">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<i class="fa fa-user pull-right"></i>
+						<h5>Admin</h5>
+					</div>
+					<div class="ibox-content">
+						<ul class="nav nav-dashboard">
+							<li><a href="/dashboard">Dashboard</a></li>
+							<li><a href="/users">Users</a></li>
+							<li><a href="/admin/add">Add User</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<i class="fa fa-motorcycle pull-right"></i>
+						<h5>Category</h5>
+					</div>
+					<div class="ibox-content">
+						<ul class="nav nav-dashboard">
+							<li><a href="/category">Category Dashboard</a></li>
+							<li><a href="/category/add">Add Category</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<i class="fa fa-motorcycle pull-right"></i>
+						<h5>Issues</h5>
+					</div>
+					<div class="ibox-content">
+						<ul class="nav nav-dashboard">
+							<li><a href="/issues">Issue Dashboard</a></li>
+							<li><a href="/issues/add">Add Issue</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+<!--			<div class="col-lg-4">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<i class="fa fa-calendar pull-right"></i>
+						<h5>Errands</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							<ul class="nav nav-dashboard col-lg-6">
+								<li><a href="/errands">Errands Dashboard</a></li>
+								<li><a href="/errands/add">Add Errand</a></li>
+								<li><a href="/errands/status">Errand Statuses</a></li>
+								<li><a href="/errands/status/add">Add Errand Status</a></li>
+								<li><a href="/errands/generate-runsheet">Generate Runsheet</a></li>
+							</ul>
+
+							<ul class="nav nav-dashboard col-lg-6">
+								<li><a href="/errands/attempted-delivery-reasons">Attempted Delivery Reasons</a></li>
+								<li><a href="/errands/attempted-delivery-reasons/add">Add Attempted Delivery Reason</a></li>
+								<li><a href="/errands/delivery-zones">Delivery Zones</a></li>
+								<li><a href="/errands/delivery-zones/add">Add Delivery Zone</a></li>
+								<li><a href="/errands/payment-status">Payment Statuses</a></li>
+								<li><a href="/errands/payment-status/add">Add Payment Status</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>-->
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<div class="row">
+							<div class="col-md-3">
+								<label for="search">Search:</label>
+								<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+							</div>
+							<div class="col-md-3">
+								<label for="search">Items Per Page:</label>
+								<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+							</div>
+							<div class="col-md-3 col-md-offset-3">
+								<dir-pagination-controls pagination-id="errand" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
+							</div>
+						</div>
+					</div>
+					<div class="ibox-content table-responsive">
+						<table class="table" class="row-errand hover">
+							<tr>
+								<th><input type="checkbox" name="select-all" text="Select All" maq-select-all-errands></th>
+								<th>Ref Number</th>
+								<th>Category</th>
+								<th>Description</th>
+								<th>Status</th>
+                                <th>Priority</th>
+								<th>Channel</th>
+								<th colspan="5">Actions</th>
+							</tr>
+							<tr dir-paginate="issue in issues | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="issue" ng-class="{'highlighted':issue.issueStatus == 'OnHold' }">
+								<td><input class="errand-checkbox" type="checkbox" name="{{issue._id}}" value="{{issue._id}}" maq-select-errand></td>
+								<td>{{issue.issueRefNumber}}</td>
+								<td>{{issue.issueCategory.categoryName}}</td>
+								<td>{{issue.issueDescription}}</td>
+								<td>{{issue.issueStatus.issueStatusName}}</td>
+                                <td>{{issue.issuePriority}}</td>
+								<td>{{issue.issueChannel}}</td>
+								<!--<td style="color:{{errand.status.statusColour}};" title="{{errand.status.statusName}}">
+									<span ng-if="errand.status.statusName == 'Open'" class="fa fa-hand-paper-o"></span>
+									<span ng-if="errand.status.statusName == 'Attempted Delivery'" class="fa fa-exchange"></span>
+									<span ng-if="errand.status.statusName == 'Cancelled'" class="fa fa-thumbs-down"></span>
+									<span ng-if="errand.status.statusName == 'Delivered'" class="fa fa-thumbs-up"></span>
+									<span ng-if="errand.status.statusName == 'In Transit'" class="fa fa-motorcycle"></span>
+								</td>-->
+								<td ng-click="open(issue)">
+									<a title="View Details"><span class="fa fa-list"></span></a>
+								</td>
+								<td ng-click="comments(issue)">
+									<a title="View Comments"><span class="fa fa-comments"></span></a>
+								</td>
+								<td ng-if="isAdminAsync">
+									<a href="issues/edit/{{issue._id}}" title="Edit"><span class="fa fa-pencil"></span></a>
+								</td>
+								<td ng-click="delete(issue)" ng-confirm-click="Are you sure you want to delete this issue?" ng-if="isAdminAsync && errand.role != 'admin'">
+									<a class="trash" title="Delete"><span class="fa fa-trash"></span></a>
+								</td>
+							</tr>
+						</table>
+					</div><!-- /.box-body -->
+				</div><!-- /.box -->
+			</div>
+
+			<script type="text/ng-template" id="myModalContent.html">
+				<div class="modal-header">
+					<h3 class="modal-title">Errand Details</h3>
+				</div>
+				<div class="modal-body">
+					<ul>
+						<li ng-if="errand.client.clientType == 'Individual'">Client: {{errand.client.firstName}} {{errand.client.lastName}}</li>
+						<li ng-if="errand.client.clientType == 'Company'">Client: {{errand.client.companyName}}</li>
+						<li ng-if="errand.clientPhoneNumber">Client Phone Number: {{client.clientPhoneNumber}}</li>
+						<li>Billing Type: {{errand.client.billingType}}</li>
+						<li ng-if="errand.paymentStatus">Payment Status: {{errand.paymentStatus.statusName}}</li>
+						<li>Rider: {{errand.errandRider.riderFirstName}} {{errand.errandRider.riderLastName}}</li>
+						<li ng-if="errand.description">Description: {{errand.description}}</li>
+						<li ng-if="errand.price">Price: Kshs. {{errand.price}}</li>
+						<li ng-if="errand.email">Email: {{errand.email}}</li>
+						<li ng-if="errand.client.phoneNumber">Phone Number: {{errand.client.phoneNumber}}</li>
+						<li>Client Location: {{errand.client.clientLocation}}</li>
+						<li>Added: {{errand.dateOfErrand | date:'mediumDate'}}</li>
+						<li>Added: {{errand.added | date:'medium'}}</li>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" ng-click="ok()">OK</button>
+					<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+				</div>
+			</script>
+
+			<script type="text/ng-template" id="updateStatusModal.html">
+				<div class="modal-header">
+					<h3 class="modal-title">Update Status</h3>
+				</div>
+				<div class="modal-body">
+					<form novalidate="novalidate" role="form" name="updateStatusForm" ng-submit="updateStatus(errand,updateStatusForm.$valid)">
+						<div class="box-body">
+
+							<div class="form-group" ng-class="{'has-error': updateStatusForm.status.$invalid && submitted,'has-success': updateStatusForm.status.$valid && submitted}">
+								<label class="control-label" for="status">Status:</label>
+								<select id="status" name="status" class="form-control" ng-model="errand.status._id" required>
+									<option ng-repeat="status in errandStatuses" value="{{status._id}}">{{status.statusName}}</option>
+									<option ng-if="status._id == errand.status._id" ng-repeat="status in errandStatuses" value="{{status._id}}" selected>{{status.statusName}}</option>
+								</select>
+								<p ng-show="updateStatusForm.status.$invalid && submitted" class="help-block">The status is required.</p>
+							</div>
+
+							<div class="form-group" ng-if="errand.client.billingType == 'Single'" ng-class="{'has-error': updateStatusForm.paymentStatus.$invalid && submitted,'has-success': updateStatusForm.paymentStatus.$valid && submitted}">
+								<label class="control-label" for="status">Payment Status:</label>
+								<select id="paymentStatus" name="paymentStatus" class="form-control" ng-model="errand.paymentStatus._id">
+									<option ng-repeat="paymentStatus in paymentStatuses" value="{{paymentStatus._id}}">{{paymentStatus.statusName}}</option>
+									<option ng-if="paymentStatus._id == errand.paymentStatus._id" ng-repeat="paymentStatus in paymentStatuses" value="{{paymentStatus._id}}" selected>{{paymentStatus.statusName}}</option>
+								</select>
+								<p ng-show="updateStatusForm.paymentStatus.$invalid && submitted" class="help-block">The Payment Status is required.</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': updateStatusForm.statusComment.$invalid && submitted,'has-success': updateStatusForm.statusComment.$valid && submitted}">
+								<label class="control-label" for="statusComment">Status Details:</label>
+								<wysiwyg textarea-id="statusComment" textarea-class="form-control"  textarea-height="80px" textarea-name="statusComment" textarea-required ng-model="errand.statusComment" enable-bootstrap-title="true" textarea-menu="{{customMenu}}"></wysiwyg>
+							</div>
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-small btn-primary">Update Status</button>
+								<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</script>
+
+		</div>
+	</div>
+</div>

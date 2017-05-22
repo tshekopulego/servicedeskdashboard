@@ -1,0 +1,17 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">Priority Details</h3>
+	</div>
+	<div class="modal-body">
+		<ul>
+			<li>Name: {{priority.priorityName}}</li>
+			<li>Description: {{priority.priorityDescription}}</li>
+            <li>SLA (Hours): {{priority.prioritySLA}}</li>
+			<li>Added: {{priority.added | date:'medium'}}</li>
+		</ul>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()">OK</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

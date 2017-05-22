@@ -1,0 +1,147 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Edit User</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/admin">Users</a>
+				</li>
+				<li class="active">
+					<strong>Edit User</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="ibox">
+					<div class="ibox-content">
+						<form novalidate="novalidate" role="form" name="editUserForm" ng-submit="updateUser(user,editUserForm.$valid)">
+
+							<div class="form-group" ng-show="user.role == 'client'" ng-class="{'has-error': editUserForm.billingType.$invalid && submitted,'has-success': !editUserForm.billingType.$invalid && submitted}">
+								<label>Billing Type</label>
+								<select id="billingType" name="billingType" class="form-control" ng-model="user.billingType" ng-required="user.role == 'client'">
+									<option ng-repeat="type in billingTypes" value="{{type.value}}">{{type.name}}</option>
+								</select>
+								<p ng-show="editUserForm.billingType.$invalid && submitted" class="help-block">The Billing Type is required</p>
+							</div>
+
+							<div class="form-group" ng-show="user.billingType == 'Package'" ng-class="{'has-error': editUserForm.clientPackage.$invalid && submitted,'has-success': !editUserForm.clientPackage.$invalid && submitted}">
+								<label>Package</label>
+								<select id="clientPackage" name="clientPackage" class="form-control" ng-model="user.clientPackage._id" ng-required="user.billingType == 'Package'">
+									<option ng-repeat="pckg in packages" value="{{pckg._id}}">{{pckg.packageName}}</option>
+								</select>
+								<p ng-show="editUserForm.clientPackage.$invalid && submitted" class="help-block">The Package is required</p>
+							</div>
+
+							<div class="form-group" ng-show="user.role == 'client'" ng-class="{'has-error': editUserForm.clientType.$invalid && submitted,'has-success': !editUserForm.clientType.$invalid && submitted}">
+								<label>Client Type</label>
+								<select id="clientType" name="clientType" class="form-control" ng-model="user.clientType" ng-required="user.role == 'client'">
+									<option ng-repeat="type in clientTypes" value="{{type.value}}">{{type.name}}</option>
+								</select>
+								<p ng-show="editUserForm.clientType.$invalid && submitted" class="help-block">The Client Type is required</p>
+							</div>
+
+							<div class="form-group" ng-if="user.role != 'client' || user.clientType == 'Individual'" ng-class="{'has-error': editUserForm.firstName.$error.required && submitted,'has-success': !editUserForm.firstName.$error.required && submitted}">
+								<label class="control-label" for="firstName">First Name:</label>
+								<input type="text" id="firstName" name="firstName" ng-model="user.firstName" ng-required="user.role != 'client' || user.clientType == 'Individual'" class="form-control"/>
+								<p ng-show="editUserForm.firstName.$error.required  && submitted" class="help-block">The First Name is required</p>
+							</div>
+
+							<div class="form-group" ng-if="user.clientType == 'Company'" ng-class="{'has-error': editUserForm.companyName.$error.required && submitted,'has-success': !editUserForm.companyName.$error.required && submitted}">
+								<label class="control-label" for="companyName">Company Name:</label>
+								<input type="text" id="companyName" name="companyName" ng-model="user.companyName" ng-required="user.clientType == 'Company'" class="form-control"/>
+								<p ng-show="editUserForm.companyName.$error.required  && submitted" class="help-block">The Company Name is required</p>
+							</div>
+
+							<div class="form-group" ng-if="user.role != 'client' || user.clientType == 'Individual'" ng-class="{'has-error': editUserForm.lastName.$error.required && submitted,'has-success': !editUserForm.lastName.$error.required && submitted}">
+								<label class="control-label" for="lastName">Last Name:</label>
+								<input type="text" id="lastName" name="lastName" ng-model="user.lastName" ng-required="user.role != 'client'" class="form-control"/>
+								<p ng-show="editUserForm.lastName.$error.required  && submitted" class="help-block">The Last Name is required</p>
+							</div>
+
+							<div class="form-group" ng-if="user.role == 'client'" ng-class="{'has-error': editUserForm.zone.$invalid && submitted,'has-success': !editUserForm.zone.$invalid && submitted}">
+								<label>Client Office Zone</label>
+								<ui-select id="zone" name="zone" ng-model="user.zone" theme="bootstrap" ng-required="user.role == 'client'">
+								<ui-select-match placeholder="Select a Zone">{{$select.selected.deliveryZoneArea+' - '+$select.selected.deliveryZoneType}}</ui-select-match>
+								<ui-select-choices repeat="zone in zones | filter: $select.search" value="{{zone._id}}">
+								<div ng-bind-html="zone.deliveryZoneArea+' - '+zone.deliveryZoneType | highlight: $select.search"></div>
+							</ui-select-choices>
+						</ui-select>
+						<p ng-show="editUserForm.zone.$invalid && submitted" class="help-block">The Zone is required.</p>
+					</div>
+
+					<div class="form-group" ng-if="user.clientType == 'Company'" ng-class="{'has-error': editUserForm.contactPerson.$error.required && submitted,'has-success': !editUserForm.contactPerson.$error.required && submitted}">
+						<label class="control-label" for="contactPerson">Contact Person:</label>
+						<input type="text" id="contactPerson" name="contactPerson" ng-model="user.contactPerson" ng-required="user.clientType == 'Company'" class="form-control"/>
+						<p ng-show="editUserForm.contactPerson.$error.required  && submitted" class="help-block">The Contact Person is required</p>
+					</div>
+
+					<div class="form-group" ng-if="user.clientType == 'Company'" ng-class="{'has-error': editUserForm.contactPersonPhoneNumber.$error.required && submitted,'has-success': !editUserForm.contactPersonPhoneNumber.$error.required && submitted}">
+						<label class="control-label" for="contactPersonPhoneNumber">Contact Person Phone Number:</label>
+						<input type="text" id="contactPersonPhoneNumber" name="contactPersonPhoneNumber" ng-model="user.contactPersonPhoneNumber" ng-required="user.clientType == 'Company'" class="form-control" ui-mask="9999999999" ui-mask-placeholder ui-mask-placeholder-char="-"/>
+						<p ng-show="editUserForm.contactPersonPhoneNumber.$error.required  && submitted" class="help-block">The Contact Person Phone Number is required</p>
+					</div>
+
+					<div class="form-group contact-row" ng-if="user.role == 'client'">
+						<label>Other Contacts</label>
+						<div class="input-group col-xs-6" ng-repeat="(index,contact) in user.extraContacts">
+							<input class="form-control" type="text" name="person" data-index="{{index}}" placeholder="Contact Person Name" value="{{contact.person}}" maq-update-extra-contacts/>
+							<input class="form-control" type="text" name="number" placeholder="Contact Person Number" value="{{contact.number}}" maq-update-extra-contacts data-index="{{index}}"/>
+							<span maq-remove-client-contact-row class="glyphicon glyphicon-remove trash delete-row" data-index="{{index}}" title="Remove Contact"></span>
+						</div>
+					</div>
+
+					<div class="form-group" ng-show="user.role == 'client'">
+						<span maq-add-client-contact></span>
+					</div>
+
+					<div class="form-group" ng-show="user.role == 'client'">
+						<label for="needsWaybill">Needs Waybill?</label>
+						<input type="checkbox" name="needsWaybill" ng-model="user.needsWaybill" value="true"/>
+					</div>
+
+					<div class="form-group" ng-class="{'has-error': editUserForm.email.$invalid && submitted,'has-success': !editUserForm.email.$invalid && submitted}">
+						<label class="control-label" for="email">Email:</label>
+						<input type="email" id="email" name="email" type="email" ng-model="user.email" ng-required="user.role == 'user'" mongoose-error class="form-control"/>
+						<p ng-show="editUserForm.email.$error.required && submitted" class="help-block">Enter a valid Email Address</p>
+						<p class="help-block" ng-show="editUserForm.email.$error.mongoose">{{ errors.email }}</p>
+					</div>
+
+					<div ng-if="user.role == 'client'" class="form-group" ng-class="{'has-error': editUserForm.phoneNumber.$invalid && submitted,'has-success': !editUserForm.phoneNumber.$invalid && submitted}">
+						<label class="control-label" for="phoneNumber">Phone Number:</label>
+						<input type="text" name="phoneNumber" id="phoneNumber" ng-model="user.phoneNumber" class="form-control" ui-mask="9999999999" ui-mask-placeholder ui-mask-placeholder-char="-"/>
+						<p ng-show="editUserForm.phoneNumber.$invalid && submitted" class="help-block">The Phone Number is required</p>
+					</div>
+
+					<div ng-if="user.role == 'client'" class="form-group" ng-class="{'has-error': editUserForm.clientLocation.$invalid && submitted,'has-success': !editUserForm.clientLocation.$invalid && submitted}">
+						<label class="control-label" for="clientLocation">Client Location:</label>
+						<input type="text" name="clientLocation" id="clientLocation" ng-model="user.clientLocation" class="form-control"/>
+						<p ng-show="editUserForm.clientLocation.$invalid && submitted" class="help-block">The Client Location is required</p>
+					</div>
+
+					<div class="box-footer">
+						<button type="submit" class="btn btn-small btn-primary">Update User</button>
+						<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+						<a href="/admin/add" class="btn btn-small btn-primary">Create New User</a>
+					</div>
+				</form>
+			</div><!-- /.box -->
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
