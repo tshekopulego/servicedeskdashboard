@@ -82,6 +82,19 @@
                     <li><a href="/issues/add">Add Issue</a></li>
 				</ul>
 			</li>
+            
+            
+			<li class="treeview" ng-show="isAdmin()">
+				<a href="/visitors" maq-sidebar-menu>
+					<i class="fa fa-motorcycle"></i>
+					<span>Change Management</span>
+					<span class="fa fa-angle-left pull-right"></span>
+				</a>
+				<ul class="nav nav-second-level">
+					<li><a href="/rfccalls">Change Management Dashboard</a></li>
+                    <li><a href="/rfccalls/add">Add RFC Call</a></li>
+				</ul>
+			</li>
 
 			<!--<li class="treeview" ng-show="isAdmin()">
 				<a href="/officeparks" maq-sidebar-menu>
