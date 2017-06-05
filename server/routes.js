@@ -16,8 +16,11 @@ module.exports = function(app) {
   app.use('/api/category', require('./api/category'));
   app.use('/api/issue-status', require('./api/issue-status'));
   app.use('/api/priority', require('./api/priority'));
+  app.use('/api/channel', require('./api/channel'));
+  app.use('/api/ictstore', require('./api/ictstore'));
+  app.use('/api/ictasset', require('./api/ictasset'));
+  	
     
-
   app.use('/auth', require('./auth'));
 
   // All undefined asset or api routes should return a 404

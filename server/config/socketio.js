@@ -24,6 +24,11 @@ function onConnect(socket) {
   require('../api/user/user.socket').register(socket);
   require('../api/issues/issue.socket').register(socket);
   require('../api/category/category.socket').register(socket);
+	 require('../api/channel/channel.socket').register(socket);
+	 require('../api/ictstore/ictstore.socket').register(socket);
+	require('../api/ictasset/ictasset.socket').register(socket);
+	
+	
 }
 
 module.exports = function (socketio) {
