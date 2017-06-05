@@ -8,10 +8,8 @@
     "grunt-contrib-clean": "^0.5.0",
     "jit-grunt": "^0.5.0",
     "jshint-stylish": "^0.1.5",
-    "time-grunt": "^0.3.2",
-	 "mongoose": "latest",
-    "morgan": "latest",
-    "socket.io": "latest"
+    "mongoose": "^4.5.8",
+    "time-grunt": "^0.3.2"
   },
   "devDependencies": {},
   "scripts": {
