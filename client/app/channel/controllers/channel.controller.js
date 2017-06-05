@@ -10,6 +10,7 @@ angular.module('serviceDeskApp')
 	$http.get('/api/channel').success(function(channel) {
 		$scope.channel = channel;
 		socket.syncUpdates('channel', $scope.channel,function(event,channel,channels){
+
 		});
 	});
 

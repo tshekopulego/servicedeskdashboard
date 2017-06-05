@@ -11,6 +11,10 @@ var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 
+var app      = express();
+var server   = require('http').Server(app);
+var io       = require('socket.io')(server);
+
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
 

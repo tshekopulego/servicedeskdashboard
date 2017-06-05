@@ -1,21 +1,27 @@
 'use strict';
 
-describe('Controller: ChannelCtrl', function () {
+angular.module('serviceDeskApp')
+.controller('EditChannelCtrl', function ($scope, $http, $location, $window, $routeParams) {
 
-  // load the controller's module
-  beforeEach(module('serviceDeskApp'));
+    $scope.channel = {};
+    $scope.submitted = false;
+    $scope.channel_id = $routeParams.id;
 
-  var ChannelCtrl, scope;
+    $http.get('/api/channel/' + $scope.channel_id ).success(function(channel) {
+        $scope.channel = channel;
+    })
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    ChannelCtrl = $controller('ChannelCtrl', {
-      $scope: scope
-    });
-  }));
+    $scope.editChannel = function(channel,isValid) {
+        $scope.submitted = true;
+        $scope.channel = channel;
+        if(isValid && $scope.submitted) {
+            $http.put('/api/channel/' + $scope.channel_id,channel);
+            $scope.channel = '';
+            $location.path('/channel');
+        }
+    };
 
-  // it('should ...', function () {
-  //   expect(1).toEqual(1);
-  // });
+    $scope.cancel = function() {
+        $window.history.back();
+    };
 });

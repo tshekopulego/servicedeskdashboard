@@ -1,80 +1,76 @@
 'use strict';
 
 var _ = require('lodash');
-var Channel = require('./channel.model');
+var ICTAsset = require('./ictasset.model');
 
-// Get list of channel
-
+// Get list of category
 exports.index = function (req, res) {
-    Channel.find(function (err, channel) {
+    ICTAsset.find(function (err, ictasset) {
         if (err) {
             return handleError(res, err);
         }
-        return res.json(200, channel);
+        return res.json(200, ictasset);
     });
 };
 
-
-// Get a single channel
+// Get a single category
 exports.show = function (req, res) {
-    Channel.findById(req.params.id, function (err, channel) {
+    ICTAsset.findById(req.params.id, function (err, ictasset) {
         if (err) {
             return handleError(res, err);
         }
-        if (!channel) {
+        if (!ictasset) {
             return res.send(404);
         }
-        return res.json(channel);
+        return res.json(ictasset);
     });
 };
 
-
-// Creates a new channel in the DB.
-
+// Creates a new category in the DB.
 exports.create = function (req, res) {
-    Channel.create(req.body, function (err, channel) {
+    ICTAsset.create(req.body, function (err, ictasset) {
         if (err) {
             return handleError(res, err);
         }
-        return res.json(201, channel);
+        return res.json(201, ictasset);
     });
 };
 
-// Updates an existing channel in the DB.
+// Updates an existing category in the DB.
 exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
-    Channel.findById(req.params.id, function (err, channel) {
+    ICTAsset.findById(req.params.id, function (err, ictasset) {
         if (err) {
             return handleError(res, err);
         }
-        if (!channel) {
+        if (!ictasset) {
             return res.send(404);
         }
-        var updated = _.merge(channel, req.body);
+        var updated = _.merge(ictasset, req.body);
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.json(200, channel);
+            return res.json(200, ictasset);
         });
     });
 };
 
-// Deletes a channel from the DB.
+// Deletes a category from the DB.
 exports.destroy = function (req, res) {
-    Channel.findById(req.params.id, function (err, channel) {
+    ICTAsset.findById(req.params.id, function (err, ictasset) {
 
         if (err) {
             return handleError(res, err);
         }
 
-        if (!channel) {
+        if (!ictasset) {
             return res.send(404);
         }
 
-        channel.remove(function (err) {
+        ictasset.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }
