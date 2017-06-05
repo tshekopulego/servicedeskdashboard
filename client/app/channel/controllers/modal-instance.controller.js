@@ -1,5 +1,5 @@
 angular.module('serviceDeskApp')
-.controller('ChannelModalInstanceCtrl', function ($scope, $modalInstance, category) {
+.controller('ChannelModalInstanceCtrl', function ($scope, $modalInstance, channel) {
 
     $scope.channel = channel;
 

@@ -4,16 +4,20 @@
 
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="col-lg-10">
+
 			<h2>Add Channel</h2>
+
 			<ol class="breadcrumb">
 				<li>
 					<a href="/">Home</a>
 				</li>
 				<li>
+
 					<a href="/packages">Channels</a>
 				</li>
 				<li class="active">
 					<strong>Add Channel</strong>
+
 				</li>
 			</ol>
 		</div>
@@ -28,6 +32,7 @@
 			<div class="col-md-6">
 				<div class="ibox">
 					<div class="ibox-content">
+
 						<form novalidate="novalidate" name="addChannelForm" ng-submit="addChannel(channel,addChannelForm.$valid)" role="form">
 
 
@@ -48,9 +53,6 @@
 								<textarea type="text" id="status" name="status" ng-model="channel.status" class="form-control"></textarea>
 								<p ng-show="addChannelForm.status.$error.required  && submitted" class="help-block">The Status is required.</p>
 							</div>
-							
-							
-							
 
 							<div class="box-footer">
 								<button type="submit" class="btn btn-small btn-primary">Submit</button>

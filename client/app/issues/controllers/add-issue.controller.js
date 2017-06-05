@@ -6,11 +6,17 @@ angular.module('serviceDeskApp')
     $scope.issue = {};
     $scope.submitted = false;
     
-    $scope.channels = [{"channelName":"Call","channelDescription":"Any Phone calls"}]
+     $http.get('/api/channel').success(function(channels) {
+        $scope.channels = channels;
+        socket.syncUpdates('channel',
+        $scope.channels,function(event,channel,channels){
+        });
+    });
     
     $http.get('/api/category').success(function(categories) {
         $scope.categories = categories;
-        socket.syncUpdates('category', $scope.categories,function(event,category,categories){
+        socket.syncUpdates('category', 
+        $scope.categories,function(event,category,categories){
         });
     });
     

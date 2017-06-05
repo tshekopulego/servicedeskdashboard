@@ -41,13 +41,14 @@
                                         <small>
                                             Description: {{priority.priorityDescription}}
 											SLA (Hours): {{priority.prioritySLA}}
-											</small>
+								        </small>
                                     </ui-select-choices>
                                 </ui-select>
                                 <p ng-show="addIssueForm.priority.$invalid && submitted" class="help-block">The Priority is required.</p>
                             </div>
 
                             <div class="form-group" ng-class="{'has-error': addIssueForm.category.$invalid && submitted,'has-success': !addIssueForm.category.$invalid && submitted}">
+                                
                                 <label>Category:</label>
                                 <ui-select id="category" name="category" ng-model="issue.category" theme="bootstrap" required>
                                     <ui-select-match placeholder="Select a Category">{{$select.selected.categoryName}}</ui-select-match>

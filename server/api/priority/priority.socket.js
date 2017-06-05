@@ -4,7 +4,7 @@
 
 'use strict';
 
-var Category = require('./priority.model');
+var Priority = require('./priority.model');
 
 exports.register = function(socket) {
   Priority.schema.post('save', function (doc) {

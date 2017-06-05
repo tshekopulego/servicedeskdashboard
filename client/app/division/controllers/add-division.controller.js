@@ -7,7 +7,7 @@ angular.module('serviceDeskApp')
 
     $scope.addDivision = function(division,isValid) {
         $scope.submitted = true;
-console.log(division);
+        console.log(division);
         if(isValid && $scope.submitted) {
             $http.post('/api/division',division);
             $scope.division = {};

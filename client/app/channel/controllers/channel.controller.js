@@ -3,13 +3,14 @@
 angular.module('serviceDeskApp')
 .controller('ChannelCtrl', function ($scope, $http, $modal, $log, $filter, socket) {
 
-	$scope.channels = [];
+	$scope.channel = [];
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
 
-	$http.get('/api/channel').success(function(channels) {
-		$scope.channels = channels;
-		socket.syncUpdates('channel', $scope.channels,function(event,channel,channels){
+	$http.get('/api/channel').success(function(channel) {
+		$scope.channel = channel;
+		socket.syncUpdates('channel', $scope.channel,function(event,channel,channels){
+
 		});
 	});
 

@@ -3,7 +3,8 @@
 var _ = require('lodash');
 var Channel = require('./channel.model');
 
-// Get list of category
+// Get list of channel
+
 exports.index = function (req, res) {
     Channel.find(function (err, channel) {
         if (err) {
@@ -13,7 +14,8 @@ exports.index = function (req, res) {
     });
 };
 
-// Get a single category
+
+// Get a single channel
 exports.show = function (req, res) {
     Channel.findById(req.params.id, function (err, channel) {
         if (err) {
@@ -26,7 +28,9 @@ exports.show = function (req, res) {
     });
 };
 
-// Creates a new category in the DB.
+
+// Creates a new channel in the DB.
+
 exports.create = function (req, res) {
     Channel.create(req.body, function (err, channel) {
         if (err) {
@@ -36,7 +40,7 @@ exports.create = function (req, res) {
     });
 };
 
-// Updates an existing category in the DB.
+// Updates an existing channel in the DB.
 exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id;
@@ -58,7 +62,7 @@ exports.update = function (req, res) {
     });
 };
 
-// Deletes a category from the DB.
+// Deletes a channel from the DB.
 exports.destroy = function (req, res) {
     Channel.findById(req.params.id, function (err, channel) {
 
