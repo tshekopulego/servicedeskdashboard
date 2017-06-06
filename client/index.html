@@ -6,10 +6,10 @@
     <head>
         <meta charset="UTF-8">
         <base href="/">
-        <title>Service Desk</title>
+        <title>Skhomo Service Desk</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -20,16 +20,15 @@
         <link rel="stylesheet" href="app/account/login/login.css">
         <link rel="stylesheet" href="app/admin/admin.css">
         <link rel="stylesheet" href="app/app.css">
-        
-        <link rel="stylesheet" href="app/division/division.css">
-        
-        <link rel="stylesheet" href="app/officeparks/officeparks.css">
-        
         <link rel="stylesheet" href="app/category/category.css">
-		
-		 <link rel="stylesheet" href="app/channel/channel.css">
-        
-        
+        <link rel="stylesheet" href="app/channel/channel.css">
+        <link rel="stylesheet" href="app/division/division.css">
+        <link rel="stylesheet" href="app/ictasset/ictasset.css">
+        <link rel="stylesheet" href="app/ictstore/ictstore.css">
+        <link rel="stylesheet" href="app/issues/issues.css">
+        <link rel="stylesheet" href="app/officeparks/officeparks.css">
+        <link rel="stylesheet" href="app/priority/priority.css">
+        <link rel="stylesheet" href="app/status/issuestatus.css">
         <link rel="stylesheet" href="assets/css/morris/morris.css">
         <link rel="stylesheet" href="assets/css/jvectormap/jquery-jvectormap-1.2.2.css">
         <link rel="stylesheet" href="assets/css/datepicker/datepicker3.css">
@@ -61,31 +60,31 @@
         <script src="socket.io/socket.io.js"></script>
         <!-- build:js(client) app/vendor.js -->
         <!-- bower:js -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
-        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-        <script src="bower_components/angular-socket-io/socket.js"></script>
-        <script src="bower_components/angular-ui-scroll/dist/ui-scroll.js"></script>
-        <script src="bower_components/angular-ui-scrollpoint/dist/scrollpoint.js"></script>
-        <script src="bower_components/angular-ui-event/dist/event.js"></script>
-        <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
-        <script src="bower_components/angular-ui-validate/dist/validate.js"></script>
-        <script src="bower_components/angular-ui-indeterminate/dist/indeterminate.js"></script>
-        <script src="bower_components/angular-ui-uploader/dist/uploader.js"></script>
-        <script src="bower_components/angular-ui-utils/index.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.js"></script>
-        <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-        <script src="bower_components/angular-ui-select/dist/select.js"></script>
-        <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
-        <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
-        <script src="bower_components/angular-wysiwyg/angular-wysiwyg.js"></script>
-        <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="../bower_components/angular-resource/angular-resource.js"></script>
+        <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="../bower_components/angular-route/angular-route.js"></script>
+        <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="../bower_components/lodash/dist/lodash.compat.js"></script>
+        <script src="../bower_components/angular-socket-io/socket.js"></script>
+        <script src="../bower_components/angular-ui-scroll/dist/ui-scroll.js"></script>
+        <script src="../bower_components/angular-ui-scrollpoint/dist/scrollpoint.js"></script>
+        <script src="../bower_components/angular-ui-event/dist/event.js"></script>
+        <script src="../bower_components/angular-ui-mask/dist/mask.js"></script>
+        <script src="../bower_components/angular-ui-validate/dist/validate.js"></script>
+        <script src="../bower_components/angular-ui-indeterminate/dist/indeterminate.js"></script>
+        <script src="../bower_components/angular-ui-uploader/dist/uploader.js"></script>
+        <script src="../bower_components/angular-ui-utils/index.js"></script>
+        <script src="../bower_components/angular-animate/angular-animate.js"></script>
+        <script src="../bower_components/jquery-ui/jquery-ui.js"></script>
+        <script src="../bower_components/angular-ui-select/dist/select.js"></script>
+        <script src="../bower_components/ng-table/dist/ng-table.min.js"></script>
+        <script src="../bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
+        <script src="../bower_components/angular-wysiwyg/angular-wysiwyg.js"></script>
+        <script src="../bower_components/angular-utils-pagination/dirPagination.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -113,60 +112,55 @@
         <script src="app/admin/directives/select-client.directive.js"></script>
         <script src="app/admin/directives/sidebar.menu.directive.js"></script>
         <script src="app/admin/directives/update-extra-contacts.directive.js"></script>
-        
+        <script src="app/category/category.js"></script>
+        <script src="app/category/controllers/add-category.controller.js"></script>
+        <script src="app/category/controllers/category.controller.js"></script>
+        <script src="app/category/controllers/edit-category.controller.js"></script>
+        <script src="app/category/controllers/modal-instance.controller.js"></script>
+        <script src="app/channel/channel.js"></script>
+        <script src="app/channel/controllers/add-channel.controller.js"></script>
+        <script src="app/channel/controllers/channel.controller.js"></script>
+        <script src="app/channel/controllers/edit-channel.controller.js"></script>
+        <script src="app/channel/controllers/modal-instance.controller.js"></script>
+        <script src="app/division/controllers/add-division.controller.js"></script>
+        <script src="app/division/controllers/division.controller.js"></script>
+        <script src="app/division/controllers/edit-division.controller.js"></script>
+        <script src="app/division/division.js"></script>
+        <script src="app/ictasset/controllers/add-ictasset.controller.js"></script>
+        <script src="app/ictasset/controllers/edit-ictasset.controller.js"></script>
+        <script src="app/ictasset/controllers/ictasset.controller.js"></script>
+        <script src="app/ictasset/controllers/modal-instance.controller.js"></script>
+        <script src="app/ictasset/ictasset.js"></script>
+        <script src="app/ictstore/controllers/add-ictstore.controller.js"></script>
+        <script src="app/ictstore/controllers/edit-ictstore.controller.js"></script>
+        <script src="app/ictstore/controllers/ictstore.controller.js"></script>
+        <script src="app/ictstore/controllers/modal-instance.controller.js"></script>
+        <script src="app/ictstore/ictstore.js"></script>
+        <script src="app/issues/controllers/add-issue.controller.js"></script>
+        <script src="app/issues/controllers/edit-issue.controller.js"></script>
+        <script src="app/issues/controllers/issue-modal-instance.controller.js"></script>
+        <script src="app/issues/controllers/issues.controller.js"></script>
+        <script src="app/issues/issues.js"></script>
         <script src="app/officeparks/controllers/add-officepark.controller.js"></script>
         <script src="app/officeparks/controllers/edit-officepark.controller.js"></script>
         <script src="app/officeparks/controllers/officeparks.controller.js"></script>
         <script src="app/officeparks/officeparks.js"></script>
-        
-        <script src="app/category/controllers/add-category.controller.js"></script>
-        <script src="app/category/controllers/edit-category.controller.js"></script>
-        <script src="app/category/controllers/modal-instance.controller.js"></script>
-        <script src="app/category/controllers/category.controller.js"></script>
-        <script src="app/category/category.js"></script>
-		
-		
-		<script src="app/channel/controllers/add-channel.controller.js"></script>
-        <script src="app/channel/controllers/edit-channel.controller.js"></script>
-        <script src="app/channel/controllers/modal-instance.controller.js"></script>
-        <script src="app/channel/controllers/channel.controller.js"></script>
-        <script src="app/channel/channel.js"></script>
-        
-		
-		<script src="app/ictstore/controllers/add-ictstore.controller.js"></script>
-        <script src="app/ictstore/controllers/edit-ictstore.controller.js"></script>
-        <script src="app/ictstore/controllers/modal-instance.controller.js"></script>
-        <script src="app/ictstore/controllers/ictstore.controller.js"></script>
-        <script src="app/ictstore/ictstore.js"></script>
-		
-		<script src="app/ictasset/controllers/add-ictasset.controller.js"></script>
-        <script src="app/ictasset/controllers/edit-ictasset.controller.js"></script>
-        <script src="app/ictasset/controllers/modal-instance.controller.js"></script>
-        <script src="app/ictasset/controllers/ictasset.controller.js"></script>
-        <script src="app/ictasset/ictasset.js"></script>
-        
-        
-        <script src="app/issues/controllers/issues.controller.js"></script>
-        <script src="app/issues/controllers/add-issue.controller.js"></script>
-        <script src="app/issues/controllers/issue-modal-instance.controller.js"></script>
-        <script src="app/issues/issues.js"></script>
-        
-        <script src="app/rfc-calls/controllers/rfccall.controller.js"></script>
-        <script src="app/rfc-calls/controllers/add-rfccall.controller.js"></script>
-        <script src="app/rfc-calls/controllers/rfccall-modal-instance.controller.js"></script>
-        <script src="app/rfc-calls/rfccalls.js"></script>
-        
         <script src="app/priority/controllers/add-priority.controller.js"></script>
         <script src="app/priority/controllers/edit-priority.controller.js"></script>
         <script src="app/priority/controllers/modal-instance.controller.js"></script>
         <script src="app/priority/controllers/priority.controller.js"></script>
         <script src="app/priority/priority.js"></script>
-        
-        <script src="app/division/controllers/add-division.controller.js"></script>
-        <script src="app/division/controllers/edit-division.controller.js"></script>
-        <script src="app/division/controllers/division.controller.js"></script>
-        <script src="app/division/division.js"></script>
-        
+        <script src="app/request-type/controllers/request-type.controller.js"></script>
+        <script src="app/request-type/requesttype.js"></script>
+        <script src="app/rfc-calls/controllers/add-rfccall.controller.js"></script>
+        <script src="app/rfc-calls/controllers/edit-rfccall.controller.js"></script>
+        <script src="app/rfc-calls/controllers/rfccall-modal-instance.controller.js"></script>
+        <script src="app/rfc-calls/controllers/rfccall.controller.js"></script>
+        <script src="app/rfc-calls/rfccalls.js"></script>
+        <script src="app/status/controllers/add-issuestatus.controller.js"></script>
+        <script src="app/status/controllers/edit-issuestatus.controller.js"></script>
+        <script src="app/status/controllers/issuestatus.controller.js"></script>
+        <script src="app/status/issuestatus.js"></script>
         <script src="components/auth/auth.service.js"></script>
         <script src="components/auth/local.service.js"></script>
         <script src="components/auth/user.service.js"></script>
