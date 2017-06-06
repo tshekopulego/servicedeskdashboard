@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "main": "server/app.js",
   "dependencies": {
+  "bower": "1.8.0",
 	"body-parser": "~1.0.0",
 	"busboy": "^0.2.11",
 	"composable-middleware": "^0.3.0",
@@ -30,6 +31,7 @@
 	"wkhtmltopdf": "^0.1.5"
   },
   "devDependencies": {
+  "bower": "1.8.0",
 	"grunt": "~0.4.4",
 	"grunt-autoprefixer": "~0.7.2",
 	"grunt-wiredep": "~1.8.0",
@@ -88,6 +90,7 @@
   },
   "scripts": {
 	"start": "node server/app.js",
+  "postinstall" : "./node_modules/bower/bin/bower cache clean && bower install",
 	"test": "grunt test",
 	"update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
   },

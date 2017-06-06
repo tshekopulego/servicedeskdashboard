@@ -97,6 +97,8 @@ angular.module('serviceDeskApp')
             var hours = duration.asHours();
             console.log(hours > sla);
 
+            console.log(sla);
+
             return hours > sla;
     }
 

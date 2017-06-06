@@ -87,10 +87,10 @@
                 <td>{{issue.issueChannel.channelName}}</td>
                 <td>{{issue.issuePriority.priorityName}}</td>
 								<td>{{issue.added | date:'medium'}}</td>
-								<td ng-if="isOverSLA(issue.added,issue.jobCardPriority.prioritySLA)">
+								<td ng-if="isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
 												<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
 							  </td>
-								<td ng-if="!isOverSLA(issue.added,issue.jobCardPriority.prioritySLA)">
+								<td ng-if="!isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
 												<span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>
 								</td>
 
