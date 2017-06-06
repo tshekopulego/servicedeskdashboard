@@ -11,9 +11,7 @@ module.exports = {
 
 	// MongoDB connection options
 	mongo: {
-
 		uri: 	'mongodb://admin:admin@ds151951.mlab.com:51951/servicedeskdb'
-
 	},
 	socket:{
 		handshake: {
