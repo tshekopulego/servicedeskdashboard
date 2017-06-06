@@ -1,18 +1,18 @@
 'use strict';
 
 angular.module('serviceDeskApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'ngRoute',
-    'ngAnimate',
-    'btford.socket-io',
-    'ui.utils',
-    'ui.bootstrap',
-    'ui.select',
-    'ngTable',
-    'wysiwyg.module',
-    'angularUtils.directives.dirPagination'
+  'ngRoute',
+      'ngResource',
+      'ngSanitize',
+      'ngCookies',
+      'ngAnimate',
+      'btford.socket-io',
+      'ui.utils',
+      'ui.bootstrap',
+      'ui.select',
+      'ngTable',
+      'wysiwyg.module',
+      'angularUtils.directives.dirPagination'
 ])
 .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

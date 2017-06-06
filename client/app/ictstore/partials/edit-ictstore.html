@@ -1,0 +1,77 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Edit ICT Store</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/ictstore">Packages</a>
+				</li>
+				<li class="active">
+					<strong>Edit ICT Store</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="ibox">
+					<div class="ibox-content">
+						<form novalidate="novalidate" name="editICTStoreForm" ng-submit="editICTStore(ictstore,editICTStoreForm.$valid)" role="form">
+
+
+							<div class="form-group" ng-class="{'has-error': editICTStoreForm.controlNumber.$invalid && submitted,'has-success': !editCategoryForm.controlNumber.$invalid && submitted}">
+								<label class="control-label" for="controlNumber">Control Number:</label>
+								<input id="controlNumber" name="controlNumber" type="text" ng-model="ictstore.controlNumber" required class="form-control"/>
+								<p ng-show="editICTStoreForm.controlNumber.$invalid && submitted" class="help-block">The Control Number is required</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': editICTStoreForm.nameSurname.$error.required && submitted,'has-success': !editICTStoreForm.nameSurname.$error.required && submitted}">
+								<label class="control-label" for="nameSurname">Name Surname:</label>
+								<textarea type="text" id="nameSurname" name="nameSurname" ng-model="ictstore.nameSurname" class="form-control"></textarea>
+								<p ng-show="editICTStoreForm.nameSurname.$error.required  && submitted" class="help-block">The Name Surname is required.</p>
+							</div>
+							<div class="form-group" ng-class="{'has-error': editICTStoreForm.location.$error.required && submitted,'has-success': !editICTStoreForm.location.$error.required && submitted}">
+								<label class="control-label" for="location">Location:</label>
+								<textarea type="text" id="location" name="location" ng-model="ictstore.location" class="form-control"></textarea>
+								<p ng-show="editICTStoreForm.location.$error.required  && submitted" class="help-block">The Location is required.</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': editICTStoreForm.costCenter.$error.required && submitted,'has-success': !editICTStoreForm.costCenter.$error.required && submitted}">
+								<label class="control-label" for="costCenter">Cost Center:</label>
+								<textarea type="text" id="location" name="location" ng-model="ictstore.location" class="form-control"></textarea>
+								<p ng-show="editICTStoreForm.costCenter.$error.required  && submitted" class="help-block">The Cost Center is required.</p>
+							</div>
+							<div class="form-group" ng-class="{'has-error': editICTStoreForm.reasonForUse.$error.required && submitted,'has-success': !editICTStoreForm.reasonForUse.$error.required && submitted}">
+								<label class="control-label" for="reasonForUse">Reason for Use:</label>
+								<textarea type="text" id="reasonForUse" name="reasonForUse" ng-model="ictstore.reasonForUse" class="form-control"></textarea>
+								<p ng-show="editICTStoreForm.reasonForUse.$error.required  && submitted" class="help-block">The Reason for Use is required.</p>
+							</div>
+							<div class="form-group" ng-class="{'has-error': editICTStoreForm.owningCompany.$error.required && submitted,'has-success': !editICTStoreForm.owningCompany.$error.required && submitted}">
+								<label class="control-label" for="owningCompany">Owning Company:</label>
+								<textarea type="text" id="owningCompany" name="owningCompany" ng-model="ictstore.owningCompany" class="form-control"></textarea>
+								<p ng-show="editICTStoreForm.owningCompany.$error.required  && submitted" class="help-block">The Owning Company is required.</p>
+							</div>
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-small btn-primary">Submit</button>
+								<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

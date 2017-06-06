@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('AddCategoryCtrl', function ($scope, $http, $location, $window) {
+.controller('AddCategoryCtrl', function ($scope, $http, $location, $window, socket) {
 
     $scope.issuecategory = {};
     $scope.submitted = false;

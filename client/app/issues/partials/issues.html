@@ -29,33 +29,38 @@
 
 
 		<div class="row">
-			<div class="col-md-12">
-				<div class="ibox">
-					<div class="ibox-title">
-						<div class="row">
-                            <div class="col-md-2">
-								<div class="row">
+				<div class="col-md-12">
+						<div class="ibox">
+								<div class="ibox-title">
+										<div class="row">
 
-									<div class="col-md-10">
-										<label for="with-selected">Category:</label>
-										<select id="category" name="category" class="form-control" ng-model="issue.category">
-                                            <option value="All">All Category</option>
-											<option ng-repeat="issue in issues" value="{{issue.category._id}}">{{issue.category.name}}</option>
-										</select>
-									</div>
-									<div class="col-md-2" style="vertical-align: text-bottom; padding-left: 0; padding-top: 22px; text-align: left;">
-										<input type="button" name="" value="Go" ng-click="bulkAction(selectedErrands,errand.bulkAction)" class="btn btn-small btn-primary">
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<label for="search">Search:</label>
 								<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<label for="search">Items Per Page:</label>
 								<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
 							</div>
+							<div class="col-md-2">
+                                <label for="search">Status:</label>
+                                <select class="form-control" name="issueStatusName" id="issueStatusName" ng-model="issuestatus._id" ng-options="issuestatus._id as issuestatus.issueStatusName for issuestatus in issuestatuses">
+                                </select>
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="search">Category:</label>
+
+                                <select class="form-control" name="categoryName" id="categoryName" ng-model="category._id" ng-options="category._id as category.categoryName for category in categories">
+
+                                </select>
+
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <input type="button" name="" value="Go" ng-click="searchIssues(category._id,issuestatus._id)" class="btn btn-small btn-primary">
+                            </div>
 							<div class="col-md-3 col-md-offset-3">
 								<dir-pagination-controls pagination-id="issue" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
 							</div>
@@ -67,20 +72,28 @@
 								<th> Ref Number</th>
 								<th> Description</th>
 								<th> Category</th>
-                                <th> Status</th>
-                                <th> Channel</th>
+                <th> Status</th>
+                <th> Channel</th>
 								<th> Priority</th>
-                                <th> Date</th>
+                <th> Date</th>
+								<th> Over SLA?</th>
 								<th colspan="5">Actions</th>
 							</tr>
 							<tr dir-paginate="issue in issues | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="issue">
-                                <td>{{issue.issueRefNumber}}</td>
+                <td>{{issue.issueRefNumber}}</td>
 								<td>{{issue.issueDescription}}</td>
 								<td>{{issue.issueCategory.categoryName}}</td>
-                                <td>{{issue.issueStatus.issueStatusName}}</td>
-                                <td>{{issue.issueChannel}}</td>
-                                <td>{{issue.issuePriority}}</td>
+                <td>{{issue.issueStatus.issueStatusName}}</td>
+                <td>{{issue.issueChannel.channelName}}</td>
+                <td>{{issue.issuePriority.priorityName}}</td>
 								<td>{{issue.added | date:'medium'}}</td>
+								<td ng-if="isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
+												<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
+							  </td>
+								<td ng-if="!isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
+												<span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>
+								</td>
+
 								<td ng-click="open(issue)">
 									<a title="View Details"><span class="glyphicon glyphicon-list"></span></a>
 								</td>

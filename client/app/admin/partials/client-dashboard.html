@@ -50,6 +50,20 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-lg-2">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<i class="fa fa-motorcycle pull-right"></i>
+						<h5>Channel</h5>
+					</div>
+					<div class="ibox-content">
+						<ul class="nav nav-dashboard">
+							<li><a href="/channel">Channel Dashboard</a></li>
+							<li><a href="/channel/add">Add Channel</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 
 <!--			<div class="col-lg-4">
 				<div class="ibox float-e-margins">
@@ -117,7 +131,7 @@
 								<td>{{issue.issueDescription}}</td>
 								<td>{{issue.issueStatus.issueStatusName}}</td>
                                 <td>{{issue.issuePriority}}</td>
-								<td>{{issue.issueChannel}}</td>
+								<td>{{issue.issueChannel.channelName}}</td>
 								<!--<td style="color:{{errand.status.statusColour}};" title="{{errand.status.statusName}}">
 									<span ng-if="errand.status.statusName == 'Open'" class="fa fa-hand-paper-o"></span>
 									<span ng-if="errand.status.statusName == 'Attempted Delivery'" class="fa fa-exchange"></span>

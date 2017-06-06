@@ -1,0 +1,58 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Add Job Card Status</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/issuestatus">Issue Statuses</a>
+				</li>
+				<li class="active">
+					<strong>Add Issue Status</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="ibox">
+					<div class="ibox-content">
+						<form novalidate="novalidate" name="addIssueStatusForm" ng-submit="addIssueStatus(issuestatus,addIssueStatusForm.$valid)" role="form">
+
+
+							<div class="form-group" ng-class="{'has-error': addIssueStatusForm.issueStatusName.$invalid && submitted,'has-success': !addIssueStatusForm.issueStatusName.$invalid && submitted}">
+								<label class="control-label" for="issueStatusName">Status Name:</label>
+								<input id="issueStatusName" name="issueStatusName" type="text" ng-model="issuestatus.issueStatusName" required class="form-control"/>
+								<p ng-show="addIssueStatusForm.issueStatusName.$invalid && submitted" class="help-block">The Status Name is required</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': addIssueStatusForm.issueStatusDescription.$error.required && submitted,'has-success': !addIssueStatusForm.issueStatusDescription.$error.required && submitted}">
+								<label class="control-label" for="issueStatusDescription">Description:</label>
+								<textarea type="text" id="issueStatusDescription" name="issueStatusDescription" ng-model="issuestatus.issueStatusDescription" class="form-control"></textarea>
+								<p ng-show="addIssueStatusForm.issueStatusDescription.$error.required  && submitted" class="help-block">The Description is required.</p>
+							</div>
+
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-small btn-primary">Submit</button>
+								<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

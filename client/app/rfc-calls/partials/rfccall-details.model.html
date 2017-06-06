@@ -1,0 +1,21 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">RFC Call Details</h3>
+	</div>
+	<div class="modal-body">
+		<ul>
+			<li>Ref Number: {{rfccall.callRefNumber}} {{rfccall.changeAuthorized}}</li>
+			<li>Category: {{rfccall.changeRequestType.requesttypeName}}</li>
+			<li>Call Description: {{rfccall.callDescription}}</li>
+			<li>Call Evaluation Outcome: {{rfccall.callEvaluationOutcome.evaluationoutcomeName}}</li>
+			<li>Action Plan: {{rfccall.actionPlan}}</li>
+			<li>Change Authorized: {{rfccall.changeAuthorized}}</li>
+            <li>Implementation Outcome: {{rfccall.implementationOutcome}}</li>
+			<li>Added: {{rfccall.added | date:'medium'}}</li>
+		</ul>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="ok()">OK</button>
+		<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	</div>
+</div>

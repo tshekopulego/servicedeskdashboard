@@ -28,8 +28,8 @@
             <div class="col-md-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
-                        
-                        <form name="addIssueForm" ng-submit="addIssue(issue,addIssueForm.$invalid)" role="form" novalidate>                    
+
+                        <form name="addIssueForm" ng-submit="addIssue(issue,addIssueForm.$invalid)" role="form" novalidate>
 
                              <div class="form-group" ng-class="{'has-error': addIssueForm.priority.$invalid && submitted,'has-success': !addIssueForm.priority.$invalid && submitted}">
                                 <label>Priority:</label>
@@ -40,14 +40,15 @@
 
                                         <small>
                                             Description: {{priority.priorityDescription}}
-											SLA (Hours): {{priority.prioritySLA}}
-											</small>
+                      											SLA (Hours): {{priority.prioritySLA}}
+                      								  </small>
                                     </ui-select-choices>
                                 </ui-select>
                                 <p ng-show="addIssueForm.priority.$invalid && submitted" class="help-block">The Priority is required.</p>
                             </div>
 
                             <div class="form-group" ng-class="{'has-error': addIssueForm.category.$invalid && submitted,'has-success': !addIssueForm.category.$invalid && submitted}">
+
                                 <label>Category:</label>
                                 <ui-select id="category" name="category" ng-model="issue.category" theme="bootstrap" required>
                                     <ui-select-match placeholder="Select a Category">{{$select.selected.categoryName}}</ui-select-match>
@@ -102,7 +103,7 @@
 
                             <div class="form-group" ng-class="{'has-error': addIssueForm.contactNumber.$invalid && submitted,'has-success': !addIssueForm.contactNumber.$invalid && submitted}">
                                 <label class="control-label" for="contactNumber">Contact Number:</label>
-                                <input id="contactNumber" name="contactNumber" type="text" ng-model="issue.contactNumber" class="form-control" required/>
+                                <input id="contactNumber" name="contactNumber" type="text" ng-model="issue.issueContactNumber" class="form-control" required/>
                                 <p ng-show="addIssueForm.contactNumber.$invalid && submitted" class="help-block">The Contact Number is required.</p>
                             </div>
 
