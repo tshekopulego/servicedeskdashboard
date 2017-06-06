@@ -1,5 +1,5 @@
 {
-  "name": "servicedesk-dashboard",
+  "name": "dash-delivery",
   "version": "0.0.0",
   "dependencies": {
     "angular": "1.4.5",
