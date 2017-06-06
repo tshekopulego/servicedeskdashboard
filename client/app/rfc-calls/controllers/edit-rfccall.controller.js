@@ -9,13 +9,12 @@ angular.module('serviceDeskApp')
 
     $http.get('/api/rfc-calls/' + $scope.rfccall_id ).success(function(rfccall) {
         $scope.rfccall = rfccall;
-        console.log(rfccall);
     })
     
     $http.get('/api/evaluation-outcome').success(function(evaluationoutcomes) {
         $scope.evaluationoutcomes = evaluationoutcomes; 
         socket.syncUpdates('evaluationoutcome',
-        $scope.evaluationoutcomes,function(event,evaluationoutcomes,evaluationoutcome){
+        $scope.evaluationoutcomes,function(event,evaluationoutcome,evaluationoutcomes){
         });
     });
     
@@ -35,7 +34,8 @@ angular.module('serviceDeskApp')
             $scope.rfccall.changeRequestType = rfccall.requesttype._id;
             $scope.rfccall.callEvaluationOutcome = rfccall.evaluationoutcome._id;
                 
-            $http.put('/api/rfc-calls/' + $scope.rfccall_id,rfccall);
+            $http.put('/api/rfc-calls/' + $scope.rfccall_id,$scope.rfccall);
+            console.log(rfccall);
             $scope.rfccall = '';
             $location.path('/rfccall');
         }
