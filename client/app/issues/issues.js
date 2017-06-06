@@ -11,6 +11,10 @@ angular.module('serviceDeskApp')
         templateUrl: 'app/issues/partials/add-issue.html',
         controller: 'AddIssueCtrl'
     })
+    .when('/issues/edit', {
+        templateUrl: 'app/issues/partials/edit-issue.html',
+        controller: 'EditIssueCtrl'
+    })
     .when('/issues/edit/:id', {
         templateUrl: 'app/issues/partials/edit-issue.html',
         controller: 'EditIssueCtrl'
