@@ -34,6 +34,7 @@
                             <div class="form-group" ng-class="{'has-error': editRfccallForm.callRefNumber.$invalid && submitted,'has-success': !editRfccallForm.callRefNumber.$invalid && submitted}">
                                 <label class="control-label" for="callRefNumber">Call RefNumber:</label>
                                 <input id="callRefNumber" name="callRefNumber" type="text" ng-model="rfccall.callRefNumber" class="form-control" required/>
+                                
                                 <p ng-show="editRfccallForm.callRefNumber.$invalid && submitted" class="help-block">The Call Ref Number is required.</p>
                             </div>
                             
@@ -47,9 +48,9 @@
                             
                             <div class="form-group" ng-class="{'has-error': editRfccallForm.changeRequestType.$invalid && submitted,'has-success': !editRfccallForm.requesttype.$invalid && submitted}">
                                 
-                                <label>Request Type:</label>
+                                <label class="control-label" for="changeRequestType">Request Type:</label>
                                 <ui-select id="requesttype" name="requesttype" ng-model="rfccall.requesttype" theme="bootstrap" required>
-                                    <ui-select-match placeholder="Select a Request Type">{{$select.selected.requesttypeName}}</ui-select-match>
+                                    <ui-select-match placeholder="Select Request Type">{{$select.selected.requesttypeName}}</ui-select-match>
                                     <ui-select-choices repeat="requesttype in requesttypes | filter: $select.search" value="{{requesttype._id}}">
                                         <div ng-bind-html="requesttype.requesttypeName | highlight: $select.search"></div>
 
@@ -65,9 +66,9 @@
                             
                             <div class="form-group" ng-class="{'has-error': editRfccallForm.evaluationoutcome.$invalid && submitted,'has-success': !editRfccallForm.evaluationoutcome.$invalid && submitted}">
                                 
-                                <label>Call Evaluation Outcome:</label>
+                                <label class="control-label" for="evaluationoutcome">Call Evaluation Outcome:</label>
                                 <ui-select id="evaluationoutcome" name="evaluationoutcome" ng-model="rfccall.evaluationoutcome" theme="bootstrap" required>
-                                    <ui-select-match placeholder="Select a evaluationoutcome">{{$select.selected.evaluationoutcomeName}}</ui-select-match>
+                                    <ui-select-match placeholder="Select evaluationoutcome">{{$select.selected.evaluationoutcomeName}}</ui-select-match>
                                     <ui-select-choices repeat="evaluationoutcome in evaluationoutcomes | filter: $select.search" value="{{evaluationoutcome._id}}">
                                         <div ng-bind-html="evaluationoutcome.evaluationoutcomeName | highlight: $select.search"></div>
                                         
@@ -85,6 +86,13 @@
                                  <input id="actionPlan" name="actionPlan" type="text" ng-model="rfccall.actionPlan" required class="form-control"/>
                                  
                                 <p ng-show="editRfccallForm.actionPlan.$invalid && submitted" class="help-block">The action plan is required.</p>
+                            </div>
+                            
+                            <div class="form-group" ng-class="{'has-error': editRfccallForm.changeAuthorized.$invalid && submitted,'has-success': !editRfccallForm.changeAuthorized.$invalid && submitted}">
+                                <label class="control-label" for="changeAuthorized">Change Authorized:</label>
+                                 <input id="changeAuthorized" name="changeAuthorized" type="text" ng-model="rfccall.changeAuthorized" required class="form-control"/>
+                                 
+                                <p ng-show="editRfccallForm.changeAuthorized.$invalid && submitted" class="help-block">The Change Authority is required.</p>
                             </div>
                             
                             <div class="form-group" ng-class="{'has-error': editRfccallForm.implementationOutcome.$invalid && submitted,'has-success': !editRfccallForm.implementationOutcome.$invalid && submitted}">

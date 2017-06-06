@@ -7,10 +7,11 @@ var Rfccall = require('./rfccall.modal');
 exports.index = function(req, res) {
 	Rfccall.find()
     .populate('changeRequestType','requesttypeName')
-    .populate('callEvaluationOutcome','evaluationoutcomeName')
+    .populate('callEvaluationoutcomeName','evaluationoutcomeName')
     .exec(function (err, rfccalls) {
         var count = Object.keys(rfccalls).length;
         console.log(count);
+        console.log(rfccalls);
 		if(err) { return handleError(res, err); }       
 		return res.json(200, rfccalls);
 	});

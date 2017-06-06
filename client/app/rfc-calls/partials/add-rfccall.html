@@ -84,7 +84,14 @@
                                 <label class="control-label" for="actionPlan">Action Plan:</label>
                                  <input id="actionPlan" name="actionPlan" type="text" ng-model="rfccall.actionPlan" required class="form-control"/>
                                  
-                                <p ng-show="addRfccallForm.actionPlan.$invalid && submitted" class="help-block">The action plan is required.</p>
+                                <p ng-show="addRfccallForm.changeAuthorized.$invalid && submitted" class="help-block">The action plan is required.</p>
+                            </div>
+                            
+                            <div class="form-group" ng-class="{'has-error': addRfccallForm.changeAuthorized.$invalid && submitted,'has-success': !addRfccallForm.changeAuthorized.$invalid && submitted}">
+                                <label class="control-label" for="changeAuthorized">Change Authorized:</label>
+                                 <input id="changeAuthorized" name="changeAuthorized" type="text" ng-model="rfccall.changeAuthorized" required class="form-control"/>
+                                 
+                                <p ng-show="addRfccallForm.changeAuthorized.$invalid && submitted" class="help-block">Change Authorized is required.</p>
                             </div>
                             
                             <div class="form-group" ng-class="{'has-error': addRfccallForm.implementationOutcome.$invalid && submitted,'has-success': !addRfccallForm.implementationOutcome.$invalid && submitted}">
