@@ -1,5 +1,5 @@
 {
-  "name": "builtapp-delivery",
+  "name": "skservicedesk",
   "version": "0.0.0",
   "main": "server/app.js",
   "dependencies": {
