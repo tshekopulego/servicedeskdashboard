@@ -7,12 +7,12 @@ angular.module('serviceDeskApp')
         templateUrl: 'app/rfc-calls/partials/rfccalls.html',
         controller: 'RfccallCtrl'
     })
-    .when('/rfccalls/edit/:id', {
-        templateUrl: 'app/rfc-calls/partials/edit-rfccalls.html',
-        controller: 'EditRfccallCtrl'
-    })
     .when('/rfccalls/add', {
         templateUrl: 'app/rfc-calls/partials/add-rfccall.html',
         controller: 'AddRfccallCtrl'
+    })
+    .when('/rfccalls/edit/:id', {
+        templateUrl: 'app/rfc-calls/partials/edit-rfccalls.html',
+        controller: 'EditRfccallCtrl'
     });
 });

@@ -19,19 +19,31 @@ angular.module('serviceDeskApp')
         $scope.requesttypes,function(event,requesttype,requesttypes){
         });
     });
-
+    
+    $http.get('/api/priority').success(function(priorities) {
+		$scope.priorities = priorities;
+		socket.syncUpdates('priority', 
+        $scope.priorities,function(event,priority,priorities){
+		});
+	});
+    
     $scope.addRfccall = function(rfccall,isValid) {
         $scope.submitted = true;
         $scope.rfccall = rfccall;
         
         if($scope.submitted) {
-            
-            $scope.rfccall.changeRequestType = rfccall.requesttype._id;
-            /*$scope.rfccall.callEvaluationOutcome = rfccall.evaluationoutcome._id;*/
+           
+            if ($scope.rfccall.requesttypeName = 'Standard') {
+                 
+                $scope.rfccall.priorities = rfccall.priority._id;
+                $scope.rfccall.changeRequestType = rfccall.requesttype._id;
+                $scope.rfccall.changeAuthorityName = 'Manager';
                 
-            $http.post('/api/rfc-calls',$scope.rfccall);
-            $scope.rfccall = '';
-            $location.path('/rfccall');
+                $http.post('/api/rfc-calls',$scope.rfccall);
+                $scope.rfccall = '';
+                $location.path('/rfccall');
+            }
+            
         }
     };
 

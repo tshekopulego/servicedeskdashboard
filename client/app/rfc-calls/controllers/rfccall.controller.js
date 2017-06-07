@@ -7,7 +7,13 @@ angular.module('serviceDeskApp')
     $scope.currentPage = 1;
     $scope.pageSize = 10;
     
-
+    $http.get('/api/evaluation-outcome').success(function(evaluationoutcomes) {
+        $scope.evaluationoutcomes = evaluationoutcomes; 
+        socket.syncUpdates('evaluationoutcome',
+        $scope.evaluationoutcomes,function(event,evaluationoutcome,evaluationoutcomes){
+        });
+    });
+    
     $http.get('/api/rfc-calls').success(function(rfccalls) {
         $scope.rfccalls = rfccalls;
         socket.syncUpdates('rfccall', $scope.rfccalls,function(event,rfccall,rfccalls){
