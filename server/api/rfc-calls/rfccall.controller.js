@@ -10,8 +10,6 @@ exports.index = function(req, res) {
     .populate('callEvaluationoutcomeName','evaluationoutcomeName')
     .exec(function (err, rfccalls) {
         var count = Object.keys(rfccalls).length;
-        console.log(count);
-        console.log(rfccalls);
 		if(err) { return handleError(res, err); }       
 		return res.json(200, rfccalls);
 	});
@@ -51,7 +49,7 @@ exports.update = function(req, res) {
 };
 
 // Deletes a RFC Call from the DB.
-exports.destroy = function(req, res) {
+exports.destroy = function(req, res, config) {
 	Rfccall.findById(req.params.id, function (err, rfccall) {
 		if(err) { return handleError(res, err); }
 		if(!rfccall) { return res.send(404); }

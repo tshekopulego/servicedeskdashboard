@@ -5,8 +5,16 @@ angular.module('serviceDeskApp')
 
     $scope.rfccall = {};
     $scope.submitted = false;
-    $scope.rfccall_id = $routeParams.id;    
-
+    $scope.rfccall_id = $routeParams.id;
+    
+    $scope.userTypes = [{
+        name: "changeInitiator",
+        value: "changeInitiator"
+    },{
+        name: "changeAuthority",
+        value: "changeAuthority"
+    }];
+    
     $http.get('/api/rfc-calls/' + $scope.rfccall_id ).success(function(rfccall) {
         $scope.rfccall = rfccall;
     })

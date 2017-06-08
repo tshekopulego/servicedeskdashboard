@@ -29,7 +29,15 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         
-                        <form name="editRfccallForm" ng-submit="editRfcCall(rfccall,editRfccallForm.$invalid)" role="form" novalidate>
+                        <form name="editRfccallForm" ng-submit="editRfcCall(rfccall,editRfccallForm.$invalid)" userType="form" novalidate>
+                            
+                            <div class="form-group" ng-class="{'has-error': editRfccallForm.userType.$invalid && submitted,'has-success': !editRfccallForm.userType.$invalid && submitted}">
+								<label>User Type:</label>
+								<select id="userType" name="userType" class="form-control" ng-model="rfccall.userType" required>
+									<option ng-repeat="userType in userTypes" value="{{userType.value}}">{{userType.name}}</option>
+								</select>
+								<p ng-show="editRfccallForm.userType.$invalid && submitted" class="help-block">The User Type is required</p>
+							</div>
                             
                             <div class="form-group" ng-class="{'has-error': editRfccallForm.callRefNumber.$invalid && submitted,'has-success': !editRfccallForm.callRefNumber.$invalid && submitted}">
                                 <label class="control-label" for="callRefNumber">Call RefNumber:</label>
@@ -79,8 +87,28 @@
 								<p ng-show="addUserForm.firstName.$error.required  && submitted" class="help-block">The First Name is required</p>
 							</div>-->
                             
+                            <div class="form-group" ng-class="{'has-error': editRfccallForm.changeAuthorized.$invalid && submitted,'has-success': !editRfccallForm.changeAuthorized.$invalid && submitted}">
+                                <label class="control-label" for="changeAuthorized">Change Authorized:</label>
+                                 <input id="changeAuthorized" name="changeAuthorized" type="text" ng-model="rfccall.changeAuthorized" required class="form-control"/>
+                                 
+                                <p ng-show="editRfccallForm.changeAuthorized.$invalid && submitted" class="help-block">The Change Authority is required.</p>
+                            </div>
                             
-                            <div class="form-group" ng-show="rfccall.authorized == 'client'" ng-class="{'has-error': editRfccallForm.evaluationoutcome.$invalid && submitted,'has-success': !editRfccallForm.evaluationoutcome.$invalid && submitted}">
+                            <div class="form-group" ng-if="rfccall.userType == 'changeInitiator'"ng-class="{'has-error': editRfccallForm.actionPlan.$invalid && submitted,'has-success': !editRfccallForm.actionPlan.$invalid && submitted}">
+                                <label class="control-label" for="actionPlan">Action Plan:</label>
+                                 <input id="actionPlan" name="actionPlan" type="text" ng-model="rfccall.actionPlan" required class="form-control"/>
+                                 
+                                <p ng-show="editRfccallForm.actionPlan.$invalid && submitted" class="help-block">The action plan is required.</p>
+                            </div>
+                            
+                            <div class="form-group" ng-if="rfccall.changeAuthority == 'changeAuthority' || changeAuthorized !=''" ng-class="{'has-error': editRfccallForm.implementationOutcome.$invalid && submitted,'has-success': !editRfccallForm.implementationOutcome.$invalid && submitted}">
+                                <label class="control-label" for="implementationOutcome">Implementation Outcome:</label>
+                                 <input id="implementationOutcome" name="implementationOutcome" type="text" ng-model="rfccall.implementationOutcome" required class="form-control"/>
+                                 
+                                <p ng-show="editRfccallForm.implementationOutcome.$invalid && submitted" class="help-block">Change Authority is required.</p>
+                            </div>
+                            
+                            <div class="form-group" ng-if="rfccall.userType == 'changeInitiator'" ng-class="{'has-error': editRfccallForm.evaluationoutcome.$invalid && submitted,'has-success': !editRfccallForm.evaluationoutcome.$invalid && submitted}">
                                 
                                 <label class="control-label" for="evaluationoutcome">Call Evaluation Outcome:</label>
                                 <ui-select id="evaluationoutcome" name="evaluationoutcome" ng-model="rfccall.evaluationoutcome" theme="bootstrap" required>
@@ -95,27 +123,6 @@
                                 </ui-select>
                                  
                                 <p ng-show="editRfccallForm.callEvaluationOutcome.$invalid && submitted" class="help-block">The call Evaluation Outcome is required.</p>
-                            </div>
-                            
-                            <div class="form-group" ng-class="{'has-error': editRfccallForm.actionPlan.$invalid && submitted,'has-success': !editRfccallForm.actionPlan.$invalid && submitted}">
-                                <label class="control-label" for="actionPlan">Action Plan:</label>
-                                 <input id="actionPlan" name="actionPlan" type="text" ng-model="rfccall.actionPlan" required class="form-control"/>
-                                 
-                                <p ng-show="editRfccallForm.actionPlan.$invalid && submitted" class="help-block">The action plan is required.</p>
-                            </div>
-                            
-                            <div class="form-group" ng-class="{'has-error': editRfccallForm.changeAuthorized.$invalid && submitted,'has-success': !editRfccallForm.changeAuthorized.$invalid && submitted}">
-                                <label class="control-label" for="changeAuthorized">Change Authorized:</label>
-                                 <input id="changeAuthorized" name="changeAuthorized" type="text" ng-model="rfccall.changeAuthorized" required class="form-control"/>
-                                 
-                                <p ng-show="editRfccallForm.changeAuthorized.$invalid && submitted" class="help-block">The Change Authority is required.</p>
-                            </div>
-                            
-                            <div class="form-group" ng-class="{'has-error': editRfccallForm.implementationOutcome.$invalid && submitted,'has-success': !editRfccallForm.implementationOutcome.$invalid && submitted}">
-                                <label class="control-label" for="implementationOutcome">Implementation Outcome:</label>
-                                 <input id="implementationOutcome" name="implementationOutcome" type="text" ng-model="rfccall.implementationOutcome" required class="form-control"/>
-                                 
-                                <p ng-show="editRfccallForm.implementationOutcome.$invalid && submitted" class="help-block">The implementation outcome is required.</p>
                             </div>
                             
                             <div class="box-footer">

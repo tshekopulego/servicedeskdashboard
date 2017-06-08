@@ -32,22 +32,21 @@ angular.module('serviceDeskApp')
         $scope.rfccall = rfccall;
         
         if($scope.submitted) {
-           
-            if ($scope.rfccall.requesttypeName = 'Standard') {
-                 
-                $scope.rfccall.priorities = rfccall.priority._id;
-                $scope.rfccall.changeRequestType = rfccall.requesttype._id;
-                $scope.rfccall.changeAuthorityName = 'Manager';
-                
-                $http.post('/api/rfc-calls',$scope.rfccall);
-                $scope.rfccall = '';
-                $location.path('/rfccall');
-            }
             
+            $scope.rfccall.priorities = rfccall.priority._id;
+            $scope.rfccall.changeRequestType = rfccall.requesttype._id;
+            if ($scope.rfccall.requesttypeName = 'Standard') {
+                
+                $scope.rfccall.changeAuthorized = 'Manager';
+            }
+                
+            $http.post('/api/rfc-calls',$scope.rfccall);
+            $scope.rfccall = '';
+            $location.path('/rfccall');
         }
     };
 
     $scope.cancel = function() {
         $window.history.back();
     };
-});
+}); 
