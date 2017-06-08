@@ -20,6 +20,7 @@ module.exports = function(app) {
   app.use('/api/rfc-calls', require('./api/rfc-calls'));
   app.use('/api/ictstore', require('./api/ictstore'));
   app.use('/api/ictasset', require('./api/ictasset'));
+  app.use('/api/assettype', require('./api/assettype'));
   app.use('/api/request-type', require('./api/request-type'));
   app.use('/api/priority', require('./api/priority'));
   app.use('/api/evaluation-outcome', require('./api/evaluation-outcome'));

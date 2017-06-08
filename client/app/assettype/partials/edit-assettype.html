@@ -1,0 +1,56 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Edit Assettype</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/assettype">Packages</a>
+				</li>
+				<li class="active">
+					<strong>Edit Assettype</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="ibox">
+					<div class="ibox-content">
+						<form novalidate="novalidate" name="editAssettypeForm" ng-submit="editAssettype(assettype,editAssettypeForm.$valid)" role="form">
+
+
+							<div class="form-group" ng-class="{'has-error': editAssettypeForm.assettypeName.$invalid && submitted,'has-success': !editAssettypeForm.assettypeName.$invalid && submitted}">
+								<label class="control-label" for="assettypeName">Assettype Name:</label>
+								<input id="assettypeName" name="assettypeName" type="text" ng-model="assettype.assettypeName" required class="form-control"/>
+								<p ng-show="editAssettypeForm.assettypeName.$invalid && submitted" class="help-block">The Assettype Name is required</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': editAssettypeForm.assettypeDescription.$error.required && submitted,'has-success': !editAssettypeForm.assettypeDescription.$error.required && submitted}">
+								<label class="control-label" for="assettypeDescription">Description:</label>
+								<textarea type="text" id="assettypeDescription" name="assettypeDescription" ng-model="assettype.assettypeDescription" class="form-control"></textarea>
+								<p ng-show="editAssettypeForm.assettypeDescription.$error.required  && submitted" class="help-block">The Description is required.</p>
+							</div>
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-small btn-primary">Submit</button>
+								<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -6,7 +6,7 @@ var ICTAssetSchema = new Schema({
 	itNumber: String,
 	assetDescription:String,
 	assetSerialNumber:String,
-	assetCategory:String,
+	assetCategory:{type: Schema.Types.ObjectId, ref: 'Category' },
 	assetType:String,
 	status: {
 		type: String,

@@ -4,7 +4,7 @@ angular.module('serviceDeskApp')
 .config(function ($routeProvider) {
     $routeProvider
     .when('/ictasset', {
-        templateUrl: 'app/ictasset/partials/ictasset.html',
+        templateUrl: 'app/ictasset/partials/ictassets.html',
         controller: 'ICTAssetCtrl'
     })
     .when('/ictasset/add', {

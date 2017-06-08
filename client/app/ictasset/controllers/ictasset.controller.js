@@ -4,23 +4,69 @@ angular.module('serviceDeskApp')
 .controller('ICTAssetCtrl', function ($scope, $http, $modal, $log, $filter, socket) {
 
 	$scope.ictassets = [];
+	
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
+	
+	
+	/*$http.get('/api/category').success(function (categories) {
+               categories.unshift({
+                   categoryName: 'All',
+                   _id: -1
+               });
+               $scope.categories = categories;
+           });*/
 
 	$http.get('/api/ictasset').success(function(ictassets) {
 		$scope.ictassets = ictassets;
+		console.log(ictassets);
 		socket.syncUpdates('ictasset', $scope.ictassets,function(event,ictasset,ictassets){
 		});
 	});
+	
+	
+	
+	/* $scope.searchICTAssets = function (category) {
 
-	$scope.open = function (issueictasset) {
+            if ((category == "-1")) { //get all records
+                $http.get('/api/ictasset').success(function (ictassets) {
+                    $scope.ictasset = ictasset;
+					
+                    console.log('/api/ictassets/');
+                });
+
+            } else {
+
+                if ((category != "-1" && !category)) {
+                    $http.get('/api/ictassets/' + category + '/' + status).success(function (ictassets) {
+
+                        $scope.ictasset = ictasset;
+                    });
+                } else {
+
+                    if (category != "-1" && !angular.isUndefined(category)) {
+
+                        $http.get('/api/ictassets/' + category + '/categories').success(function (ictassets) {
+
+                            $scope.ictasset = ictasset;
+
+                        });
+
+                    } 
+
+                }
+
+            }
+        };*/
+
+	$scope.open = function (ictasset) {
 
 		var modalInstance = $modal.open({
 			templateUrl: 'app/ictasset/partials/ictasset-details.modal.html',
 			controller: 'ICTAssetModalInstanceCtrl',
 			resolve: {
 				ictasset: function() {
-					return issueictasset;
+					return ictasset;
 				}
 			}
 		});
@@ -36,8 +82,8 @@ angular.module('serviceDeskApp')
 		$window.history.back();
 	};
 
-	$scope.delete = function(issueictasset) {
-		$http.delete('/api/ictasset/' + issueictasset._id);
+	$scope.delete = function(ictasset) {
+		$http.delete('/api/ictasset/' + ictasset._id);
         
 	};
 
