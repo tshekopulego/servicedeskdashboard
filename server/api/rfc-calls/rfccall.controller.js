@@ -114,7 +114,7 @@ exports.showRfccallBychangeRequestType = function(req, res) {
 
 // Search Issues By all Evaluation Outcome
 exports.showRfccallBycallEvaluationOutcome = function(req, res) {
-	Issue.find({
+	Rfccall.find({
 		callEvaluationOutcome:req.params.callevaluationoutcome
 	}).sort({added:1})
 	.populate('changeRequestType','requesttypeName')
