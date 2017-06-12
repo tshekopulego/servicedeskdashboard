@@ -23,6 +23,7 @@ angular.module('serviceDeskApp')
             resolve: {
                 departments: function() {
                     return department;
+
                 }
             }
         });

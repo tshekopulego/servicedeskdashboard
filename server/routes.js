@@ -22,6 +22,7 @@ module.exports = function(app) {
   app.use('/api/ictasset', require('./api/ictasset'));
   app.use('/api/request-type', require('./api/request-type'));
   app.use('/api/priority', require('./api/priority'));
+  app.use('/api/department', require('./api/department'));
   app.use('/api/evaluation-outcome', require('./api/evaluation-outcome'));
   app.use('/api/department', require('./api/department'));
   	

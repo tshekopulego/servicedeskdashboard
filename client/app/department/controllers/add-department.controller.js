@@ -7,6 +7,7 @@ angular.module('serviceDeskApp')
     $scope.submitted = false;
 
     $http.get('/api/users').success(function(users) {
+
         $scope.users = users;
         socket.syncUpdates('user', $scope.users,function(event,user,users){
         });

@@ -80,12 +80,12 @@
 								<p ng-show="addUserForm.lastName.$error.required  && submitted" class="help-block">The Last Name is required</p>
 							</div>
 
-							<div class="form-group" ng-class="{'has-error': addUserForm.zone.$invalid && submitted,'has-success': !addUserForm.zone.$invalid && submitted}">
+							<div class="form-group" ng-class="{'has-error': addUserForm.departments.$invalid && submitted,'has-success': !addUserForm.departments.$invalid && submitted}">
 								<label>Department</label>
-								<ui-select id="zone" name="zone" ng-model="user.zone" theme="bootstrap" required>
-									<ui-select-match placeholder="Select a Department">{{$select.selected.deliveryZoneArea+' - '+$select.selected.deliveryZoneType}}</ui-select-match>
-									<ui-select-choices repeat="zone in zones | filter: $select.search" value="{{zone._id}}">
-										<div ng-bind-html="zone.deliveryZoneArea+' - '+zone.deliveryZoneType | highlight: $select.search"></div>
+								<ui-select id="departments" name="departments" ng-model="user.department" theme="bootstrap" required>
+									<ui-select-match placeholder="Select a department">{{$select.selected.departmentName}}</ui-select-match>
+									<ui-select-choices repeat="zone in department | filter: $select.search" value="{{department._id}}">
+										<div ng-bind-html="zone.departments | highlight: $select.search"></div>
 									</ui-select-choices>
 								</ui-select>
 								<p ng-show="addUserForm.zone.$invalid && submitted" class="help-block">The Department is required.</p>
