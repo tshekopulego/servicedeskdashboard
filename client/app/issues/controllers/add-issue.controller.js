@@ -5,27 +5,27 @@ angular.module('serviceDeskApp')
 
     $scope.issue = {};
     $scope.submitted = false;
-    
+
      $http.get('/api/channel').success(function(channels) {
         $scope.channels = channels;
         socket.syncUpdates('channel',
         $scope.channels,function(event,channel,channels){
         });
     });
-    
+
     $http.get('/api/category').success(function(categories) {
         $scope.categories = categories;
-        socket.syncUpdates('category', 
+        socket.syncUpdates('category',
         $scope.categories,function(event,category,categories){
         });
     });
-    
+
     $http.get('/api/division').success(function(divisions) {
         $scope.divisions = divisions;
         socket.syncUpdates('division', $scope.divisions,function(event,division,divisions){
         });
-    });    
-    
+    });
+
     $http.get('/api/priority').success(function(priorities) {
         $scope.priorities = priorities;
         socket.syncUpdates('priority', $scope.priorities,function(event,priority,priorities){
@@ -36,14 +36,17 @@ angular.module('serviceDeskApp')
         $scope.submitted = true;
         $scope.issue = issue;
         if($scope.submitted) {
-            
+
             $scope.issue.issueCategory = issue.category._id;
-            $scope.issue.issueStatus = issue.issueStatus._id
-            $scope.issue.issueChannel = issue.channel.name;
-            
-            $http.post('/api/issue',$scope.issue);
+            $scope.issue.issueChannel = issue.channel._id;
+            $scope.issue.issuePriority = issue.priority._id;
+            $scope.issue.issueDivision = issue.division._id;
+            $scope.issue.issueRefNumber = (new Date).getTime();
+          
+
+            $http.post('/api/issues',$scope.issue);
             $scope.issue = '';
-            $location.path('/issue');
+            $location.path('/issues');
         }
     };
 

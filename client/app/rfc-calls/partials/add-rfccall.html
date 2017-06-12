@@ -28,22 +28,22 @@
             <div class="col-md-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
-                        
+
                         <form name="addRfccallForm" ng-submit="addRfccall(rfccall,addRfccallForm.$invalid)" role="form" novalidate>
-                            
+
                             <div class="form-group" ng-class="{'has-error': addRfccallForm.callRefNumber.$invalid && submitted,'has-success': !addRfccallForm.callRefNumber.$invalid && submitted}">
-                                <label class="control-label" for="callRefNumber">Call RefNumber:</label>
+                                <label class="control-label" for="callRefNumber">RefNumber:</label>
                                 <input id="callRefNumber" name="callRefNumber" type="text" ng-model="rfccall.callRefNumber" class="form-control" required/>
                                 <p ng-show="addRfccallForm.callRefNumber.$invalid && submitted" class="help-block">The Call Ref Number is required.</p>
                             </div>
-                            
+
                             <div class="form-group" ng-class="{'has-error': addRfccallForm.callDescription.$invalid && submitted,'has-success': !addRfccallForm.callDescription.$invalid && submitted}">
-                                <label class="control-label" for="callDescription">Call Description:</label>
+                                <label class="control-label" for="callDescription">Description:</label>
                                  <input id="callDescription" name="callDescription" type="text" ng-model="rfccall.callDescription" required class="form-control"/>
-                                 
+
                                 <p ng-show="addRfccallForm.callDescription.$invalid && submitted" class="help-block">The Call Description is required.</p>
                             </div>
-                            
+
                             <div class="form-group" ng-class="{'has-error': addRfccallForm.priorities.$invalid && submitted,'has-success': !addRfccallForm.priorities.$invalid && submitted}">
                                 
                                 <label>Priority:</label>
@@ -61,10 +61,9 @@
                                 
                                 <p ng-show="addRfccallForm.priorities.$invalid && submitted" class="help-block"> Priority is required.</p>
                             </div>
-                            
-                            
+
                             <div class="form-group" ng-class="{'has-error': addRfccallForm.changeRequestType.$invalid && submitted,'has-success': !addRfccallForm.requesttype.$invalid && submitted}">
-                                
+
                                 <label>Request Type:</label>
                                 <ui-select id="requesttype" name="requesttype" ng-model="rfccall.requesttype" theme="bootstrap" required>
                                     <ui-select-match placeholder="Select a Request Type">{{$select.selected.requesttypeName}}</ui-select-match>
@@ -76,11 +75,41 @@
 											</small>
                                     </ui-select-choices>
                                 </ui-select>
-                                
-                                
+
+
                                 <p ng-show="addRfccallForm.requesttype.$invalid && submitted" class="help-block">The Request Type is required.</p>
                             </div>
-                            
+
+                            <div class="form-group" ng-class="{'has-error': addRfccallForm.evaluationoutcome.$invalid && submitted,'has-success': !addRfccallForm.evaluationoutcome.$invalid && submitted}">
+
+                                <label>Call Evaluation Outcome:</label>
+                                <ui-select id="evaluationoutcome" name="evaluationoutcome" ng-model="rfccall.evaluationoutcome" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a evaluationoutcome">{{$select.selected.evaluationoutcomeName}}</ui-select-match>
+                                    <ui-select-choices repeat="evaluationoutcome in evaluationoutcomes | filter: $select.search" value="{{evaluationoutcome._id}}">
+                                        <div ng-bind-html="evaluationoutcome.evaluationoutcomeName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Description: {{evaluationoutcome.evaluationoutcomeDescription}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+
+                                <p ng-show="addRfccallForm.callEvaluationOutcome.$invalid && submitted" class="help-block">The call Evaluation Outcome is required.</p>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': addRfccallForm.actionPlan.$invalid && submitted,'has-success': !addRfccallForm.actionPlan.$invalid && submitted}">
+                                <label class="control-label" for="actionPlan">Action Plan:</label>
+                                 <input id="actionPlan" name="actionPlan" type="text" ng-model="rfccall.actionPlan" required class="form-control"/>
+
+                                <p ng-show="addRfccallForm.actionPlan.$invalid && submitted" class="help-block">The action plan is required.</p>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': addRfccallForm.implementationOutcome.$invalid && submitted,'has-success': !addRfccallForm.implementationOutcome.$invalid && submitted}">
+                                <label class="control-label" for="implementationOutcome">Implementation Outcome:</label>
+                                 <input id="implementationOutcome" name="implementationOutcome" type="text" ng-model="rfccall.implementationOutcome" required class="form-control"/>
+
+                                <p ng-show="addRfccallForm.implementationOutcome.$invalid && submitted" class="help-block">The implementation outcome is required.</p>
+                            </div>
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-small btn-primary">Submit</button>
                                 <a ng-click="cancel()" class="btn btn-small">Cancel</a>

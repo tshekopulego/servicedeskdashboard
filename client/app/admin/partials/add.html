@@ -145,7 +145,7 @@
 								<input type="password" id="confirmPassword" name="confirmPassword" ng-model="user.confirmPassword" ui-validate="{passwordsMatch: 'passwordsMatch($value)'}" ui-validate-watch="'user.password'" ng-required="user.role == 'user'" class="form-control"/>
 								<p ng-show="addUserForm.confirmPassword.$dirty && (addUserForm.confirmPassword.$error.passwordsMatch && submitted)" class="help-block">Passwords don't match</p>
 							</div>
-                            
+
 
 							<div class="box-footer">
 								<button type="submit" class="btn btn-small btn-primary">Submit</button>

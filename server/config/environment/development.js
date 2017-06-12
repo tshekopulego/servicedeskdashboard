@@ -4,21 +4,28 @@
 // =================================
 module.exports = {
 	// Server IP
-  ip:       '127.0.0.1',
+	ip:       process.env.OPENSHIFT_NODEJS_IP ||
+						process.env.IP ||
+						undefined,
 
 	// Server port
-	port:     8080,
+	port:     process.env.OPENSHIFT_NODEJS_PORT ||
+						process.env.PORT ||
+						8080,
 
 	// MongoDB connection options
 	mongo: {
-		//uri: 	'mongodb://admin:admin@ds151951.mlab.com:51951/servicedeskdb'
-        uri:    'mongodb://127.0.0.1:27017/servicedesk'
+
+		uri:   'mongodb://admin:admin@ds151951.mlab.com:51951/servicedeskdb'
+
 	},
 	socket:{
 		handshake: {
 			address: {
-				address: 'http://localhost',
-				port: 8080
+				address: process.env.DOMAIN || 'http://localhost',
+				port: process.env.OPENSHIFT_NODEJS_PORT ||
+						process.env.PORT ||
+						8080
 			}
 		}
 	},
