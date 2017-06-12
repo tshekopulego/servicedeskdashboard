@@ -1,9 +1,10 @@
 angular.module('serviceDeskApp')
-.controller('AddCtrl', function ($scope, $http, $location, $window) {
+.controller('AddCtrl', function ($scope, $http, $location, $window, socket) {
 
     $scope.submitted = false;
     $scope.errors = {};
-
+    $scope.user = {};
+    $scope.extraContacts = {};
 
     $scope.clientTypes = [{
         value: "Individual",
@@ -13,7 +14,7 @@ angular.module('serviceDeskApp')
         name: "Company"
     }];
 
-    $scope.roles = [{
+    /*$scope.roles = [{
         value: "user",
         name: "User"
     },{
@@ -34,25 +35,36 @@ angular.module('serviceDeskApp')
     },{
         value: "ictstoreagent",
         name: "ICT Store Agent"
-    }];
+    }];*/
+    
+    $http.get('/api/role').success(function(roles) {
+        $scope.roles = roles;
+        socket.syncUpdates('role', $scope.roles,function(event,role,roles){
+        });
+    });
 
-    $scope.extraContacts = {};
-
+    
+    $http.get('/api/department').success(function(departments) {
+        $scope.departments = departments;
+        socket.syncUpdates('departments', $scope.departments,function(event,department,departments){
+        });
+    });
+    
     $scope.addUser = function(user,form,isValid) {
         $scope.submitted = true;
         $scope.user = user;
         if(isValid && $scope.submitted) {
 
-            if(user.zone)
-                user.zone = user.zone._id;
+            if(user.departmentName)
+                user.departmentName = department.department._id;
 
             if(!_.isEmpty($scope.extraContacts))
                 user.extraContacts = $scope.extraContacts;
 
-            $http.post('/api/users',user)
-            .then(function() {
+            $http.post('/api/users',$scope.user)
+            .then(function($location) {
                 $scope.user = '';
-                $location.path('/users/');
+                $location.path('/users');
             }).catch(function(err) {
                 err = err.data;
                 $scope.errors = {};
@@ -68,6 +80,20 @@ angular.module('serviceDeskApp')
                     $scope.errors['email'] = err.message;
                 }
             });
+        }
+    };
+    $scope.addRfccall = function(rfccall,isValid) {
+        $scope.submitted = true;
+        $scope.rfccall = rfccall;
+        
+        if($scope.submitted) {
+            
+            $scope.rfccall.changeRequestType = rfccall.requesttype._id;
+            $scope.rfccall.callEvaluationOutcome = rfccall.evaluationoutcome._id;
+                
+            $http.post('/api/rfc-calls',$scope.rfccall);
+            $scope.rfccall = '';
+            $location.path('/rfccall');
         }
     };
 
