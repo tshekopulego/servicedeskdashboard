@@ -1,0 +1,80 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+    <maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Department</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/department">Departments</a>
+                </li>
+                <li class="active">
+                    <strong>Add New Department</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeIn">
+        <maq-socket-disconnected></maq-socket-disconnected>
+        <maq-danger-alert></maq-danger-alert>
+        <maq-info-alert></maq-info-alert>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        
+                        <form name="addDepartmentForm" ng-submit="addDepartment(rfccall,addDepartmentForm.$invalid)" role="form" novalidate>
+                            
+                            <div class="form-group" ng-class="{'has-error': addDepartmentForm.callRefNumber.$invalid && submitted,'has-success': !addDepartmentForm.departmentName.$invalid && submitted}">
+                                <label class="control-label" for="departmentName">Department Name:</label>
+                                <input id="departmentName" name="departmentName" type="text" ng-model="department.departmentName" class="form-control" required/>
+                                <p ng-show="addDepartmentForm.departmentName.$invalid && submitted" class="help-block">The Call Ref Number is required.</p>
+                            </div>
+                            
+                            <div class="form-group" ng-class="{'has-error': addDepartmentForm.departmentDescription.$invalid && submitted,'has-success': !addDepartmentForm.departmentDescription.$invalid && submitted}">
+                                <label class="control-label" for="departmentDescription">Department Description:</label>
+                                 <input id="departmentDescription" name="departmentDescription" type="text" ng-model="department.departmentDescription" required class="form-control"/>
+                                 
+                                <p ng-show="addDepartmentForm.departmentDescription.$invalid && submitted" class="help-block">Department Description is required.</p>
+                            </div>
+                            
+                            <div class="form-group" ng-class="{'has-error': addDepartmentForm.priorities.$invalid && submitted,'has-success': !addDepartmentForm.priorities.$invalid && submitted}">
+                                
+                                <label>Department Manager:</label>
+                                <ui-select id="users" name="users" ng-model="department.user" theme="bootstrap" required>
+
+                                    <ui-select-match placeholder="Select a Department Manager">{{$select.selected.firstName}}</ui-select-match>
+
+                                    <ui-select-choices repeat="user in users | filter: $select.search" value="{{user._id}}">
+                                        <div ng-bind-html="users.firstName | highlight: $select.search"></div>
+
+                                        <small>
+
+                                            Role: {{user.role}}
+
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                
+                                
+                                <p ng-show="addRfccallForm.users.$invalid && submitted" class="help-block"> Department Manager is required.</p>
+                            </div>
+                            
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-small btn-primary">Submit</button>
+                                <a ng-click="cancel()" class="btn btn-small">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </div>
+</div>

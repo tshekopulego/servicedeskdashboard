@@ -20,6 +20,7 @@ var validationError = function(res, err) {
  	var lastName = req.body.lastName;
  	var password = req.body.password;
  	var role = req.body.role;
+    var department = req.body.department;
 
  	if(role == 'client') {
  		//console.log(req.body);
@@ -36,7 +37,7 @@ var validationError = function(res, err) {
 
  			if (user) return validationError(res, {message:'The specified email address is already in use.'});
 
- 			var guestSessionToken = jwt.sign({email: email, firstName : req.body.firstName, role : 'guest' , password: password }, config.secrets.session, { expiresInMinutes: 60*5 });
+ 			var guestSessionToken = jwt.sign({email: email, firstName : req.body.firstName, department : req.body.department, role : 'guest' , password: password }, config.secrets.session, { expiresInMinutes: 60*5 });
  			res.json({ token: guestSessionToken });
 
  			var mailConfirmationToken = jwt.sign({firstName : req.body.firstName, lastName: req.body.lastName, email: req.body.email,  password: req.body.password }, config.secrets.mailConfirmation, {expiresInMinutes: 60 * 24 * 30});
@@ -106,6 +107,7 @@ exports.registerClient = function(req, res, next) {
  exports.index = function(req, res) {
  	User.find({}, '-salt -hashedPassword')
  	.sort('firstName')
+     .populate('departmentName','departmentName')
  	.exec(function (err, users) {
  		if(err) return res.send(500, err);
  		res.json(200, users);
