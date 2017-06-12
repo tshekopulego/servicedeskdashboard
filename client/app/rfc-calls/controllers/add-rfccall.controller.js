@@ -13,6 +13,13 @@ angular.module('serviceDeskApp')
         });
     });*/
     
+    $http.get('/api/department').success(function(department) {
+        $scope.departments = department;
+        socket.syncUpdates('department', $scope.departments,function(event,department,departments){
+        });
+    });
+    //console.log($scope.departments)
+    
     $http.get('/api/request-type').success(function(requesttypes) {
         $scope.requesttypes = requesttypes;
         socket.syncUpdates('requesttype', 

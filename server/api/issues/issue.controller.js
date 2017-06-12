@@ -7,10 +7,21 @@ var Issue = require('./issue.model');
 exports.index = function(req, res) {
 	Issue.find()
     .populate('issueCategory','categoryName')
-    .populate('issueStatus','issueStatusName')
+    .populate('issueStatus','issueStatusName')/*
 		.populate('issueChannel','channelName')
 		.populate('issuePriority','priorityName prioritySLA')
-	  .populate('issueDivision','divisionName')
+	  .populate('issueDivision','divisionName')*/
+    .exec(function (err, issues) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, issues);
+	});
+};
+
+// Get list of visitors
+exports.index = function(req, res) {
+	Issue.find()
+    .populate('issueCategory','categoryName')
+    .populate('issueStatus','issueStatusName')
     .exec(function (err, issues) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, issues);

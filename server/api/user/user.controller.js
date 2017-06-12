@@ -73,8 +73,6 @@ exports.registerClient = function(req, res, next) {
  * Confirm mail address
  */
  exports.createUser = function(req, res, next) {
-
-
  	var mailConfirmationToken = req.param('mailConfirmationToken');
 
  	jwt.verify(mailConfirmationToken, config.secrets.mailConfirmation, function(error, data) {
@@ -123,6 +121,12 @@ exports.registerClient = function(req, res, next) {
  	var newUser = new User(req.body);
  	newUser.provider = 'local';
  	newUser.role = 'user';
+     
+     User.create(req.body, function(err, rfccall) {
+                 if(err) { return handleRrror(res,err); }
+                 return res.json(201, user);
+                 });
+     
  	newUser.save(function(err, user) {
  		if (err) return validationError(res, err);
  		var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
