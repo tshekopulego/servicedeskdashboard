@@ -22,7 +22,8 @@ angular.module('serviceDeskApp')
             //size: size,
             resolve: {
                 departments: function() {
-                    return departments;
+                    return department;
+
                 }
             }
         });
