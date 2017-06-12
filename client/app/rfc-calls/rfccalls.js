@@ -13,6 +13,6 @@ angular.module('serviceDeskApp')
     })
     .when('/rfccalls/edit/:id', {
         templateUrl: 'app/rfc-calls/partials/edit-rfccalls.html',
-        controller: 'EditrfccallCtrl'
+        controller: 'EditRfccallCtrl'
     });
 });

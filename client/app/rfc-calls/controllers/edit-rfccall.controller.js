@@ -1,22 +1,16 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('EditRfccallCtrl', function ($scope, $http, $location, $window, $routeParams) {
+.controller('EditRfccallCtrl', function ($scope, $http, $location, $window, socket, $routeParams) {
 
-    $scope.category = {};
+    $scope.rfccall = {};
     $scope.submitted = false;
-    $scope.category_id = $routeParams.id;
+    $scope.rfccall_id = $routeParams.id;
 
-    $http.get('/api/rfc-calls/' + $scope.category_id ).success(function(rfccall) {
+    $http.get('/api/rfc-calls/' + $scope.rfccall_id ).success(function(rfccall) {
         $scope.rfccall = rfccall;
     })
     
-    $http.get('/api/evaluation-outcome').success(function(evaluationoutcomes) {
-        $scope.evaluationoutcomes = evaluationoutcomes; 
-        socket.syncUpdates('evaluationoutcome',
-        $scope.evaluationoutcomes,function(event,evaluationoutcome,evaluationoutcomes){
-        });
-    });
     
     $http.get('/api/request-type').success(function(requesttypes) {
         $scope.requesttypes = requesttypes;
