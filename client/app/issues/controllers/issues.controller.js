@@ -15,7 +15,6 @@ angular.module('serviceDeskApp')
                $scope.issuestatuses = issuestatuses;
            });
 
-
            $http.get('/api/category').success(function (categories) {
                categories.unshift({
                    categoryName: 'All',
@@ -26,6 +25,7 @@ angular.module('serviceDeskApp')
 
     $http.get('/api/issues').success(function(issues) {
         $scope.issues = issues;
+        console.log(issues);
         socket.syncUpdates('issue', $scope.issues,function(event,issue,issues){
         });
     });
@@ -102,6 +102,25 @@ angular.module('serviceDeskApp')
             return hours > sla;
     }
 
+    $scope.comments = function (issue) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'app/issues/partials/issue-comments.modal.html',
+                controller: 'IssueCommentsModalInstanceCtrl',
+                //size: size,
+                resolve: {
+                    issue: function () {
+                        return issue;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+    };
 
     $scope.cancel = function() {
         $window.history.back();

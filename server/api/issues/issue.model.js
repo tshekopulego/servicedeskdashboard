@@ -10,6 +10,7 @@ var IssueSchema = new Schema({
     issueDivision: {type: Schema.Types.ObjectId, ref: 'Division' },
     issueRefNumber: String,
     issueContactNumber: String,
+    comments: {},
     status: {
         type: String,
         default: 1
