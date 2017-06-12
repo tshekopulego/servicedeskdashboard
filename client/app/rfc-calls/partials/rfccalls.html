@@ -49,6 +49,32 @@
 								<label for="search">Items Per Page:</label>
 								<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
 							</div>
+                            
+                            
+                            <div class="col-md-2">
+                                <label for="search">Request Type:</label>
+                                <select class="form-control" name="requesttypeName" id="requesttypeName" ng-model="requesttype._id" ng-options="requesttype._id as requesttype.requesttypeName for requesttype in requesttypes">
+                                </select>
+                            </div>
+                            
+                            
+                             <div class="col-md-2">
+                                <label for="search">Evaluation:</label>
+
+                                <select class="form-control" name="evaluationoutcomeName" id="evaluationoutcomeName" ng-model="evaluationoutcome._id" ng-options="evaluationoutcome._id as evaluationoutcome.evaluationoutcomeName for evaluationoutcome in evaluationoutcomes">
+
+                                </select>
+
+                            </div>
+                            
+                            
+                            <div class="col-md-2">
+
+                                <input type="button" name="" value="Go" ng-click="searchRfccall(requesttype._id,evaluationoutcome._id)" class="btn btn-small btn-primary">
+                            </div>
+                            
+                            
+                            
 							<div class="col-md-3 col-md-offset-3">
 								<dir-pagination-controls pagination-id="rfccall" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
 							</div>

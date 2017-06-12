@@ -9,22 +9,40 @@ exports.index = function(req, res) {
     .populate('changeRequestType','requesttypeName')
     .populate('callEvaluationoutcomeName','evaluationoutcomeName')
     .exec(function (err, rfccalls) {
+
         var count = Object.keys(rfccalls).length;
+
 		if(err) { return handleError(res, err); }       
 		return res.json(200, rfccalls);
 	});
 };
 
-// Get a single RFC Call
+
+// Get a single RFC call
 exports.show = function(req, res) {
-	Rfccall.findById(req.params.id, function (err, rfccall) {
-		if(err) { 
-            return handleError(res, err); 
-        }
-		if(!rfccall) { return res.send(404); }
-		return res.json(rfccall);
-	});
+	Rfccall.findById({
+		_id:req.params.id
+	}).sort({added:1})
+	.populate('changeRequestType','requesttypeName')
+	.populate('callEvaluationOutcome','evaluationoutcomeName')
+	
+	.exec(function (err, rfccalls) {
+	if(err) { return handleError(res, err); }
+	return res.json(200, rfccalls)
+});
 };
+
+
+// Get a single RFC Call
+//exports.show = function(req, res) {
+//	Rfccall.findById(req.params.id, function (err, rfccall) {
+//		if(err) { 
+//            return handleError(res, err); 
+//        }
+//		if(!rfccall) { return res.send(404); }
+//		return res.json(rfccall);
+//	});
+//};
 
 // Creates a new RFC Call in the DB.
 exports.create = function(req, res) {
@@ -63,6 +81,56 @@ exports.destroy = function(req, res, config) {
 		}
 	});
 };
+
+
+
+// Search IRFC
+exports.searchRfccall = function(req, res) {
+	Rfccall.find({
+		changeRequestType:req.params.changerequesttype,
+		callEvaluationOutcome:req.params.callevaluationoutcome
+	}).sort({added:1})
+	  .populate('changeRequestType','requesttypeName')
+	  .populate('callEvaluationOutcome','evaluationoutcomeName')
+	 
+    .exec(function (err, irfccall) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, rfccall);
+	});
+};
+
+
+// Search Issue By change Request Type
+exports.showRfccallBychangeRequestType = function(req, res) {
+	Rfccall.find({
+		changeRequestType:req.params.changerequesttype
+	}).sort({added:1})
+	.populate('changeRequestType','requesttypeName')
+	.populate('callEvaluationOutcome','evaluationoutcomeName')
+	
+  .exec(function (err, rfccall) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, rfccall);
+	});
+};
+
+
+// Search Issues By all Evaluation Outcome
+exports.showRfccallBycallEvaluationOutcome = function(req, res) {
+	Rfccall.find({
+		callEvaluationOutcome:req.params.callevaluationoutcome
+	}).sort({added:1})
+	.populate('changeRequestType','requesttypeName')
+	.populate('callEvaluationOutcome','evaluationoutcomeName')
+    
+    .exec(function (err, rfccall) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, rfccall);
+	});
+};
+
+
+
 
 function handleError(res, err) {
 	return res.send(500, err);
