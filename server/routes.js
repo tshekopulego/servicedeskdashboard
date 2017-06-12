@@ -14,6 +14,7 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
   app.use('/api/issues', require('./api/issues'));
   app.use('/api/category', require('./api/category'));
+  //app.use('/api/department', require('./api/department'));
   app.use('/api/issue-status', require('./api/issue-status'));
   app.use('/api/priority', require('./api/priority'));
   app.use('/api/channel', require('./api/channel'));
@@ -21,6 +22,7 @@ module.exports = function(app) {
   app.use('/api/ictstore', require('./api/ictstore'));
   app.use('/api/ictasset', require('./api/ictasset'));
   app.use('/api/request-type', require('./api/request-type'));
+  app.use('/api/role', require('./api/role'));
   app.use('/api/priority', require('./api/priority'));
   app.use('/api/evaluation-outcome', require('./api/evaluation-outcome'));
   	

@@ -7,7 +7,7 @@ var Role = require('./role.modal');
 exports.index = function(req, res) {
 	Role.find()
     .populate('userLastName','firstName')
-    .populate('departmentName','departmentName')
+    //.populate('departmentName','departmentName')
     .exec(function (err, roles) {
 		if(err) { return handleError(res, err); }       
 		return res.json(200, roles);
