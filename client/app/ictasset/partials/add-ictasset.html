@@ -68,7 +68,7 @@
 
                                 <label>Asset Category:</label>
                                 <ui-select id="category" name="category" ng-model="ictasset.category" theme="bootstrap" required>
-                                    <ui-select-match placeholder="Select a Category">{{$select.selected.categoryName}}</ui-select-match>
+                                    <ui-select-match placeholder="Select  Category">{{$select.selected.categoryName}}</ui-select-match>
                                     <ui-select-choices repeat="category in categories | filter: $select.search" value="{{category._id}}">
                                         <div ng-bind-html="category.categoryName | highlight: $select.search"></div>
 
