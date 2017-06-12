@@ -33,6 +33,11 @@ angular.module('serviceDeskApp')
         $scope.rfccalls = rfccalls;
         socket.syncUpdates('rfccall', $scope.rfccalls,function(event,rfccall,rfccalls){
         });
+        
+        var count = rfccalls.length;
+        
+        $scope.count = count;
+        
     });
     
     
