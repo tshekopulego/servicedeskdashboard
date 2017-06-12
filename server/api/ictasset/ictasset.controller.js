@@ -6,7 +6,8 @@ var ICTAsset = require('./ictasset.model');
 // Get list of ictasset
 exports.index = function (req, res) {
     ICTAsset.find()
-    .populate('assetCategory','categoryName') 
+    .populate('assetCategory','categoryName')
+	.populate('assetType','assettypeName')
 	.exec(function (err, ictassets) {
         if (err) {
             return handleError(res, err);
@@ -20,13 +21,17 @@ exports.show = function (req, res) {
     ICTAsset.findById({_id:req.params.id
 	}).sort({added:1})
 	.populate('assetCategory','categoryName')
-	.exec(function (err, ictasset){
+	.populate('assetType','assettypeName')
+	.exec(function (err, ictassets){
         if (err) {
             return handleError(res, err);
         }
+		if (!ictasset) {
+            return res.send(404);
+        }
         if (err) {
             return handleError(res, err); }
-	return res.json(200, ictasset)
+	return res.json(200, ictassets)
     });
 };
 	/*ICTAsset.findById(req.params.id, function (err, ictasset) {
@@ -40,9 +45,9 @@ exports.show = function (req, res) {
 
 // Creates a new ictasset in the DB.
 exports.create = function(req, res) {
-	ICTAsset.create(req.body, function(err, ictasset) {
+	ICTAsset.create(req.body, function(err, ictassets) {
 		if(err) { return handleError(res, err); }
-		return res.json(201, ictasset);
+		return res.json(201, ictassets);
 	});
 };
 
@@ -51,7 +56,7 @@ exports.create = function(req, res) {
 exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id; }
-    ICTAsset.findById(req.params.id, function (err, ictasset) {
+    ICTAsset.findById(req.params.id, function (err, ictassets) {
         if (err) { return handleError(res, err); }
         if (!ictasset) { return res.send(404); }
         var updated = _.merge(ictasset, req.body);
@@ -61,18 +66,33 @@ exports.update = function (req, res) {
         });
     });
 };
-
+/*
+// search ictasset by category
 exports.showICTAssetByCategory = function(req, res) {
 	ICTAsset.find({
 		assetCategory:req.params.category
 	}).sort({added:1})
 	.populate('assetCategory','categoryName')
-	exec(function (err, ictasset) {
+	.populate('assetType','assettypeName')
+	.exec(function (err, ictasset) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, ictasset);
 	});
 };
 
+// search ictasset by assettype
+exports.showICTAssetByAssettype = function(req, res) {
+	ICTAsset.find({
+		assetType:req.params.assettype
+	}).sort({added:1})
+	.populate('assetCategory','categoryName')
+	.populate('assetType','assettypeName')
+	.exec(function (err, ictasset) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, ictasset);
+	});
+};
+*/
 
 // Deletes a ictasset from the DB.
 exports.destroy = function (req, res) {

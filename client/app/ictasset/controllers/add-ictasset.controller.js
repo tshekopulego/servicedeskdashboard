@@ -12,6 +12,12 @@ angular.module('serviceDeskApp')
         $scope.categories,function(event,category,categories){
         });
     });
+	
+	$http.get('/api/assettype').success(function(assettypes) {
+		$scope.assettypes = assettypes;
+		socket.syncUpdates('assettype', $scope.assettypes,function(event,assettype,assettypes){
+		});
+	});
 
     $scope.addICTAsset = function(ictasset,isValid) {
         $scope.submitted = true;
@@ -19,14 +25,14 @@ angular.module('serviceDeskApp')
         if($scope.submitted) {
 			
 			$scope.ictasset.assetCategory = ictasset.category._id;
-			/* $scope.issue.issueRefNumber = (new Date).getTime();
-            */
+			$scope.ictasset.assetType = ictasset.assetType._id;  
+			/* $scope.issue.issueRefNumber = (new Date).getTime();*/
 			$http.post('/api/ictasset',$scope.ictasset);
             $scope.ictasset = '';
             $location.path('/ictasset');
         }
     };
-
+	/*console.log($scope.ictasset);*/
     $scope.cancel = function() {
         $window.history.back();
     };
