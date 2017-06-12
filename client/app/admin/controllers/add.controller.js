@@ -1,5 +1,5 @@
 angular.module('serviceDeskApp')
-.controller('AddCtrl', function ($scope, $http, $location, $window) {
+.controller('AddCtrl', function ($scope, $http, $location, $window, socket) {
 
     $scope.submitted = false;
     $scope.errors = {};
@@ -38,13 +38,21 @@ angular.module('serviceDeskApp')
 
     $scope.extraContacts = {};
 
+     $http.get('/api/department').success(function(departments) {
+        $scope.departments = departments;
+        socket.syncUpdates('department', $scope.departments,function(event,department,departments){
+        });
+    });
+    console.log(departments);
+    
+    
     $scope.addUser = function(user,form,isValid) {
         $scope.submitted = true;
         $scope.user = user;
         if(isValid && $scope.submitted) {
 
-            if(user.zone)
-                user.zone = user.zone._id;
+            if(user.department)
+                user.department = user.department._id;
 
             if(!_.isEmpty($scope.extraContacts))
                 user.extraContacts = $scope.extraContacts;

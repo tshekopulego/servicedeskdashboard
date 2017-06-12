@@ -52,6 +52,11 @@
 							<div class="col-md-3 col-md-offset-3">
 								<dir-pagination-controls pagination-id="rfccall" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
 							</div>
+                            <div class="col-md-3">
+                                <label for="count">Number of calls:</label>
+                                <label>{{count}}</label>
+                            
+                            </div>
 						</div>
 					</div>
 					<div class="ibox-content table-responsive">
@@ -70,7 +75,7 @@
                                 <td>{{rfccall.callRefNumber}}</td>
 								<td>{{rfccall.callDescription}}</td>
 								<td>{{rfccall.changeRequestType.requesttypeName}}</td>
-                                <td>{{rfccall.callEvaluationOutcome.evaluationoutcomeName}}</td>
+                                <td>{{rfccall.callEvaluationoutcomeName.evaluationoutcomeName}}</td>
                                 <td>{{rfccall.actionPlan}}</td>
                                 <td>{{rfccall.changeAuthorized}}</td>
 								<td>{{rfccall.implementationOutcome}}</td>
