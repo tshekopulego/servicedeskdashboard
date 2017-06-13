@@ -6,6 +6,10 @@ angular.module('serviceDeskApp')
     $scope.ictstore = {};
     $scope.submitted = false;
     $scope.ictstore_id = $routeParams.id;
+	
+	$http.get('/api/costcenter').success(function(costcenters) {
+        $scope.costcenters = costcenters;
+    });
 
     $http.get('/api/ictstore/' + $scope.ictstore_id ).success(function(ictstore) {
         $scope.ictstore = ictstore;
@@ -15,7 +19,9 @@ angular.module('serviceDeskApp')
         $scope.submitted = true;
         $scope.ictstore = ictstore;
         if(isValid && $scope.submitted) {
-            $http.put('/api/ictstore/' + $scope.ictstore_id,ictstore);
+           $scope.ictstore.costCenter = ictstore.costcenter._id;
+			 $http.post('/api/ictstore',$scope.ictstore);
+			$http.put('/api/ictstore/' + $scope.ictstore_id,ictstore);
             $scope.ictstore = '';
             $location.path('/ictstore');
         }

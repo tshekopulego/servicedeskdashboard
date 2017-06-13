@@ -88,7 +88,7 @@
 
                                 <label>Asset Type:</label>
                                 <ui-select id="assettype" name="assettype" ng-model="ictasset.assettype" theme="bootstrap" required>
-                                    <ui-select-match placeholder="Select a Category">{{$select.selected.assettypeName}}</ui-select-match>
+                                    <ui-select-match placeholder="Select a Asset Type">{{$select.selected.assettypeName}}</ui-select-match>
                                     <ui-select-choices repeat="assettype in assettypes | filter: $select.search" value="{{assettype._id}}">
                                         <div ng-bind-html="assettype.assettypeName | highlight: $select.search"></div>
 

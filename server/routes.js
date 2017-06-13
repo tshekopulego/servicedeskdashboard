@@ -17,6 +17,7 @@ module.exports = function(app) {
   app.use('/api/issue-status', require('./api/issue-status'));
   app.use('/api/priority', require('./api/priority'));
   app.use('/api/channel', require('./api/channel'));
+   app.use('/api/costcenter', require('./api/costcenter'));
   app.use('/api/rfc-calls', require('./api/rfc-calls'));
   app.use('/api/ictstore', require('./api/ictstore'));
   app.use('/api/ictasset', require('./api/ictasset'));

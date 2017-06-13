@@ -13,14 +13,14 @@ angular.module('serviceDeskApp')
 		});
 	});
 
-	$scope.open = function (issueictstore) {
+	$scope.open = function (ictstore) {
 
 		var modalInstance = $modal.open({
 			templateUrl: 'app/ictstore/partials/ictstore-details.modal.html',
 			controller: 'ICTStoreModalInstanceCtrl',
 			resolve: {
 				ictstore: function() {
-					return issueictstore;
+					return ictstore;
 				}
 			}
 		});
@@ -37,7 +37,7 @@ angular.module('serviceDeskApp')
 	};
 
 	$scope.delete = function(issueictstore) {
-		$http.delete('/api/ictstore/' + issueictstore._id);
+		$http.delete('/api/ictstore/' + ictstore._id);
         
 	};
 

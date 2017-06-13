@@ -1,17 +1,24 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('AddICTStoreCtrl', function ($scope, $http, $location, $window) {
+.controller('AddICTStoreCtrl', function ($scope, $http, $location, $window, socket) {
 
-    $scope.issueictstore = {};
+    $scope.ictstore = {};
     $scope.submitted = false;
+	
+		$http.get('/api/costcenter').success(function(costcenters) {
+		$scope.costcenters = costcenters;
+		socket.syncUpdates('costcenter', $scope.costcenters,function(event,costcenter,costcenters){
+		});
+	});
 
-    $scope.addICTStore = function(issueictstore,isValid) {
+    $scope.addICTStore = function(ictstore,isValid) {
         $scope.submitted = true;
-        $scope.issueictstore = issueictstore;
+        $scope.ictstore = ictstore;
         if(isValid && $scope.submitted) {
-            $http.post('/api/ictstore',issueictstore);
-            $scope.issueictstore = '';
+			$scope.ictstore.costCenter = ictstore.costcenter._id; 
+            $http.post('/api/ictstore',$scope.ictstore);
+            $scope.ictstore = '';
             $location.path('/ictstore');
         }
     };
