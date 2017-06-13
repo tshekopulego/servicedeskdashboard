@@ -3,15 +3,15 @@
 angular.module('serviceDeskApp')
 .config(function ($routeProvider) {
     $routeProvider
-    .when('/division', {
-        templateUrl: 'app/request-type/partials/division.html',
-        controller: 'DivisionCtrl'
+    .when('/requesttype', {
+        templateUrl: 'app/request-type/partials/add-requesttype',
+        controller: 'RequesttpeCtrl'
     })
-    .when('/division/add', {
-        templateUrl: 'app/request-type/partials/add-division.html',
-        controller: 'RequesttypeCtrl'
+    .when('/requesttype/add', {
+        templateUrl: 'app/request-type/partials/add-requesttype.html',
+        controller: 'AddRequesttypeCtrl'
     })
-    .when('/division/edit/:id', {
+    .when('/requesttype/edit/:id', {
         templateUrl: 'app/request-type/partials/edit-division.html',
         controller: 'EditRequesttypeCtrl'
     });

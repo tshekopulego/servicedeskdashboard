@@ -18,17 +18,18 @@ angular.module('serviceDeskApp')
         $scope.requesttypes,function(event,requesttype,requesttypes){
         });
     });
+    
 
-    $scope.editRfccall = function(rfccall,isValid) {
+    $scope.editRfcCall = function(rfccall,isValid) {
         $scope.submitted = true;
         $scope.rfccall = rfccall;
         
         if(isValid && $scope.submitted) {
             
             $scope.rfccall.changeRequestType = rfccall.requesttype._id;
-            $scope.rfccall.callEvaluationOutcome = rfccall.evaluationoutcome._id;
                 
-            $http.put('/api/rfc-calls/' + $scope.rfccall._id,rfccall);
+            $http.put('/api/rfc-calls/' + $scope.rfccall_id,$scope.rfccall);
+            console.log(rfccall);
             $scope.rfccall = '';
             $location.path('/rfccall');
         }

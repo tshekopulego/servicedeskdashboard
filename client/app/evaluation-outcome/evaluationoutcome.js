@@ -3,16 +3,16 @@
 angular.module('serviceDeskApp')
 .config(function ($routeProvider) {
     $routeProvider
-    .when('/evaluationoutcome', {
+    .when('/evaluationOutcome', {
         templateUrl: 'app/evaluation-outcome/partials/evaluationoutcome.html',
         controller: 'EvaluationOutcomeCtrl'
     })
-    .when('/evaluationoutcome/add', {
-        templateUrl: 'app/evaluation-outcome/partials/add-rfccall.html',
-        controller: 'AddRfccallCtrl'
+    .when('/evaluationOutcome/add', {
+        templateUrl: 'app/evaluation-outcome/partials/add-evaluation-outcome.html',
+        controller: 'AddEvaluationOutcomeCtrl'
     })
-    .when('/evaluationoutcome/edit/:id', {
-        templateUrl: 'app/evaluation-outcome/partials/edit-rfccalls.html',
-        controller: 'EditRfccallCtrl'
+    .when('/evaluationOutcome/edit/:id', {
+        templateUrl: 'app/evaluation-outcome/partials/edit-evaluation-outcome.html',
+        controller: 'EditEvaluationOutconeCtrl'
     });
 });

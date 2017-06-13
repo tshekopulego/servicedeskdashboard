@@ -62,14 +62,27 @@
 			<li class="treeview" ng-show="isAdmin()">
 				<a href="/packages" maq-sidebar-menu>
 					<i class="fa fa-gift"></i>
-					<span>Channel</span>
+					<span>Department</span>
 					<span class="fa fa-angle-left pull-right"></span>
 				</a>
 				<ul class="nav nav-second-level">
-					<li><a href="/channel">Channel Dashboard</a></li>
-					<li><a href="/channel/add">Add Channel</a></li>
+
+					<li><a href="/department">Department Dashboard</a></li>
+					<li><a href="/department/add">Add department</a></li>
+
 				</ul>
 			</li> -->
+            <li class="treeview" ng-show="isAdmin()">
+				<a href="/packages" maq-sidebar-menu>
+					<i class="fa fa-gift"></i>
+					<span>Department</span>
+					<span class="fa fa-angle-left pull-right"></span>
+				</a>
+				<ul class="nav nav-second-level">
+					<li><a href="/department">Department Dashboard</a></li>
+					<li><a href="/department/add">Add department</a></li>
+				</ul>
+			</li>
 
 
 			<li class="treeview" ng-show="isAdmin()">
@@ -121,7 +134,6 @@
 				</ul>
 			</li>
 
-
 			<li class="treeview" ng-show="isAdmin()">
 				<a href="/visitors" maq-sidebar-menu>
 					<i class="fa fa-plus-square"></i>
@@ -131,19 +143,12 @@
 				<ul class="nav nav-second-level">
 					<li><a href="/rfccalls">Change Management Dashboard</a></li>
                     <li><a href="/rfccalls/add">Add RFC Call</a></li>
+                    
+                    <li><a>Total Calls: {{count}}</a></li>
+                    
 				</ul>
 			</li>
-
-			<!--<li class="treeview" ng-show="isAdmin()">
-				<a href="/officeparks" maq-sidebar-menu>
-					<i class="fa fa-motorcycle"></i>
-					<span>Office Parks</span>
-					<span class="fa fa-angle-left pull-right"></span>
-				</a>
-				<ul class="nav nav-second-level">
-					<li><a href="/officeparks">Office Parks Dashboard</a></li>
-				</ul>
-			</li>
+            <!--
 
 			<li class="treeview" ng-show="isAdmin()">
 				<a href="/companies" maq-sidebar-menu>

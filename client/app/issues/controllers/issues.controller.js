@@ -8,21 +8,21 @@ angular.module('serviceDeskApp')
     $scope.pageSize = 10;
 
     $http.get('/api/issue-status').success(function (issuestatuses) {
-               issuestatuses.unshift({
-                   issueStatusName: 'All',
-                   _id: -1
-               });
-               $scope.issuestatuses = issuestatuses;
-           });
+        issuestatuses.unshift({
+            issueStatusName: 'All',
+            _id: -1
+        });
+        $scope.issuestatuses = issuestatuses;
+    });
 
 
-           $http.get('/api/category').success(function (categories) {
-               categories.unshift({
-                   categoryName: 'All',
-                   _id: -1
-               });
-               $scope.categories = categories;
-           });
+    $http.get('/api/category').success(function (categories) {
+        categories.unshift({
+            categoryName: 'All',
+            _id: -1
+        });
+        $scope.categories = categories;
+    });
 
     $http.get('/api/issues').success(function(issues) {
         $scope.issues = issues;

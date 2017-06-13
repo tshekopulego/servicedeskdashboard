@@ -41,7 +41,7 @@ var validationError = function(res, err) {
 
  			var mailConfirmationToken = jwt.sign({firstName : req.body.firstName, lastName: req.body.lastName, email: req.body.email,  password: req.body.password }, config.secrets.mailConfirmation, {expiresInMinutes: 60 * 24 * 30});
 
- 			mail.userConfirmation.sendMail(req.body.firstName, req.body.email, mailConfirmationToken, null);
+ 			//mail.userConfirmation.sendMail(req.body.firstName, req.body.email, mailConfirmationToken, null);
  		});
  	}
 };
@@ -72,6 +72,8 @@ exports.registerClient = function(req, res, next) {
  * Confirm mail address
  */
  exports.createUser = function(req, res, next) {
+
+
  	var mailConfirmationToken = req.param('mailConfirmationToken');
 
  	jwt.verify(mailConfirmationToken, config.secrets.mailConfirmation, function(error, data) {
@@ -114,17 +116,11 @@ exports.registerClient = function(req, res, next) {
 
 /**
  * Creates a new user
- */
+*/
  exports.create = function (req, res, next) {
  	var newUser = new User(req.body);
  	newUser.provider = 'local';
- 	newUser.role = 'user';
-     
-     User.create(req.body, function(err, rfccall) {
-                 if(err) { return handleRrror(res,err); }
-                 return res.json(201, user);
-                 });
-     
+ 	//newUser.role = 'user';
  	newUser.save(function(err, user) {
  		if (err) return validationError(res, err);
  		var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
