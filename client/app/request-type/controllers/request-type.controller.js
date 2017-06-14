@@ -1,20 +1,20 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('RequesttpeCtrl', function ($scope, $http, $window, socket) {
+.controller('RequesttypeCtrl', function ($scope, $http, $modal, $log, $filter, socket) {
 
-    $scope.requesttpe = [];
+    $scope.requesttype = [];
     $scope.currentPage = 1;
     $scope.pageSize = 10;
 
-    $http.get('/api/request-tpe').success(function(requesttpe) {
-        $scope.requesttpes = requesttpes;
-        socket.syncUpdates('requesttpe', $scope.requesttpes,function(event,requesttpe,requesttpes){
+    $http.get('/api/request-type').success(function(requesttypes) {
+        $scope.requestytpes = requesttypes;
+        socket.syncUpdates('requesttype', $scope.requesttypes,function(event,requesttype,requesttypes){
         });
     });
 
-    $scope.delete = function(requesttpe) {
-        $http.delete('/api/request-tpe/' + requesttpe._id);
+    $scope.delete = function(requesttype) {
+        $http.delete('/api/request-type/' + requesttype._id);
     };
 
     $scope.cancel = function() {
@@ -22,6 +22,6 @@ angular.module('serviceDeskApp')
     };
 
     $scope.$on('$destroy', function () {
-        socket.unsyncUpdates('requesttpe');
+        socket.unsyncUpdates('requesttype');
     });
 });

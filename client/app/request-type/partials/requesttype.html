@@ -50,12 +50,12 @@
 						<div class="ibox-content table-responsive">
 							<table class="table">
 								<tr>
-									<th>Requesttype Name</th>
-									<th>Requesttype Description</th>
+									<th>Request Type Name</th>
+									<th>Request Type Description</th>
 									<th>Contact</th>
 									<th colspan="5">Actions</th>
 								</tr>
-								<tr dir-paginate="division in divisions | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="division">
+								<tr dir-paginate="requesttype in requesttypes | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="requesttype">
 									<td>{{requesttype.requesttypeName}}</td>
 									<td>{{requesttype.requesttypeDescription}}</td>
 									<td>

@@ -6,6 +6,7 @@ Schema = mongoose.Schema;
 var CategorySchema = new Schema({
 	categoryName: String,
 	categoryDescription: String,
+    comments: {},
 	status: {
 		type: String,
 		default: 1

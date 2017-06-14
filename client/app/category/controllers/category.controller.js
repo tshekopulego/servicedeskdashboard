@@ -31,6 +31,27 @@ angular.module('serviceDeskApp')
 			$log.info('Modal dismissed at: ' + new Date());
 		});
 	};
+    
+    $scope.comments = function (category) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'app/category/partials/category-comments.modal.html',
+                controller: 'CategoryCommentsModalInstanceCtrl',
+                //size: size,
+                resolve: {
+                    category: function () {
+                        return category;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+    };
+    
+    
 
 	$scope.cancel = function() {
 		$window.history.back();

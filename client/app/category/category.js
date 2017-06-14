@@ -8,6 +8,10 @@ angular.module('serviceDeskApp')
         controller: 'CategoryCtrl'
     })
     .when('/category/add', {
+        templateUrl: 'app/category/partials/category-comments.modal.html',
+        controller: 'CategoryCommentsModalInstanceCtrl'
+    })
+    .when('/category/add', {
         templateUrl: 'app/category/partials/add-category.html',
         controller: 'AddCategoryCtrl'
     }).when('/category/edit/:id', {

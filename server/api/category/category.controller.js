@@ -42,6 +42,10 @@ exports.update = function (req, res) {
         delete req.body._id;
     }
     Category.findById(req.params.id, function (err, category) {
+        
+        if(req.body.comments) {
+			category.comments = req.body.comments;
+		}
         if (err) {
             return handleError(res, err);
         }
@@ -49,6 +53,9 @@ exports.update = function (req, res) {
             return res.send(404);
         }
         var updated = _.merge(category, req.body);
+        
+        updated.markModified('comments');
+        
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);

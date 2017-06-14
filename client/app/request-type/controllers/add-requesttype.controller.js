@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('AddRequesttypeCtrl', function ($scope, $http, $location, $window) {
+.controller('AddRequesttypeCtrl', function ($scope, $http, $location, $window, socket) {
 
     $scope.issuepriority = {};
     $scope.submitted = false;
@@ -10,7 +10,7 @@ angular.module('serviceDeskApp')
         $scope.submitted = true;
         $scope.requesttype = requesttype;
         if(isValid && $scope.submitted) {
-            $http.post('/api/request-type',requesttype);
+            $http.post('/api/request-type',$scope.requesttype);
             $scope.requesttype = '';
             $location.path('/requesttype');
         }
