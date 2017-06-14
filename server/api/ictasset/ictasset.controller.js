@@ -56,14 +56,20 @@ exports.create = function(req, res) {
 exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id; }
-    ICTAsset.findById(req.params.id, function (err, ictassets) {
+    ICTAsset.findById(req.params.id, function (err, ictasset) {
+        if(req.body.comments) {
+			ictasset.comments = req.body.comments;
+		}
         if (err) { return handleError(res, err); }
-        if (!ictasset) { return res.send(404); }
-        var updated = _.merge(ictasset, req.body);
-        updated.save(function (err) {
-            if (err) { return handleError(res, err); }
-            return res.json(200, ictasset);
-        });
+		if(!ictasset) { return res.send(404); }
+		var updated = _.merge(ictasset, req.body);
+
+		updated.markModified('comments');
+
+		updated.save(function (err) {
+			if (err) { return handleError(res, err); }
+			return res.json(200, ictasset);
+		});
     });
 };
 /*

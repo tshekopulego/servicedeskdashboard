@@ -19,7 +19,6 @@ angular.module('serviceDeskApp')
 
 	$http.get('/api/ictasset').success(function(ictassets) {
 		$scope.ictassets = ictassets;
-		console.log(ictassets);
 		socket.syncUpdates('ictasset', $scope.ictassets,function(event,ictasset,ictassets){
 		});
 	});
@@ -77,6 +76,27 @@ angular.module('serviceDeskApp')
 			$log.info('Modal dismissed at: ' + new Date());
 		});
 	};
+    
+    
+    $scope.comments = function (ictasset) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'app/ictasset/partials/ictasset-comments.modal.html',
+                controller: 'ICTAssetCommentsModalInstanceCtrl',
+                //size: size,
+                resolve: {
+                    ictasset: function () {
+                        return ictasset;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+    };
 
 	$scope.cancel = function() {
 		$window.history.back();
