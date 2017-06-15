@@ -16,7 +16,7 @@ angular.module('serviceDeskApp')
 				controller: 'SignupCtrl'
 			})
 			.when('/signup-serviceagent', {
-				templateUrl: 'app/account/signup/signup-serviceagent.html',
+				templateUrl: 'app/account/signup/signup-servicedeskagent.html',
 				controller: 'SignupCtrl'
 			})
 			.when('/settings', {
@@ -27,7 +27,7 @@ angular.module('serviceDeskApp')
 			.when('/confirm', {
 				templateUrl: 'app/account/confirm/confirm.html',
 				controller: 'ConfirmCtrl',
-				authenticate: true
+				//authenticate: true
 			})
 			.when('/confirm/:confirmToken', {
 				templateUrl: 'app/account/confirm/confirm.html',
