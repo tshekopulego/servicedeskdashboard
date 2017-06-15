@@ -32,7 +32,7 @@ angular.module('serviceDeskApp')
         if(isValid && $scope.submitted) {
 
             if(user.department)
-                user.department = department.department._id;
+                user.department = department.departmentName;
 
             if(!_.isEmpty($scope.extraContacts))
                 user.extraContacts = $scope.extraContacts;
