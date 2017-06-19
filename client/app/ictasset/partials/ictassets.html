@@ -41,6 +41,30 @@
 								<label for="search">Items Per Page:</label>
 								<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
 							</div>
+                            
+                            <div class="col-md-2">
+                                <label for="search">Asset Category:</label>
+                                <select class="form-control" name="categoryName" id="categoryName" ng-model="category._id" ng-options="category._id as category.categoryName for category in categories">
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <label for="search">Asset Type:</label>
+
+                                <select class="form-control" name="assettypeName" id="assettypeName" ng-model="assettype._id" ng-options="assettype._id as assettype.assettypeName for assettype in assettypes">
+
+                                </select>
+
+                            </div>
+                            
+                            
+                            
+                            <div class="col-md-2">
+
+                                <input type="button" name="" value="Go" ng-click="searchICTAssets(category._id,assettype._id)" class="btn btn-small btn-primary">
+                            </div>
+                            
+                            
 							<div class="col-md-3 col-md-offset-3">
 								
 																

@@ -72,7 +72,28 @@ exports.update = function (req, res) {
 		});
     });
 };
-/*
+
+
+
+
+// Search ICT Assets
+exports.searchICTAssets = function(req, res) {
+	ICTAsset.find({
+		assetCategory:req.params.category,
+		assetType:req.params.assettype
+	}).sort({added:1})
+	  .populate('assetCategory','categoryName')
+	.populate('assetType','assettypeName')
+    .exec(function (err, ictasset) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, ictasset);
+	});
+};
+
+
+
+
+
 // search ictasset by category
 exports.showICTAssetByCategory = function(req, res) {
 	ICTAsset.find({
@@ -85,7 +106,6 @@ exports.showICTAssetByCategory = function(req, res) {
 		return res.json(200, ictasset);
 	});
 };
-
 // search ictasset by assettype
 exports.showICTAssetByAssettype = function(req, res) {
 	ICTAsset.find({
@@ -98,7 +118,7 @@ exports.showICTAssetByAssettype = function(req, res) {
 		return res.json(200, ictasset);
 	});
 };
-*/
+
 
 // Deletes a ictasset from the DB.
 exports.destroy = function (req, res) {

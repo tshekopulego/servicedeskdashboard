@@ -9,14 +9,26 @@ angular.module('serviceDeskApp')
 	$scope.pageSize = 10;
 	
 	
-	/*$http.get('/api/category').success(function (categories) {
+	$http.get('/api/category').success(function (categories) {
                categories.unshift({
                    categoryName: 'All',
                    _id: -1
                });
                $scope.categories = categories;
-           });*/
+           });
 
+    
+    
+	$http.get('/api/assettype').success(function (assettypes) {
+               assettypes.unshift({
+                   assettypeName: 'All',
+                   _id: -1
+               });
+               $scope.assettypes = assettypes;
+           });
+    
+    
+    
 	$http.get('/api/ictasset').success(function(ictassets) {
 		$scope.ictassets = ictassets;
 		socket.syncUpdates('ictasset', $scope.ictassets,function(event,ictasset,ictassets){
@@ -25,38 +37,44 @@ angular.module('serviceDeskApp')
 	
 	
 	
-	/* $scope.searchICTAssets = function (category) {
+	$scope.searchICTAssets = function (category,assettype) {
 
-            if ((category == "-1")) { //get all records
+            if ((category == "-1") && (assettype == "-1")) { //get all records
                 $http.get('/api/ictasset').success(function (ictassets) {
-                    $scope.ictasset = ictasset;
-					
-                    console.log('/api/ictassets/');
+                    $scope.ictassets = ictassets;
+                    console.log('/api/ictasset/');
                 });
 
             } else {
 
-                if ((category != "-1" && !category)) {
-                    $http.get('/api/ictassets/' + category + '/' + status).success(function (ictassets) {
+                if ((category != "-1" && !category) && (assettype != "-1" && !assettype)) {
+                    $http.get('/api/ictasset/' + category + '/' + assettype).success(function (ictassets) {
 
-                        $scope.ictasset = ictasset;
+                        $scope.ictassets = ictassets;
                     });
                 } else {
 
                     if (category != "-1" && !angular.isUndefined(category)) {
 
-                        $http.get('/api/ictassets/' + category + '/categories').success(function (ictassets) {
+                        $http.get('/api/ictasset/' + category + '/categories').success(function (ictassets) {
 
-                            $scope.ictasset = ictasset;
+                            $scope.ictassets = ictassets;
 
                         });
 
-                    } 
+                    } else if (assettype != "-1") {
+
+                        $http.get('/api/ictasset/' + assettype + '/assettypes').success(function (ictassets) {
+
+                            $scope.ictassets = ictassets;
+
+                        });
+                    }
 
                 }
 
             }
-        };*/
+        };
 
 	$scope.open = function (ictasset) {
 
