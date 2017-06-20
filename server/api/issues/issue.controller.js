@@ -17,6 +17,20 @@ exports.index = function(req, res) {
 	});
 };
 
+// Get list of visitors
+exports.index = function(req, res) {
+	Issue.find()
+	.populate('issueCategory','categoryName')
+	.populate('issueStatus','issueStatusName')
+	.populate('issueChannel','channelName')
+	.populate('issuePriority','priorityName prioritySLA')
+	.populate('issueDivision','divisionName')
+    .exec(function (err, issues) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, issues);
+	});
+};
+
 // Get a single issue
 exports.show = function(req, res) {
 	Issue.findById({
@@ -41,19 +55,28 @@ exports.create = function(req, res) {
 	});
 };
 
-// Updates an existing issue in the DB.
+// Updates an existing jobcard in the DB.
 exports.update = function(req, res) {
 	if(req.body._id) { delete req.body._id; }
 	Issue.findById(req.params.id, function (err, issue) {
+
+		if(req.body.comments) {
+			issue.comments = req.body.comments;
+		}
+
 		if (err) { return handleError(res, err); }
 		if(!issue) { return res.send(404); }
 		var updated = _.merge(issue, req.body);
+
+		updated.markModified('comments');
+
 		updated.save(function (err) {
 			if (err) { return handleError(res, err); }
 			return res.json(200, issue);
 		});
 	});
 };
+
 
 // Deletes a issue from the DB.
 exports.destroy = function(req, res) {
@@ -110,11 +133,11 @@ exports.showJobIssuesByStatus = function(req, res) {
 	Issue.find({
 		issueStatus:req.params.status
 	}).sort({added:1})
-	.populate('issueCategory','categoryName')
-	.populate('issueStatus','issueStatusName')
-	.populate('issueChannel','channelName')
-	.populate('issuePriority','priorityName prioritySLA')
-	  .populate('issueDivision','divisionName')		
+	  .populate('issueCategory','categoryName')
+	  .populate('issueStatus','issueStatusName')
+	  .populate('issueChannel','channelName')
+	  .populate('issuePriority','priorityName prioritySLA')
+	  .populate('issueDivision','divisionName')
     .exec(function (err, issues) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, issues);

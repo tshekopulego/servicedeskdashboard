@@ -1,0 +1,89 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+    <maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Edit Role</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/roles">Roles</a>
+                </li>
+                <li class="active">
+                    <strong>Edit Role</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeIn">
+        <maq-socket-disconnected></maq-socket-disconnected>
+        <maq-danger-alert></maq-danger-alert>
+        <maq-info-alert></maq-info-alert>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+
+                        <form name="addRoleForm" ng-submit="addRole(role,addRoleForm.$invalid)" role="form" novalidate>
+
+                            <div class="form-group" ng-class="{'has-error': addRoleForm.callRefNumber.$invalid && submitted,'has-success': !addRoleForm.callRefNumber.$invalid && submitted}">
+                                <label class="control-label" for="roleName">Role Name:</label>
+                                <input id="roleName" name="roleName" type="text" ng-model="role.roleName" class="form-control" required/>
+                                <p ng-show="addRoleForm.roleName.$invalid && submitted" class="help-block">The Role is required.</p>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': addRoleForm.roleDescription.$invalid && submitted,'has-success': !addRoleForm.callDescription.$invalid && submitted}">
+                                <label class="control-label" for="roleDescription">Description:</label>
+                                 <input id="roleDescription" name="roleDescription" type="text" ng-model="role.roleDescription" required class="form-control"/>
+
+                                <p ng-show="addRoleForm.roleDescription.$invalid && submitted" class="help-block">The Call Description is required.</p>
+                            </div>
+                                
+                                <div class="form-group" ng-class="{'has-error': addRoleForm.departmentName.$invalid && submitted,'has-success': !addRoleForm.departmentName.$invalid && submitted}">
+                                
+                                <label>Department:</label>
+                                <ui-select id="department" name="departments" ng-model="role.departmentName" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a Department">{{$select.selected.departmentName}}</ui-select-match>
+                                    <ui-select-choices repeat="department in departments | filter: $select.search" value="{{department._id}}">
+                                        <div ng-bind-html="department.departmentName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Department Description: {{department.departmentDescription}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                
+                                
+                                    <p ng-show="addRoleForm.department.$invalid && submitted" class="help-block"> Select a Department</p>
+                            </div>
+                                
+                                <label>Select a User:</label>
+                                <ui-select id="users" name="users" ng-model="role.firstName" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a User for this role">{{$select.selected.firstName}} {{}}</ui-select-match>
+                                    <ui-select-choices repeat="user in users | filter: $select.search" value="{{user._id}}">
+                                        <div ng-bind-html="user.firstName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Email: {{user.email}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+                            
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-small btn-primary">Submit</button>
+                                <a ng-click="cancel()" class="btn btn-small">Cancel</a>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </div>
+</div>
