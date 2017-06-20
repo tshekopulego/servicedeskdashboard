@@ -1,6 +1,5 @@
 'use strict';
-var Rfccall = require('./rfccall.modal');
-//var Rfccall = require('../../api/rfc-calls/rfccall.modal');
+var Rfccall = require('../../api/rfc-calls/rfccall.modal');
 
 // Search RfcCall By change Request Type
 /*exports.showRfccallStatsBychangeRequestType = function(req, res) {
