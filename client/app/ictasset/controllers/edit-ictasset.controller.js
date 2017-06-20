@@ -1,21 +1,34 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('EditICTAssetCtrl', function ($scope, $http, $location, $window, $routeParams) {
+.controller('EditICTAssetCtrl', function ($scope, $http, $location, $window, $routeParams, socket) {
 
     $scope.ictasset = {};
     $scope.submitted = false;
     $scope.ictasset_id = $routeParams.id;
+	
+	 $http.get('/api/category').success(function(categories) {
+        $scope.categories = categories;
+    });
+	
+	 $http.get('/api/assettype').success(function(assettypes) {
+        $scope.assettypes = assettypes;
+    });
 
     $http.get('/api/ictasset/' + $scope.ictasset_id ).success(function(ictasset) {
+		console.log(ictasset);
         $scope.ictasset = ictasset;
     })
 
     $scope.editICTAsset = function(ictasset,isValid) {
         $scope.submitted = true;
         $scope.ictasset = ictasset;
-        if(isValid && $scope.submitted) {
-            $http.put('/api/ictasset/' + $scope.ictasset_id,ictasset);
+        if($scope.submitted) {
+			$scope.ictasset.assetCategory = ictasset.category._id;
+			$scope.ictasset.assetType = ictasset.assettype._id;
+			
+			 $http.post('/api/ictasset',$scope.ictasset);
+           $http.put('/api/ictasset/' + $scope.ictasset_id,ictasset);
             $scope.ictasset = '';
             $location.path('/ictasset');
         }

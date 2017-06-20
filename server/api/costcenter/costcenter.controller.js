@@ -1,82 +1,76 @@
 'use strict';
 
 var _ = require('lodash');
-var ICTStore = require('./ictstore.model');
+var Costcenter = require('./costcenter.model');
 
-// Get list of ictstore
+// Get list of costcenters
 exports.index = function (req, res) {
-    ICTStore.find()
-	.populate('costCenter','costcenterName')
-	.exec(function (err, ictstore){
+    Costcenter.find(function (err, costcenters) {
         if (err) {
             return handleError(res, err);
         }
-        return res.json(200, ictstore);
+        return res.json(200, costcenters);
     });
 };
 
-// Get a single ictstore
+// Get a single costcenter
 exports.show = function (req, res) {
-    ICTStore.findById({_id:req.params.id
-	}).sort({added:1})
-	
-	.populate('costCenter','costcenterName')
-	.exec(function (err, ictstores){
+    Costcenter.findById(req.params.id, function (err, costcenters) {
         if (err) {
             return handleError(res, err);
         }
-        if (!ictstore) {
+        if (!costcenter) {
             return res.send(404);
         }
-        return res.json(ictstore);
+        return res.json(costcenters);
     });
 };
 
-// Creates a new ictstore in the DB.
+// Creates a new costcenter in the DB.
 exports.create = function (req, res) {
-    ICTStore.create(req.body, function (err, ictstore) {
+    Costcenter.create(req.body, function (err, costcenters) {
         if (err) {
             return handleError(res, err);
         }
-        return res.json(201, ictstore);
+        return res.json(201, costcenters);
     });
 };
 
-// Updates an existing ictstore in the DB.
+// Updates an existing costcenters in the DB.
 exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
-    ICTStore.findById(req.params.id, function (err, ictstore) {
+    Costcenter.findById(req.params.id, function (err, costcenters) {
         if (err) {
             return handleError(res, err);
         }
-        if (!ictstore) {
+        if (!costcenter) {
             return res.send(404);
         }
-        var updated = _.merge(ictstore, req.body);
+        var updated = _.merge(costcenter, req.body);
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.json(200, ictstore);
+            return res.json(200, costcenters);
         });
     });
 };
 
-// Deletes a ictstore from the DB.
+// Deletes a assettype from the DB.
 exports.destroy = function (req, res) {
-    ICTStore.findById(req.params.id, function (err, ictstore) {
+    Costcenter.findById(req.params.id, function (err, costcenter) {
 
         if (err) {
             return handleError(res, err);
         }
 
-        if (!ictstore) {
+        if (!costcenter) {
             return res.send(404);
         }
 
-        ictstore.remove(function (err) {
+        costcenter.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }

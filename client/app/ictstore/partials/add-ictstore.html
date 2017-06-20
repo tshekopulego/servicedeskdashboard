@@ -13,7 +13,7 @@
 					<a href="/packages">ICT Stores</a>
 				</li>
 				<li class="active">
-					<strong>Add ICT User Details </strong>
+					<strong>Add ICTUser</strong>
 				</li>
 			</ol>
 		</div>
@@ -50,7 +50,19 @@
 
 							<div class="form-group" ng-class="{'has-error': addICTStoreForm.costCenter.$error.required && submitted,'has-success': !addICTStoreForm.costCenter.$error.required && submitted}">
 								<label class="control-label" for="costCenter">Cost Center:</label>
-								<textarea type="text" id="costCenter" name="costCenter" ng-model="ictstore.costCenter" class="form-control"></textarea>
+								<!--<textarea type="text" id="costCenter" name="costCenter" ng-model="ictstore.costCenter" class="form-control"></textarea>-->
+								      								                               
+                         <ui-select id="costCenter" name="costCenter" ng-model="ictstore.costCenter" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select  Cost Center ">{{$select.selected.costcenterName}}</ui-select-match>
+                                    <ui-select-choices repeat="costcenter in costcenters | filter: $select.search" value="{{costcenter._id}}">
+                                        <div ng-bind-html="costcenter.costcenterName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Description: {{costcenter.costcenterDescription}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+
 								<p ng-show="addICTStoreForm.costCenter.$error.required  && submitted" class="help-block">The Cost Center is required.</p>
 							</div>
 

@@ -5,7 +5,7 @@ var ICTStoreSchema = new Schema({
 	controlNumber: String,
 	nameSurname: String,
 	location:String,
-	costCenter:String,
+	costCenter:{type: Schema.Types.ObjectId, ref: 'Costcenter' },
 	reasonForUse:String,
 	owningCompany:String,
 	status: {

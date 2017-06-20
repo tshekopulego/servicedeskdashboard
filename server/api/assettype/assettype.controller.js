@@ -1,82 +1,76 @@
 'use strict';
 
 var _ = require('lodash');
-var ICTStore = require('./ictstore.model');
+var Assettype = require('./assettype.model');
 
-// Get list of ictstore
+// Get list of assettype
 exports.index = function (req, res) {
-    ICTStore.find()
-	.populate('costCenter','costcenterName')
-	.exec(function (err, ictstore){
+    Assettype.find(function (err, assettypes) {
         if (err) {
             return handleError(res, err);
         }
-        return res.json(200, ictstore);
+        return res.json(200, assettypes);
     });
 };
 
-// Get a single ictstore
+// Get a single assettype
 exports.show = function (req, res) {
-    ICTStore.findById({_id:req.params.id
-	}).sort({added:1})
-	
-	.populate('costCenter','costcenterName')
-	.exec(function (err, ictstores){
+    Assettype.findById(req.params.id, function (err, assettypes) {
         if (err) {
             return handleError(res, err);
         }
-        if (!ictstore) {
+        if (!assettype) {
             return res.send(404);
         }
-        return res.json(ictstore);
+        return res.json(assettypes);
     });
 };
 
-// Creates a new ictstore in the DB.
+// Creates a new assettype in the DB.
 exports.create = function (req, res) {
-    ICTStore.create(req.body, function (err, ictstore) {
+    Assettype.create(req.body, function (err, assettypes) {
         if (err) {
             return handleError(res, err);
         }
-        return res.json(201, ictstore);
+        return res.json(201, assettypes);
     });
 };
 
-// Updates an existing ictstore in the DB.
+// Updates an existing assettype in the DB.
 exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
-    ICTStore.findById(req.params.id, function (err, ictstore) {
+    Assettype.findById(req.params.id, function (err, assettype) {
         if (err) {
             return handleError(res, err);
         }
-        if (!ictstore) {
+        if (!assettype) {
             return res.send(404);
         }
-        var updated = _.merge(ictstore, req.body);
+        var updated = _.merge(assettype, req.body);
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.json(200, ictstore);
+            return res.json(200, assettype);
         });
     });
 };
 
-// Deletes a ictstore from the DB.
+// Deletes a assettype from the DB.
 exports.destroy = function (req, res) {
-    ICTStore.findById(req.params.id, function (err, ictstore) {
+    Assettype.findById(req.params.id, function (err, assettype) {
 
         if (err) {
             return handleError(res, err);
         }
 
-        if (!ictstore) {
+        if (!assettype) {
             return res.send(404);
         }
 
-        ictstore.remove(function (err) {
+        assettype.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }
