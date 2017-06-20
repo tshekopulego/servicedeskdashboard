@@ -30,15 +30,14 @@ angular.module('serviceDeskApp')
         $scope.submitted = true;
         $scope.user = user;
         if(isValid && $scope.submitted) {
-
-            if(user.department)
-                user.department = department.departmentName;
-
+            $scope.user.department = user.department.departmentName;
+            $scope.user.role = user.role.roleName;
+            
             if(!_.isEmpty($scope.extraContacts))
-                user.extraContacts = $scope.extraContacts;
+                $scope.user.extraContacts = $scope.extraContacts;
 
             $http.post('/api/users',user)
-            .then(function($location) {
+            .then(function() {
                 $scope.user = '';
                 $location.path('/users');
             }).catch(function(err) {

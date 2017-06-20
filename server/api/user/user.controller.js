@@ -20,12 +20,13 @@ var validationError = function(res, err) {
  	var lastName = req.body.lastName;
  	var password = req.body.password;
  	var role = req.body.role;
+    var department = req.body.departmentName;
 
- 	if(role == 'client') {
- 		//console.log(req.body);
+ 	if(role == 'Client') {
+ 		console.log(req.body);
  		var newUser = new User(req.body);
 	 	newUser.provider = 'local';
-	 	//newUser.role = 'user';
+	 	//newUser.role = 'User';
 	 	newUser.save(function(err, user) {
 	 		if (err) return validationError(res, err);
 	 		var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
@@ -38,9 +39,9 @@ var validationError = function(res, err) {
 
  			var guestSessionToken = jwt.sign({email: email, firstName : req.body.firstName, role : 'guest' , password: password }, config.secrets.session, { expiresInMinutes: 60*5 });
  			res.json({ token: guestSessionToken });
-
+            
  			var mailConfirmationToken = jwt.sign({firstName : req.body.firstName, lastName: req.body.lastName, email: req.body.email,  password: req.body.password }, config.secrets.mailConfirmation, {expiresInMinutes: 60 * 24 * 30});
-
+            console.log({"mailConfirmationToken" : mailConfirmationToken})
  			//mail.userConfirmation.sendMail(req.body.firstName, req.body.email, mailConfirmationToken, null);
  		});
  	}
@@ -95,6 +96,8 @@ exports.registerClient = function(req, res, next) {
  				if (err) return validationError(res, err);
  				var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
  				res.json({ token: token });
+                
+                console.log({ token2: token });
  			});
 
  		});
@@ -123,8 +126,9 @@ exports.registerClient = function(req, res, next) {
  	//newUser.role = 'user';
  	newUser.save(function(err, user) {
  		if (err) return validationError(res, err);
- 		var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
- 		res.json({ token: token });
+ 		var token3 = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+ 		res.json({ token: token3 });
+        console.log({ token3: token3 });
  	});
  };
 

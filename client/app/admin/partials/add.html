@@ -42,7 +42,7 @@
                                 <label>Department:</label>
                                 <ui-select id="department" name="department" ng-model="user.department" theme="bootstrap" required>
                                     <ui-select-match placeholder="Select a department">{{$select.selected.departmentName}}</ui-select-match>
-                                    <ui-select-choices repeat="department in departments | filter: $select.search" value="{{department._id}}">
+                                    <ui-select-choices repeat="department in departments | filter: $select.search" value="{{department.departmentName}}">
                                         <div ng-bind-html="department.departmentName | highlight: $select.search"></div>
                                         <small>
                                             Description: {{department.departmentDescription}}
@@ -119,13 +119,13 @@
 								<p class="help-block" ng-show="addUserForm.email.$error.mongoose">{{ errors.email }}</p>
 							</div>
 
-							<div class="form-group phone-number animate-show" ng-show="user.role == 'client'" ng-class="{'has-error': addUserForm.phoneNumber.$invalid && submitted,'has-success': !addUserForm.phoneNumber.$invalid && submitted}">
+							<div class="form-group phone-number animate-show" ng-show="user.role == 'Client'" ng-class="{'has-error': addUserForm.phoneNumber.$invalid && submitted,'has-success': !addUserForm.phoneNumber.$invalid && submitted}">
 								<label class="control-label" for="phoneNumber">Phone Number:</label>
 								<input type="phoneNumber" id="phoneNumber" name="phoneNumber" type="phoneNumber" ng-model="user.phoneNumber" ng-required="user.role == 'client'" class="form-control" ui-mask="9999999999" ui-mask-placeholder ui-mask-placeholder-char="-"/>
 								<p ng-show="addUserForm.phoneNumber.$invalid && submitted" class="help-block">A Phone Number is required</p>
 							</div>
 
-							<div class="form-group" ng-show="user.role == 'client'">
+							<div class="form-group" ng-show="user.role == 'Client'">
 								<span maq-add-client-contact></span>
 							</div>
 

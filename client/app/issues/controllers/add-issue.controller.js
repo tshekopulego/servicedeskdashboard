@@ -6,7 +6,7 @@ angular.module('serviceDeskApp')
     $scope.issue = {};
     $scope.submitted = false;
 
-     $http.get('/api/channel').success(function(channels) {
+    $http.get('/api/channel').success(function(channels) {
         $scope.channels = channels;
         socket.syncUpdates('channel',
         $scope.channels,function(event,channel,channels){
