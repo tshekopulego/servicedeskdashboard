@@ -11,6 +11,7 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -38,8 +39,13 @@
         <link rel="stylesheet" href="assets/css/inspinia/animate.css">
         <link rel="stylesheet" href="assets/css/inspinia/style.css">
         <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
+        <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css">
         <!-- endinjector -->
         <!-- endbuild -->
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/d3/d3.js"></script>
+        <script src="../bower_components/nvd3"></script> <!-- or use another assembly -->
+        <script src="../bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,6 +66,10 @@
         <script src="socket.io/socket.io.js"></script>
         <!-- build:js(client) app/vendor.js -->
         <!-- bower:js -->
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/d3/d3.js"></script>
+        <script src="../bower_components/nvd3"></script> <!-- or use another assembly -->
+        <script src="../bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/angular/angular.js"></script>
         <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -187,6 +197,10 @@
         <script src="app/status/controllers/edit-issuestatus.controller.js"></script>
         <script src="app/status/controllers/issuestatus.controller.js"></script>
         <script src="app/status/issuestatus.js"></script>
+        
+        <script src="app/stats/controllers/ictstore.stat.controller.js"></script>
+        <script src="app/stats/stats.js"></script>
+        
         <script src="components/auth/auth.service.js"></script>
         <script src="components/auth/local.service.js"></script>
         <script src="components/auth/user.service.js"></script>
