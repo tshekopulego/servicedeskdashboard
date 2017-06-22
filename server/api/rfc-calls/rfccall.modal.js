@@ -13,7 +13,7 @@ var RfccallSchema = new Schema({
     actionPlan: String,
 	changeAuthorized: String,
 	implementationOutcome: String,
-	rfcPriority: {type: Schema.Types.ObjectId, ref: 'Priority' },
+	rfccallPriority: {type: Schema.Types.ObjectId, ref: 'Priority' },
 	callStatus: String,
 	status: {
 		type: String,

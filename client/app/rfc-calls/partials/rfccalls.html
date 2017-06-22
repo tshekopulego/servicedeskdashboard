@@ -95,16 +95,31 @@
                                 <th> Action Plan</th>
 								<th> Change Authority</th>
                                 <th> Implementation Outcome</th>
+								<th>Priority</th>
+								<th> Date</th>
+								<th> Over SLA?</th>
 								<th colspan="5">Actions</th>
 							</tr>
 							<tr dir-paginate="rfccall in rfccalls | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="rfccall">
                                 <td>{{rfccall.callRefNumber}}</td>
 								<td>{{rfccall.callDescription}}</td>
 								<td>{{rfccall.changeRequestType.requesttypeName}}</td>
-                                <td>{{rfccall.callEvaluationoutcomeName.evaluationoutcomeName}}</td>
+                                <td>{{rfccall.callEvaluationOutcome.evaluationoutcomeName}}</td>
                                 <td>{{rfccall.actionPlan}}</td>
                                 <td>{{rfccall.changeAuthorized}}</td>
 								<td>{{rfccall.implementationOutcome}}</td>
+								<td>{{rfccall.rfccallPriority.priorityName}}</td>
+								
+                                <td>{{rfccall.added | date:'medium'}}</td>
+								
+                               <td ng-if="isOverSLA(rfccall.added,rfccall.rfccallPriority.prioritySLA)">
+												
+                               <span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
+							  </td>
+								<td ng-if="!isOverSLA(rfccall.added,rfccall.rfccallPriority.prioritySLA)">
+												
+                                <span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>
+								</td>
 								<td ng-click="open(rfccall)">
 									<a title="View Details"><span class="glyphicon glyphicon-list"></span></a>
 								</td>
