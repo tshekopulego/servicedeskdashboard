@@ -19,13 +19,20 @@ angular.module('serviceDeskApp')
 		});
 	});
 
+	 $http.get('/api/priority').success(function(priorities) {
+        $scope.priorities = priorities;
+        socket.syncUpdates('priority', $scope.priorities,function(event,priority,priorities){
+        });
+    });
+	
     $scope.addICTAsset = function(ictasset,isValid) {
         $scope.submitted = true;
         $scope.ictasset = ictasset;
         if($scope.submitted) {
 			
 			$scope.ictasset.assetCategory = ictasset.category._id;
-			$scope.ictasset.assetType = ictasset.assetType._id;  
+			$scope.ictasset.assetType = ictasset.assetType._id; 
+			 $scope.ictasset.assetPriority = ictasset.priority._id;
 			/* $scope.issue.issueRefNumber = (new Date).getTime();*/
 			$http.post('/api/ictasset',$scope.ictasset);
             $scope.ictasset = '';

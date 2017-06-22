@@ -7,6 +7,7 @@ var ICTStore = require('./ictstore.model');
 exports.index = function (req, res) {
     ICTStore.find()
 	.populate('costCenter','costcenterName')
+	.populate('assetPriority','priorityName prioritySLA')
 	.exec(function (err, ictstore){
         if (err) {
             return handleError(res, err);
@@ -21,6 +22,7 @@ exports.show = function (req, res) {
 	}).sort({added:1})
 	
 	.populate('costCenter','costcenterName')
+	.populate('assetPriority','priorityName prioritySLA')
 	.exec(function (err, ictstores){
         if (err) {
             return handleError(res, err);

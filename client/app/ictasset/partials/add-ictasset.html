@@ -103,6 +103,23 @@
                                 <p ng-show="addICTAssetForm.assetType.$invalid && submitted" class="help-block">The Asset Type is required.</p>
                             </div>
 							
+							  <div class="form-group" ng-class="{'has-error': addICTAssetForm.priority.$invalid && submitted,'has-success': !addICTAssetForm.priority.$invalid && submitted}">
+                                <label>Priority:</label>
+                                <ui-select id="priority" name="priority" ng-model="ictasset.priority" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a Priority">{{$select.selected.priorityName}}</ui-select-match>
+                                    <ui-select-choices repeat="priority in priorities | filter: $select.search" value="{{priority._id}}">
+                                        <div ng-bind-html="priority.priorityName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Description: {{priority.priorityDescription}}
+                      											SLA (Hours): {{priority.prioritySLA}}
+                      								  </small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <p ng-show="addICTAssetForm.priority.$invalid && submitted" class="help-block">The Priority is required.</p>
+                            </div>
+
+							
 							
 
 							<div class="box-footer">

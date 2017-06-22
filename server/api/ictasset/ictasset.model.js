@@ -9,6 +9,7 @@ var ICTAssetSchema = new Schema({
     comments: {},
 	assetCategory:{type: Schema.Types.ObjectId, ref: 'Category' },
 	assetType:{type: Schema.Types.ObjectId, ref: 'Assettype' },
+	assetPriority: {type: Schema.Types.ObjectId, ref: 'Priority' },
 	status: {
 		type: String,
 		default: 1

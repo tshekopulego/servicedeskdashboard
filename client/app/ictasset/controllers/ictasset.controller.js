@@ -95,6 +95,18 @@ angular.module('serviceDeskApp')
 		});
 	};
     
+	 $scope.isOverSLA = function (dateCaptured, sla) {
+
+            var now = moment(new Date()); //todays date
+            var duration = moment.duration(now.diff(dateCaptured));
+            var hours = duration.asHours();
+            console.log(hours > sla);
+
+            /*console.log(sla);
+*/
+            return hours > sla;
+    }
+
     
     $scope.comments = function (ictasset) {
 
@@ -116,6 +128,8 @@ angular.module('serviceDeskApp')
             });
     };
 
+	
+	
 	$scope.cancel = function() {
 		$window.history.back();
 	};

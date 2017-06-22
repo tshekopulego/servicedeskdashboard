@@ -55,6 +55,9 @@
 								<th>Cost Center</th>
 								<th>Reason for Use</th>
 								<th>Owning Company</th>
+								<th> Priority</th>
+								<th> Date</th>
+								<th> Over SLA?</th>
 								<th colspan="5">Actions</th>
 							</tr>
 							<tr dir-paginate="ictstore in ictstores | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="ictstore">
@@ -64,6 +67,15 @@
 								<td>{{ictstore.costCenter.costcenterName}}</td>
 								<td>{{ictstore.reasonForUse}}</td>
 								<td>{{ictstore.owningCompany}}</td>
+								<td>{{ictstore.assetPriority.priorityName}}</td>
+								<td>{{ictstore.added | date:'medium'}}</td>
+								<td ng-if="isOverSLA(ictstore.added,ictstore.assetPriority.prioritySLA)">
+												<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
+							  </td>
+								<td ng-if="!isOverSLA(ictstore.added,ictstore.assetPriority.prioritySLA)">
+												<span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>
+								</td>
+								
 								<td ng-click="open(ictstore)">
 									<a title="View Details"><span class="glyphicon glyphicon-list"></span></a>
 								</td>

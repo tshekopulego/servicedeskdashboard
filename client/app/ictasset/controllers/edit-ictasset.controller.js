@@ -14,6 +14,10 @@ angular.module('serviceDeskApp')
 	 $http.get('/api/assettype').success(function(assettypes) {
         $scope.assettypes = assettypes;
     });
+	
+	 $http.get('/api/priority').success(function(priorities) {
+        $scope.priorities = priorities;
+    });
 
     $http.get('/api/ictasset/' + $scope.ictasset_id ).success(function(ictasset) {
 		console.log(ictasset);
@@ -25,7 +29,9 @@ angular.module('serviceDeskApp')
         $scope.ictasset = ictasset;
         if($scope.submitted) {
 			$scope.ictasset.assetCategory = ictasset.category._id;
-			$scope.ictasset.assetType = ictasset.assettype._id;
+			$scope.ictasset.assetType = ictasset.assetType._id;
+			$scope.ictasset.assetPriority = ictasset.priority._id;
+			
 			
 			 $http.post('/api/ictasset',$scope.ictasset);
            $http.put('/api/ictasset/' + $scope.ictasset_id,ictasset);
