@@ -27,6 +27,7 @@ module.exports = function(app) {
   app.use('/api/department', require('./api/department'));
   app.use('/api/evaluation-outcome', require('./api/evaluation-outcome'));
 	app.use('/api/costcenter', require('./api/costcenter'));
+	app.use('/api/getcalleroversla', require('./api/getcalleroversla'));
 
   	
   app.use('/auth', require('./auth'));
