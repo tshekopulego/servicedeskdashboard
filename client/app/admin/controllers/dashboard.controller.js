@@ -9,6 +9,48 @@ angular.module('serviceDeskApp')
     
     $http.get('/api/issues').success(function(issues) {
                 $scope.issues = issues;
+        
+        
+        
+        
+          $scope.counts={};
+        
+               var itemsArray = [];
+
+                var itemIds = issues
+
+                for (var i = 0; i < issues.length; i++) {
+                    var status =itemIds[i].issueStatus.issueStatusName
+                  
+                    itemsArray.push(status);
+
+                    if(itemIds.length === itemsArray.length){
+
+                        console.log(itemsArray)
+                              
+                        
+                         $scope.counts = {}, i, $scope.value;
+                        for (i = 0; i < itemsArray.length; i++) {
+                        $scope.value = itemsArray[i];
+                        if (typeof $scope.counts[$scope.value] === "undefined") {
+                        $scope.counts[$scope.value] = 1;
+                        } else {
+                        $scope.counts[$scope.value]++;
+                        }
+                            }
+                        console.log($scope.counts);
+                        
+                       
+
+                    }
+
+                    
+                };
+        
+        
+        
+        
+        
                 socket.syncUpdates('issue', $scope.issues,function(event,issue,issues){});
     });
 

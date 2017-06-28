@@ -1,7 +1,16 @@
 'use strict';
+var kue = require('kue'); 
+var queue = kue.createQueue();
 
 var _ = require('lodash');
 var Issue = require('./issue.model');
+
+
+//kue
+
+
+
+
 
 // Get list of visitors
 exports.index = function(req, res) {
@@ -19,6 +28,8 @@ exports.index = function(req, res) {
 
 // Get list of visitors
 exports.index = function(req, res) {
+    
+    
 	Issue.find()
 	.populate('issueCategory','categoryName')
 	.populate('issueStatus','issueStatusName')
@@ -26,6 +37,43 @@ exports.index = function(req, res) {
 	.populate('issuePriority','priorityName prioritySLA')
 	.populate('issueDivision','divisionName')
     .exec(function (err, issues) {
+        
+        
+        var itemsArray = []
+
+                var itemIds = issues
+
+                for (var i = 0; i < issues.length; i++) {
+                    var status =itemIds[i].issueStatus.issueStatusName
+                  
+                    itemsArray.push(status);
+
+                    if(itemIds.length === itemsArray.length){
+
+                        console.log(itemsArray)
+                              
+                        
+                        var counts = {}, i, value;
+                        for (i = 0; i < itemsArray.length; i++) {
+                        value = itemsArray[i];
+                        if (typeof counts[value] === "undefined") {
+                        counts[value] = 1;
+                        } else {
+                        counts[value]++;
+                        }
+                            }
+                        console.log(counts);
+                        
+                        
+
+                    }
+
+                    
+                };
+        
+        
+        
+        
 		if(err) { return handleError(res, err); }
 		return res.json(200, issues);
 	});
@@ -50,6 +98,21 @@ exports.show = function(req, res) {
 // Creates a new issue in the DB.
 exports.create = function(req, res) {
 	Issue.create(req.body, function(err, issue) {
+        
+        queue.create('mohapi.mokoena@skhomotech.co.za', {  
+
+        title: 'Testing Issues',
+
+        to: 'mohapi.mokoena@skhomotech.co.za',
+
+        template: 'checking the issue '+ issue.issueDescription
+
+            
+
+        }).priority('high').attempts(5).save();
+        
+        
+        
 		if(err) { return handleError(res, err); }
 		return res.json(201, issue);
 	});
@@ -93,6 +156,13 @@ exports.destroy = function(req, res) {
 		}
 	});
 };
+
+
+
+
+
+
+
 
 // Search Issue
 exports.searchIssues = function(req, res) {

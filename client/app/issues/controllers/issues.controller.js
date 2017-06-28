@@ -15,6 +15,7 @@ angular.module('serviceDeskApp')
                $scope.issuestatuses = issuestatuses;
            });
 
+
            $http.get('/api/category').success(function (categories) {
                categories.unshift({
                    categoryName: 'All',
@@ -25,8 +26,48 @@ angular.module('serviceDeskApp')
 
     $http.get('/api/issues').success(function(issues) {
         $scope.issues = issues;
-        console.log(issues);
+       
+         $scope.counts={};
+        
+               var itemsArray = [];
+
+                var itemIds = issues
+
+                for (var i = 0; i < issues.length; i++) {
+                    var status =itemIds[i].issueStatus.issueStatusName
+                  
+                    itemsArray.push(status);
+
+                    if(itemIds.length === itemsArray.length){
+
+                        console.log(itemsArray)
+                              
+                        
+                         $scope.counts = {}, i, $scope.value;
+                        for (i = 0; i < itemsArray.length; i++) {
+                        $scope.value = itemsArray[i];
+                        if (typeof $scope.counts[$scope.value] === "undefined") {
+                        $scope.counts[$scope.value] = 1;
+                        } else {
+                        $scope.counts[$scope.value]++;
+                        }
+                            }
+                        console.log($scope.counts);
+                        
+                       
+
+                    }
+
+                    
+                };
+        
+        
+        
         socket.syncUpdates('issue', $scope.issues,function(event,issue,issues){
+            
+           
+            
+            
         });
     });
 
@@ -68,6 +109,17 @@ angular.module('serviceDeskApp')
 
             }
         };
+    
+    
+    
+    
+    
+    
+    
+   
+                                          
+    
+    
 
     $scope.open = function (issue) {
 
@@ -80,7 +132,15 @@ angular.module('serviceDeskApp')
                     return issue;
                 }
             }
+            
+              
+            
         });
+        
+        
+        
+   
+        
 
         modalInstance.result.then(function (selectedItem) {
             $scope.selected = selectedItem;
@@ -88,6 +148,14 @@ angular.module('serviceDeskApp')
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
+    
+    
+    
+    
+    
+
+    
+    
 
 
     $scope.isOverSLA = function (dateCaptured, sla) {
@@ -101,26 +169,9 @@ angular.module('serviceDeskApp')
 
             return hours > sla;
     }
+    
+    
 
-    $scope.comments = function (issue) {
-
-            var modalInstance = $modal.open({
-                templateUrl: 'app/issues/partials/issue-comments.modal.html',
-                controller: 'IssueCommentsModalInstanceCtrl',
-                //size: size,
-                resolve: {
-                    issue: function () {
-                        return issue;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-    };
 
     $scope.cancel = function() {
         $window.history.back();
@@ -133,4 +184,15 @@ angular.module('serviceDeskApp')
     $scope.$on('$destroy', function () {
         socket.unsyncUpdates('issue');
     });
+    
+    
+    
+    
+    
+    
+         
+     
+    
+    
+    
 });
