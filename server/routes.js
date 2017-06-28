@@ -30,6 +30,13 @@ module.exports = function(app) {
 
   	
   app.use('/auth', require('./auth'));
+    
+    
+const kue = require('kue');  
+//...
+app.use('/api/queue', kue.app);  
+//app.use('api/queue', require('./api/queue'));
+    
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

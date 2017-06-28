@@ -29,10 +29,34 @@ require('./config/socketio')(socketio);
 require('./config/express')(app);
 require('./routes')(app);
 
+// radis server
+var redis = require('redis');
+var redisClient = redis.createClient({host : 'localhost', port : 6379});
+
+redisClient.on('ready',function() {
+ console.log("Redis is ready");
+});
+
+redisClient.on('error',function() {
+ console.log("Error in Redis");
+});
+
+// KUE
+
+var kue = require('kue'); 
+var queue = kue.createQueue();  
+
 // Start server
 server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
+
+
+//const kue = require('kue');  
+//...
+//app.use('/queue', kue.app);  
+//app.use('/queue', queue);
+
 
 // Expose app
 exports = module.exports = app;
