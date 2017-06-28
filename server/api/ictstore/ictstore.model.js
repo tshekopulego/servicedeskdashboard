@@ -6,6 +6,7 @@ var ICTStoreSchema = new Schema({
 	nameSurname: String,
 	location:String,
 	costCenter:{type: Schema.Types.ObjectId, ref: 'Costcenter' },
+	assetPriority: {type: Schema.Types.ObjectId, ref: 'Priority' },
 	reasonForUse:String,
 	owningCompany:String,
 	status: {

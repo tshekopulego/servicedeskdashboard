@@ -8,6 +8,7 @@ exports.index = function (req, res) {
     ICTAsset.find()
     .populate('assetCategory','categoryName')
 	.populate('assetType','assettypeName')
+	.populate('assetPriority','priorityName prioritySLA')
 	.exec(function (err, ictassets) {
         if (err) {
             return handleError(res, err);
@@ -22,6 +23,7 @@ exports.show = function (req, res) {
 	}).sort({added:1})
 	.populate('assetCategory','categoryName')
 	.populate('assetType','assettypeName')
+	.populate('assetPriority','priorityName prioritySLA')
 	.exec(function (err, ictassets){
         if (err) {
             return handleError(res, err);
@@ -84,11 +86,13 @@ exports.searchICTAssets = function(req, res) {
 	}).sort({added:1})
 	  .populate('assetCategory','categoryName')
 	.populate('assetType','assettypeName')
+	/*.populate('assetPriority','priorityName prioritySLA')*/
     .exec(function (err, ictasset) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, ictasset);
 	});
 };
+
 
 
 
@@ -101,6 +105,7 @@ exports.showICTAssetByCategory = function(req, res) {
 	}).sort({added:1})
 	.populate('assetCategory','categoryName')
 	.populate('assetType','assettypeName')
+	/*.populate('assetPriority','priorityName prioritySLA')*/
 	.exec(function (err, ictasset) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, ictasset);
@@ -118,6 +123,7 @@ exports.showICTAssetByAssettype = function(req, res) {
 		return res.json(200, ictasset);
 	});
 };
+
 
 
 // Deletes a ictasset from the DB.

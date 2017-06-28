@@ -11,6 +11,10 @@ angular.module('serviceDeskApp')
         $scope.costcenters = costcenters;
     });
 
+	 $http.get('/api/priority').success(function(priorities) {
+        $scope.priorities = priorities;
+    });
+	
     $http.get('/api/ictstore/' + $scope.ictstore_id ).success(function(ictstore) {
         $scope.ictstore = ictstore;
     })
@@ -19,7 +23,8 @@ angular.module('serviceDeskApp')
         $scope.submitted = true;
         $scope.ictstore = ictstore;
         if(isValid && $scope.submitted) {
-           $scope.ictstore.costCenter = ictstore.costcenter._id;
+           $scope.ictstore.costCenter = ictstore.costCenter._id;
+			$scope.ictstore.assetPriority = ictstore.priority._id;
 			 $http.post('/api/ictstore',$scope.ictstore);
 			$http.put('/api/ictstore/' + $scope.ictstore_id,ictstore);
             $scope.ictstore = '';

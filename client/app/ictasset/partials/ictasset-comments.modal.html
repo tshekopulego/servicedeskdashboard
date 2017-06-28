@@ -4,14 +4,15 @@
 	</div>
 	<div class="modal-body">
   <ul>
-    <li>Asset Config Number: {{ictasset.assetConfigNumber}}</li>
+            <li>Asset Config Number: {{ictasset.assetConfigNumber}}</li>
 			<li>IT Number: {{ictasset.itNumber}}</li>
 			<li>Asset Description: {{ictasset.assetDescription}}</li>
 			<li>Asset Serial Number: {{ictasset.assetSerialNumber}}</li>
 			<!--<li>Asset Category: {{ictasset.assetCategory.assetCategory}}</li>-->
 			<li>Asset Category: {{ictasset.assetCategory.categoryName}}</li>
 			<li>Asset Type: {{ictasset.assetType.assettypeName}}</li>
-      <li>Added: {{ictasset.added | date:'medium'}}</li>
+	        <li>Priority: {{ictasset.assetPriority}}</li>
+            <li>Added: {{ictasset.added | date:'medium'}}</li>
   </ul>
 		<hr/>
 		<h2>Comments</h2>
