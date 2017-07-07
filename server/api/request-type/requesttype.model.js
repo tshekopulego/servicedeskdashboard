@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var RequesttypeSchema = new Schema({
+    id: {type: Schema.Types.ObjectId, ref: 'Counter'},
 	requesttypeName: String,
 	requesttypeDescription: String,
 	status: {

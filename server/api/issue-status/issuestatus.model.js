@@ -2,6 +2,7 @@ var mongoose = require('mongoose'),
 Schema = mongoose.Schema;
 
 var IssueStatusSchema = new Schema({
+    id: {type: Schema.Types.ObjectId, ref: 'Counter'},
 	issueStatusName: String,
 	issueStatusDescription: String,
 	status: {

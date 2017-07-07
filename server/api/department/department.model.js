@@ -5,6 +5,7 @@ var DepartmentSchema = new Schema({
 	departmentName: String,
 	departmentDescription: String,
     departmentManager: {type: Schema.Types.ObjectId, ref: 'User' },
+    id: {type: Schema.Types.ObjectId, ref: 'Counter'},
 	status: {
 		type: String,
 		default: 1

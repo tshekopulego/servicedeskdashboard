@@ -10,12 +10,13 @@ angular.module('serviceDeskApp')
         $scope.submitted = true;
         $scope.issuecategory = issuecategory;
         if(isValid && $scope.submitted) {
+            $scope.issuecategory.id = counter.getNextSequenceValue("categories");
+            
             $http.post('/api/category',issuecategory);
             $scope.issuecategory = '';
             $location.path('/category');
         }
     };
-
     $scope.cancel = function() {
         $window.history.back();
     };
