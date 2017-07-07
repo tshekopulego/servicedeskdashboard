@@ -15,16 +15,16 @@ exports.index = function (req, res) {
 };
 
 //Get next Sequence Function
-exports.getCounter = function getNextSequence(name) {
-   var ret = Counter.findAndModify(
-          {
-            query: { _id: name },
-            update: { $inc: { seq: 1 } },
-            new: true
-          }
+exports.getCounter = function (req, res) {
+   var seqDoc = Counter.findAndModify(
+       {
+           query: { _id: req.params.id },
+           update: { $inc: { seq: 1 }},
+           new: true
+       }
    );
-
-   return ret.seq;
+    
+    return seqDoc.seq;
 }
 
 // Get a single counter

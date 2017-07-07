@@ -37,7 +37,7 @@ angular.module('serviceDeskApp')
         $scope.issue = issue;
         if($scope.submitted) {
 
-            $scope.issue.issueCategory = issue.category._id;
+            $scope.issue.issueCategory = issue.category.categoryName;
             $scope.issue.issueChannel = issue.channel._id;
             $scope.issue.issuePriority = issue.priority._id;
             $scope.issue.issueDivision = issue.division._id;

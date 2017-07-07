@@ -32,8 +32,7 @@ exports.show = function (req, res) {
 // Creates a new channel in the DB.
 
 exports.create = function (req, res) {
-    Channel.create(
-        req.body, function (err, channel) {
+    Channel.create(req.body, function (err, channel) {
         if (err) {
             return handleError(res, err);
         }
@@ -41,13 +40,6 @@ exports.create = function (req, res) {
         return res.json(201, channel);
     });
 };
-
- db.products.insert({
-           "_id":getNextSequenceValue("tid"),
-           "product":"Samsung",
-           "category":"mobiles"
-             })
-
 
 // Updates an existing channel in the DB.
 exports.update = function (req, res) {
