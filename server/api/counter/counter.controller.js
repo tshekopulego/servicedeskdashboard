@@ -4,19 +4,18 @@ var _ = require('lodash');
 var Counter = require('./counter.model');
 
 // Get list of counter
-
-exports.index = function (req, res) {
+/*exports.index = function (req, res) {
     Counter.find(function (err, counter) {
         if (err) {
             return handleError(res, err);
         }
         return res.json(200, counter);
     });
-};
+};*/
 
-//Get next Sequence Function
-exports.getCounter = function (req, res) {
-   var seqDoc = Counter.findAndModify(
+//Get next Sequence Function   
+exports.show = function (req, res) {
+   Counter.findAndModify(
        {
            query: { _id: req.params.id },
            update: { $inc: { seq: 1 }},
@@ -24,7 +23,8 @@ exports.getCounter = function (req, res) {
        }
    );
     
-    return seqDoc.seq;
+    //return seqDoc.seq;
+    return res.json(200, counter);
 }
 
 // Get a single counter
@@ -58,23 +58,19 @@ exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
-    Counter.findById(req.params.id, function (err, counter) {
-        if (err) {
-            return handleError(res, err);
-        }
-        if (!counter) {
-            return res.send(404);
-        }
-        var updated = _.merge(counter, req.body);
-        updated.save(function (err) {
-            if (err) {
-                return handleError(res, err);
+    
+    Counter.findAndModify(
+        {
+            query: { _id: req.params.id },
+            update: { $inc: { seq: 1 }},
+                new: true
             }
-            return res.json(200, counter);
-        });
-    });
+        );
+    return res.json(200, seqDoc.seq);
 };
 
+
+/*
 // Deletes a counter from the DB.
 exports.destroy = function (req, res) {
     Counter.findById(req.params.id, function (err, counter) {
@@ -95,6 +91,7 @@ exports.destroy = function (req, res) {
         });
     });
 };
+*/
 
 function handleError(res, err) {
     return res.send(500, err);
