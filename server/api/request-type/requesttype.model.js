@@ -1,9 +1,12 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+	AutoIncriment = require('mongoose-sequence'),
+	
+Schema = mongoose.Schema;
 
 var RequesttypeSchema = new Schema({
+	requesttypeId: {type: Number, default: 0, unique: true},
 	requesttypeName: String,
 	requesttypeDescription: String,
 	status: {
@@ -20,4 +23,5 @@ var RequesttypeSchema = new Schema({
 	}
 });
 
+RequesttypeSchema.plugin(AutoIncriment, {inc_field: 'requesttypeId'});
 module.exports = mongoose.model('Requesttype', RequesttypeSchema);

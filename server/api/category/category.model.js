@@ -1,9 +1,11 @@
 'use strict';
 
 var mongoose = require('mongoose'),
+	AutoIncrement = require('mongoose-sequence'),
 Schema = mongoose.Schema;
 
 var CategorySchema = new Schema({
+	categoryId: {type: Number, default: 0, unique: true},
 	categoryName: String,
 	categoryDescription: String,
 	status: {
@@ -19,5 +21,7 @@ var CategorySchema = new Schema({
 		default: Date.now
 	}
 });
+
+CategorySchema.plugin(AutoIncrement, {inc_field: 'categoryId'});
 
 module.exports = mongoose.model('Category', CategorySchema);

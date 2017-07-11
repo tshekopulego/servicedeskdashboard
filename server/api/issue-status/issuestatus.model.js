@@ -1,7 +1,10 @@
 var mongoose = require('mongoose'),
+	AutoIncrement = require('mongoose-sequence'),
+	
 Schema = mongoose.Schema;
 
 var IssueStatusSchema = new Schema({
+	issueStatusId: {type: Number, default: 0, unique: true},
 	issueStatusName: String,
 	issueStatusDescription: String,
 	status: {
@@ -18,4 +21,5 @@ var IssueStatusSchema = new Schema({
 	}
 });
 
+IssueStatusSchema.plugin(AutoIncrement, {inc_field: 'issueStatusId'});
 module.exports = mongoose.model('IssueStatus', IssueStatusSchema);

@@ -6,14 +6,18 @@ var mongoose = require('mongoose'),
 var RfccallSchema = new Schema({
     callDescription: String,
     callRefNumber: String,
+	
     changeRequestType: {type: Schema.Types.ObjectId, ref: 'Requesttype' },
     callEvaluationOutcome: {type: Schema.Types.ObjectId, ref: 'Evaluationoutcome' },
+	rfccallPriority: {type: Schema.Types.ObjectId, ref: 'Priority' },
 	
-   /* priorities: {type: Schema.Types.ObjectId, ref: 'Priority'},*/
+	changerequesttypeId: {type: Number, ref: 'Requesttype'},
+	callEvaluationOutcomeId: {type: Number, ref: 'Evaluationoutcome'},
+	rfccallPriorityId: {type: Number, ref: 'Priority' },
+	
     actionPlan: String,
 	changeAuthorized: String,
 	implementationOutcome: String,
-	rfccallPriority: {type: Schema.Types.ObjectId, ref: 'Priority' },
 	callStatus: String,
 	status: {
 		type: String,

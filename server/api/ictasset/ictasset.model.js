@@ -1,7 +1,9 @@
 var mongoose = require('mongoose'),
+	AutoIncrement = require('mongoose-sequence'),
 Schema = mongoose.Schema;
 
 var ICTAssetSchema = new Schema({
+	ictAssetId: {type: Number, default: 0, unique: true},
 	assetConfigNumber: String,
 	itNumber: String,
 	assetDescription:String,
@@ -23,5 +25,7 @@ var ICTAssetSchema = new Schema({
 		default: Date.now
 	}
 });
+
+ICTAssetSchema.plugin(AutoIncrement, {inc_field: 'ictAssetId'});
 
 module.exports = mongoose.model('ICTAsset', ICTAssetSchema);

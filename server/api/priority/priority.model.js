@@ -1,10 +1,13 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+	AutoIncriment = require('mongoose-sequence'),
+	
+Schema = mongoose.Schema;
 
 var PrioritySchema = new Schema({
+	priorityId: {type: Number, default: 0, unique: true},
 	priorityName: String,
 	priorityDescription: String,
-  prioritySLA: Number,
+  	prioritySLA: Number,
 	status: {
 		type: String,
 		default: 1
@@ -18,5 +21,7 @@ var PrioritySchema = new Schema({
 		default: Date.now
 	}
 });
+
+PrioritySchema.plugin(AutoIncriment, {inc_field: 'priorityId'});
 
 module.exports = mongoose.model('Priority', PrioritySchema);

@@ -6,7 +6,7 @@ angular.module('serviceDeskApp')
     $scope.issue = {};
     $scope.submitted = false;
 
-     $http.get('/api/channel').success(function(channels) {
+    $http.get('/api/channel').success(function(channels) {
         $scope.channels = channels;
         socket.syncUpdates('channel',
         $scope.channels,function(event,channel,channels){
@@ -42,8 +42,12 @@ angular.module('serviceDeskApp')
             $scope.issue.issuePriority = issue.priority._id;
             $scope.issue.issueDivision = issue.division._id;
             $scope.issue.issueRefNumber = (new Date).getTime();
-          
-
+			
+			$scope.issue.issueCategoryId = issue.category.categoryId;
+            $scope.issue.issueChannelId = issue.channel.channelId;
+            $scope.issue.issuePriorityId = issue.priority.priorityId;
+            $scope.issue.issueDivisionId = issue.division.divisionId;
+			
             $http.post('/api/issues',$scope.issue);
             $scope.issue = '';
             $location.path('/issues');

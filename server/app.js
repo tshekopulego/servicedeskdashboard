@@ -46,6 +46,7 @@ redisClient.on('error',function() {
 var kue = require('kue'); 
 var queue = kue.createQueue();  
 
+
 // Start server
 server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
