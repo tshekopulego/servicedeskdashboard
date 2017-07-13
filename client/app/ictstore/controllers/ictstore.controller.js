@@ -6,6 +6,15 @@ angular.module('serviceDeskApp')
 	$scope.ictstores = [];
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
+	
+	
+    $http.get('/api/issue-status').success(function (issuestatuses) {
+               issuestatuses.unshift({
+                   issueStatusName: 'All',
+                   _id: -1
+               });
+               $scope.issuestatuses = issuestatuses;
+           });
 
 	$http.get('/api/ictstore').success(function(ictstores) {
 		$scope.ictstores = ictstores;

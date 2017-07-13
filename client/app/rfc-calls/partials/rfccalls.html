@@ -50,6 +50,12 @@
 								<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
 							</div>
                             
+							
+							<div class="col-md-2">
+                                <label for="search">Status:</label>
+                                <select class="form-control" name="issueStatusName" id="issueStatusName" ng-model="issuestatus._id" ng-options="issuestatus._id as issuestatus.issueStatusName for issuestatus in issuestatuses">
+                                </select>
+                            </div>
                             
                             <div class="col-md-2">
                                 <label for="search">Request Type:</label>

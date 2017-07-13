@@ -7,6 +7,7 @@ var ICTStoreSchema = new Schema({
 	location:String,
 	costCenter:{type: Schema.Types.ObjectId, ref: 'Costcenter' },
 	assetPriority: {type: Schema.Types.ObjectId, ref: 'Priority' },
+    ictStoreStatus: {type: Schema.Types.ObjectId, ref: 'IssueStatus',  default: '5923ea094632f26f5d77bf5f'},
 	reasonForUse:String,
 	owningCompany:String,
 	status: {

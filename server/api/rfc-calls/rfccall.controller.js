@@ -9,6 +9,7 @@ exports.index = function(req, res) {
     .populate('changeRequestType','requesttypeName')
     .populate('callEvaluationOutcome','evaluationoutcomeName')
 	.populate('rfccallPriority','priorityName prioritySLA')
+	.populate('rfcCallStatus','issueStatusName')
     .exec(function (err, rfccalls) {
 
         var count = Object.keys(rfccalls).length;
@@ -27,6 +28,7 @@ exports.show = function(req, res) {
 	.populate('changeRequestType','requesttypeName')
 	.populate('callEvaluationOutcome','evaluationoutcomeName')
 	.populate('rfccallPriority','priorityName prioritySLA')
+	.populate('rfcCallStatus','issueStatusName')
 	
 	.exec(function (err, rfccalls) {
 	if(err) { return handleError(res, err); }
@@ -86,7 +88,7 @@ exports.destroy = function(req, res, config) {
 
 
 
-// Search IRFC
+// Search RFC
 exports.searchRfccall = function(req, res) {
 	Rfccall.find({
 		changeRequestType:req.params.changerequesttype,
@@ -102,13 +104,14 @@ exports.searchRfccall = function(req, res) {
 };
 
 
-// Search Issue By change Request Type
+// Search RFCCall By change Request Type
 exports.showRfccallBychangeRequestType = function(req, res) {
 	Rfccall.find({
 		changeRequestType:req.params.changerequesttype
 	}).sort({added:1})
 	.populate('changeRequestType','requesttypeName')
 	.populate('callEvaluationOutcome','evaluationoutcomeName')
+	.populate('rfcCallStatus','issueStatusName')
 	
   .exec(function (err, rfccall) {
 		if(err) { return handleError(res, err); }
@@ -124,6 +127,7 @@ exports.showRfccallBycallEvaluationOutcome = function(req, res) {
 	}).sort({added:1})
 	.populate('changeRequestType','requesttypeName')
 	.populate('callEvaluationOutcome','evaluationoutcomeName')
+	.populate('rfcCallStatus','issueStatusName')
     
     .exec(function (err, rfccall) {
 		if(err) { return handleError(res, err); }
