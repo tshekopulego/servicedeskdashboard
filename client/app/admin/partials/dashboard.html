@@ -110,6 +110,56 @@
                     </div>
                 </div>
             </div>
+				<div><!-- This is the DOM element that the deck will be inserted into. -->
+<!-- You can change the width and height and use a stylesheet to apply styling. -->
+<iframe frameborder="0" width="100%" height="800" id="sd-deck-e777ed9b-698c-4228-95bc-1e4c0f72765c"></iframe>
+
+<!-- To change a deck's variables after it has been inserted please use window.slamDataDeckUrl to create an new URI then update the deck iframe's src parameter. -->
+<script type="text/javascript">
+  window.slamDataDeckUrl = function (options) {
+    var queryParts = function () {
+      var parts = [];
+      if (options.echartTheme) {
+        parts.push("echartTheme=" + encodeURIComponent(options.echartTheme));
+      }
+      if (options.permissionTokens && options.permissionTokens.length) {
+        parts.push("permissionTokens=" + options.permissionTokens.join(","));
+      }
+      if (options.stylesheetUrls && options.stylesheetUrls.length) {
+        parts.push("stylesheets=" + options.stylesheetUrls.map(encodeURIComponent).join(","));
+      }
+      return parts;
+    };
+    var queryString = "?" + queryParts().join("&");
+    var varsParam = options.vars ? "/?vars=" + encodeURIComponent(JSON.stringify(options.vars)) : "";
+    return options.slamDataUrl + queryString + "#" + options.deckPath + options.deckId + "/view" + varsParam;
+  };
+</script>
+
+<!-- This is the script which performs SlamData deck insertion. -->
+<script type="text/javascript">
+  (function () {
+    var options = {
+      slamDataUrl: "http://192.168.99.100/files/workspace.html",
+      deckPath: "/servicedeskdb/Issues+Category+Channel+Workspace.slam/",
+      deckId: "e777ed9b-698c-4228-95bc-1e4c0f72765c",
+      permissionTokens: [],
+      stylesheetUrls: [], // An array of custom stylesheet URIs.
+      echartTheme: undefined,
+      vars: {}
+    };
+
+    var deckSelector = "iframe#sd-deck-" + options.deckId;
+    var deckElement = document.querySelector(deckSelector);
+
+    if (deckElement) {
+      deckElement.src = window.slamDataDeckUrl(options);
+    } else {
+      throw("SlamData: Couldn't locate " + deckSelector);
+    }
+  })();
+</script>
+				</div>
 
      
         </div>
