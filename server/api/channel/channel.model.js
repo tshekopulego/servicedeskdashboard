@@ -1,8 +1,13 @@
 var mongoose = require('mongoose'),
 
-Schema = mongoose.Schema;
+Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment'),
+ 	connection = mongoose.createConnection("mongodb://admin:admin@ds151951.mlab.com:51951/servicedeskdb");
+ 
+autoIncrement.initialize(connection);
 
 var ChannelSchema = new Schema({
+	channelId: {type: Number},
 	channelName: String,
 	channelDescription: String,
 	status: {
@@ -20,3 +25,4 @@ var ChannelSchema = new Schema({
 });
 
 module.exports = mongoose.model('Channel', ChannelSchema);
+ChannelSchema.plugin(autoIncrement.plugin, { model: 'Assettype', field: 'channelId' });

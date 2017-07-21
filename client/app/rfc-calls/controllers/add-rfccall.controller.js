@@ -44,9 +44,14 @@ angular.module('serviceDeskApp')
             
             /*$scope.rfccall.rfccallpriorities = rfccall.priority._id;*/
             $scope.rfccall.changeRequestType = rfccall.requesttype._id;
-			 $scope.rfccall.rfccallPriority = rfccall.priority._id;
-			
+			$scope.rfccall.rfccallPriority = rfccall.priority._id;
 			$scope.rfccall.callEvaluationOutcome = rfccall.evaluationoutcome._id;
+			$scope.rfccall.department = rfccall.department._id;
+			
+			$scope.rfccall.priorityId = rfccall.priority.priorityId;
+			$scope.rfccall.changeRequestTypeId = rfccall.requesttype.changerequesttypeId;
+			$scope.rfccall.callEvaluationOutcomeId = rfccall.evaluationoutcome.evaluationoutcomeId;
+			$scope.rfccall.departmentId = rfccall.department.departmentId;
             if ($scope.rfccall.requesttypeName = 'Standard') {
                 
                 $scope.rfccall.changeAuthorized = 'Manager';

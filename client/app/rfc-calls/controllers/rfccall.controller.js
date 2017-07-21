@@ -17,8 +17,6 @@ angular.module('serviceDeskApp')
                $scope.requesttypes = requesttypes;
            });
     
-    
-    
     $http.get('/api/evaluation-outcome').success(function (evaluationoutcomes) {
                evaluationoutcomes.unshift({
                   evaluationoutcomeName: 'All',
@@ -27,8 +25,6 @@ angular.module('serviceDeskApp')
                $scope.evaluationoutcomes = evaluationoutcomes;
            });
     
-    
-
     $http.get('/api/rfc-calls').success(function(rfccalls) {
         $scope.rfccalls = rfccalls;
         socket.syncUpdates('rfccall', $scope.rfccalls,function(event,rfccall,rfccalls){
@@ -41,7 +37,7 @@ angular.module('serviceDeskApp')
     });
     
     
-     $scope.searchRfccall = function (changerequesttype, callevaluationoutcome) {
+    $scope.searchRfccall = function (changerequesttype, callevaluationoutcome) {
 
             if ((changerequesttype == "-1") && (callevaluationoutcome == "-1")) { //get all records
                 $http.get('/api/rfc-calls').success(function (rfccalls) {
@@ -79,10 +75,6 @@ angular.module('serviceDeskApp')
 
             }
         };
-    
-
-    
-    
 
     $scope.open = function (rfccall) {
 

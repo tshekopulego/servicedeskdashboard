@@ -6,13 +6,13 @@ angular.module('serviceDeskApp')
     $scope.ictstore = {};
     $scope.submitted = false;
 	
-		$http.get('/api/costcenter').success(function(costcenters) {
+	$http.get('/api/costcenter').success(function(costcenters) {
 		$scope.costcenters = costcenters;
 		socket.syncUpdates('costcenter', $scope.costcenters,function(event,costcenter,costcenters){
 		});
 	});
 	
-	 $http.get('/api/priority').success(function(priorities) {
+	$http.get('/api/priority').success(function(priorities) {
         $scope.priorities = priorities;
         socket.syncUpdates('priority', $scope.priorities,function(event,priority,priorities){
         });
@@ -21,9 +21,14 @@ angular.module('serviceDeskApp')
     $scope.addICTStore = function(ictstore,isValid) {
         $scope.submitted = true;
         $scope.ictstore = ictstore;
+		
         if(isValid && $scope.submitted) {
 			$scope.ictstore.costCenter = ictstore.costCenter._id;
-			 $scope.ictstore.assetPriority = ictstore.priority._id;
+			$scope.ictstore.assetPriority = ictstore.priority._id;
+			
+			$scope.ictstore.costCenter = ictstore.costCenter.costcenterId;
+			$scope.ictstore.assetPriority = ictstore.priority.priorityId;
+			
             $http.post('/api/ictstore',$scope.ictstore);
             $scope.ictstore = '';
             $location.path('/ictstore');
