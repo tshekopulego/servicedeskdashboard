@@ -8,7 +8,9 @@ var RfccallSchema = new Schema({
     callRefNumber: String,
     changeRequestType: {type: Schema.Types.ObjectId, ref: 'Requesttype' },
     callEvaluationOutcome: {type: Schema.Types.ObjectId, ref: 'Evaluationoutcome' },
-	
+	changeRequestTypeId: { type: Number, ref: 'Requesttype'},
+	callEvaluationOutcomeId: { type: Number, ref: 'Evaluationoutcome'},
+	priorityId: { type: Number, ref: 'Priority' },
    /* priorities: {type: Schema.Types.ObjectId, ref: 'Priority'},*/
     actionPlan: String,
 	changeAuthorized: String,
