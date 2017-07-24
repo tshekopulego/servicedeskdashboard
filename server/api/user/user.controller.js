@@ -41,8 +41,9 @@ var validationError = function(res, err) {
  			res.json({ token: guestSessionToken });
 
  			var mailConfirmationToken = jwt.sign({firstName : req.body.firstName, lastName: req.body.lastName, email: req.body.email,  password: req.body.password }, config.secrets.mailConfirmation, {expiresInMinutes: 60 * 24 * 30});
-
- 			mail.userConfirmation.sendMail(req.body.firstName, req.body.email, mailConfirmationToken, null);
+			
+			console.log(mailConfirmationToken);
+ 			//mail.userConfirmation.sendMail(req.body.firstName, req.body.email, mailConfirmationToken, null);
  		});
  	}
 };

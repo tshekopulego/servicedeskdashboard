@@ -21,53 +21,99 @@
 				</a>
 			</div>
 		</div>
-	</div><!-- This is the DOM element that the deck will be inserted into. -->
-<!-- You can change the width and height and use a stylesheet to apply styling. -->
-<iframe frameborder="0" width="100%" height="800" id="sd-deck-ef837eb6-46bb-4669-bfae-c96e085247c7"></iframe>
+		<div class="row">
+			<div>
+				<!-- This is the DOM element that the deck will be inserted into. -->
+	<!-- You can change the width and height and use a stylesheet to apply styling. -->
+	<iframe frameborder="0" width="100%" height="800" id="sd-deck-ef837eb6-46bb-4669-bfae-c96e085247c7"></iframe>
+	
+	<!-- To change a deck's variables after it has been inserted please use window.slamDataDeckUrl to create an new URI then update the deck iframe's src parameter. -->
+	<script type="text/javascript">
+		window.slamDataDeckUrl = function (options) {
+			var queryParts = function () {
+				var parts = [];
+				if (options.echartTheme) {
+					parts.push("echartTheme=" + encodeURIComponent(options.echartTheme));
+				}
+				if (options.permissionTokens && options.permissionTokens.length) {
+					parts.push("permissionTokens=" + options.permissionTokens.join(","));
+				}
+				if (options.stylesheetUrls && options.stylesheetUrls.length) {
+					parts.push("stylesheets=" + options.stylesheetUrls.map(encodeURIComponent).join(","));
+				}
+				return parts;
+			};
+			var queryString = "?" + queryParts().join("&");
+			var varsParam = options.vars ? "/?vars=" + encodeURIComponent(JSON.stringify(options.vars)) : "";
+			return options.slamDataUrl + queryString + "#" + options.deckPath + options.deckId + "/view" + varsParam;
+		};
+	</script>
+	
+	<!-- This is the script which performs SlamData deck insertion. -->
+	<script type="text/javascript">
+	  (function () {
+		var options = {
+		  slamDataUrl: "http://192.168.99.100/files/workspace.html",
+		  deckPath: "/servicedeskdb/RFC+Calls+Dashboard.slam/",
+		  deckId: "ef837eb6-46bb-4669-bfae-c96e085247c7",
+		  permissionTokens: [],
+		  stylesheetUrls: [], // An array of custom stylesheet URIs.
+		  echartTheme: undefined,
+		  vars: {}
+		};
 
-<!-- To change a deck's variables after it has been inserted please use window.slamDataDeckUrl to create an new URI then update the deck iframe's src parameter. -->
-<script type="text/javascript">
-  window.slamDataDeckUrl = function (options) {
-    var queryParts = function () {
-      var parts = [];
-      if (options.echartTheme) {
-        parts.push("echartTheme=" + encodeURIComponent(options.echartTheme));
-      }
-      if (options.permissionTokens && options.permissionTokens.length) {
-        parts.push("permissionTokens=" + options.permissionTokens.join(","));
-      }
-      if (options.stylesheetUrls && options.stylesheetUrls.length) {
-        parts.push("stylesheets=" + options.stylesheetUrls.map(encodeURIComponent).join(","));
-      }
-      return parts;
-    };
-    var queryString = "?" + queryParts().join("&");
-    var varsParam = options.vars ? "/?vars=" + encodeURIComponent(JSON.stringify(options.vars)) : "";
-    return options.slamDataUrl + queryString + "#" + options.deckPath + options.deckId + "/view" + varsParam;
-  };
-</script>
+		var deckSelector = "iframe#sd-deck-" + options.deckId;
+		var deckElement = document.querySelector(deckSelector);
 
-<!-- This is the script which performs SlamData deck insertion. -->
-<script type="text/javascript">
-  (function () {
-    var options = {
-      slamDataUrl: "http://192.168.99.100/files/workspace.html",
-      deckPath: "/servicedeskdb/RFC+Calls+Dashboard.slam/",
-      deckId: "ef837eb6-46bb-4669-bfae-c96e085247c7",
-      permissionTokens: [],
-      stylesheetUrls: [], // An array of custom stylesheet URIs.
-      echartTheme: undefined,
-      vars: {}
-    };
+		if (deckElement) {
+		  deckElement.src = window.slamDataDeckUrl(options);
+		} else {
+		  throw("SlamData: Couldn't locate " + deckSelector);
+		}
+	  })();
+	</script>
+			</div>
+			
+		<!--<div class="col-md-2">
+								<div class="row">
 
-    var deckSelector = "iframe#sd-deck-" + options.deckId;
-    var deckElement = document.querySelector(deckSelector);
-
-    if (deckElement) {
-      deckElement.src = window.slamDataDeckUrl(options);
-    } else {
-      throw("SlamData: Couldn't locate " + deckSelector);
-    }
-  })();
-</script>
+									<div class="col-md-2" style="vertical-align: text-bottom; padding-left: 0; padding-top: 22px; text-align: left;">
+										<input type="button" name="" value="Go" ng-click="bulkAction(selectedErrands,errand.bulkAction)" class="btn btn-small btn-primary">
+									</div>
+								</div>
+							</div>-->
+		<div class="col-md-3">
+			<label for="search">Search:</label>
+			<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+		</div>
+		<div class="col-md-3">
+			<label for="search">Items Per Page:</label>
+			<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+		</div>
+		
+		<div class="col-md-2">
+			<label for="search">Request Type:</label>
+			<select class="form-control" name="requesttypeName" id="requesttypeName" ng-model="requesttype._id" ng-options="requesttype._id as requesttype.requesttypeName for requesttype in requesttypes">
+			</select>
+		</div>
+		
+		<div class="col-md-2">
+			<label for="search">Evaluation:</label>
+			<select class="form-control" name="evaluationoutcomeName" id="evaluationoutcomeName" ng-model="evaluationoutcome._id" ng-options="evaluationoutcome._id as evaluationoutcome.evaluationoutcomeName for evaluationoutcome in evaluationoutcomes">
+			</select>
+		</div>
+		
+		<div class="col-md-2">
+			<input type="button" name="" value="Go" ng-click="searchRfccall(requesttype._id,evaluationoutcome._id)" class="btn btn-small btn-primary">
+		</div>
+		
+		<div class="col-md-3 col-md-offset-3">
+			<dir-pagination-controls pagination-id="rfccall" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
+		</div>
+		<div class="col-md-3">
+			<label for="count">Number of calls:</label>
+			<label>{{count}}</label>
+		</div>
+		</div>
+	</div>
 </div>

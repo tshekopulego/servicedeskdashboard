@@ -32,9 +32,12 @@ angular.module('serviceDeskApp')
 			$scope.ictasset.assetType = ictasset.assetType._id;
 			$scope.ictasset.assetPriority = ictasset.priority._id;
 			
+			$scope.ictasset.assetCategoryId = ictasset.category.categoryId;
+			$scope.ictasset.assetTypeId = ictasset.assetType.assetTypeId; 
+			$scope.ictasset.assetPriorityId = ictasset.priority.priorityId;
 			
-			 $http.post('/api/ictasset',$scope.ictasset);
-           $http.put('/api/ictasset/' + $scope.ictasset_id,ictasset);
+			$http.post('/api/ictasset',$scope.ictasset);
+			$http.put('/api/ictasset/' + $scope.ictasset_id,ictasset);
             $scope.ictasset = '';
             $location.path('/ictasset');
         }
