@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment');
 
 var IssueSchema = new Schema({
     issueDescription: String,
@@ -31,3 +32,4 @@ var IssueSchema = new Schema({
 });
 
 module.exports = mongoose.model('Issue', IssueSchema);
+IssueSchema.plugin(autoIncrement.plugin, { model: 'Issue', field: 'issuesId' });

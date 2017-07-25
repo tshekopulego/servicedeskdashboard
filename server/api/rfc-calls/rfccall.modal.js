@@ -1,7 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment');
 
 var RfccallSchema = new Schema({
     callDescription: String,
@@ -33,3 +34,4 @@ var RfccallSchema = new Schema({
 });
 
 module.exports = mongoose.model('Rfccall', RfccallSchema);
+RfccallSchema.plugin(autoIncrement.plugin, { model: 'Rfccall', field: 'rfccallId' });
