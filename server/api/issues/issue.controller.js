@@ -154,7 +154,7 @@ exports.update = function(req, res) {
 
 
 
-  // will fire every 5 minutes
+  // will fire every 20 minutes
   var textSched = later.parse.text('every 20 min');
   
   // execute logTime for each successive occurrence of the text schedule
