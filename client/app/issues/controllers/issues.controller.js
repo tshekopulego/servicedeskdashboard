@@ -53,24 +53,12 @@ angular.module('serviceDeskApp')
                         }
                             }
                         console.log($scope.counts);
-                        
-                       
-
-                    }
-
-                    
+                    } 
                 };
-        
-        
-        
         socket.syncUpdates('issue', $scope.issues,function(event,issue,issues){
-            
-           
-            
             
         });
     });
-
         $scope.searchIssues = function (category, status) {
 
             if ((category == "-1") && (status == "-1")) { //get all records
@@ -109,17 +97,6 @@ angular.module('serviceDeskApp')
 
             }
         };
-    
-    
-    
-    
-    
-    
-    
-   
-                                          
-    
-    
 
     $scope.open = function (issue) {
 
@@ -136,11 +113,6 @@ angular.module('serviceDeskApp')
               
             
         });
-        
-        
-        
-   
-        
 
         modalInstance.result.then(function (selectedItem) {
             $scope.selected = selectedItem;
@@ -149,14 +121,6 @@ angular.module('serviceDeskApp')
         });
     };
     
-    
-    
-    
-    
-
-    
-    
-
 
     $scope.isOverSLA = function (dateCaptured, sla) {
 
@@ -169,9 +133,6 @@ angular.module('serviceDeskApp')
 
             return hours > sla;
     }
-    
-    
-
 
     $scope.cancel = function() {
         $window.history.back();
@@ -184,15 +145,6 @@ angular.module('serviceDeskApp')
     $scope.$on('$destroy', function () {
         socket.unsyncUpdates('issue');
     });
-    
-    
-    
-    
-    
-    
-         
-     
-    
-    
+
     
 });

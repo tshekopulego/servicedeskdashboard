@@ -22,10 +22,10 @@ module.exports = {
   DEBUG: '',
 
   MAIL_SERVICE:"Mailgun", // sets automatically host, port and connection security settings
-  MAIL_USER: "tsheko.mashego@gmail.com",
-  MAIL_PASS: "Tsheko1",
+  MAIL_USER: "mohapi.mokoena@skhomotech.co.za",
+  MAIL_PASS: "C@ss@no27",
   MAIL_FROM_NAME: "Tshwane Safety",
-  MAIL_FROM_ADDRESS: "info@pulego.co.za",
-  MAIL_CONFIRMATION_SECRET: "mailconfsecret",
+  MAIL_FROM_ADDRESS: "mohapi.mokoena@skhomotech.co.za",
+  MAIL_CONFIRMATION_SECRET: "key-d2a8b25c5443f8089a4404e4eb6bd706",
   PASSWORD_RESET_SECRET: "pwdresetsecret"
 };
