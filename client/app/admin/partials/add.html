@@ -33,7 +33,7 @@
 							<div class="form-group" ng-class="{'has-error': addUserForm.role.$invalid && submitted,'has-success': !addUserForm.role.$invalid && submitted}">
 								<label>Role</label>
 								<select id="role" name="role" class="form-control" ng-model="user.role" required>
-									<option ng-repeat="role in roles" value="{{role.value}}">{{role.name}}</option>
+									<option ng-repeat="role in roles" value="{{role.roleName}}">{{role.roleName}}</option>
 								</select>
 								<p ng-show="addUserForm.role.$invalid && submitted" class="help-block">The role is required</p>
 							</div>
@@ -62,7 +62,7 @@
 								<p ng-show="addUserForm.clientType.$invalid && submitted" class="help-block">The Client Type is required</p>
 							</div>-->
 
-							<div class="form-group" ng-if="user.role == 'user' || user.clientType == 'Individual'" ng-class="{'has-error': addUserForm.firstName.$error.required && submitted,'has-success': !addUserForm.firstName.$error.required && submitted}">
+							<div class="form-group" ng-if="user.roleName = 'User' || user.clientType = 'Individual'" ng-class="{'has-error': addUserForm.firstName.$error.required && submitted,'has-success': !addUserForm.firstName.$error.required && submitted}">
 								<label class="control-label" for="firstName">First Name:</label>
 								<input type="text" id="firstName" name="firstName" ng-model="user.firstName" ng-required="user.role == 'user' || user.clientType == 'Individual'" class="form-control"/>
 								<p ng-show="addUserForm.firstName.$error.required  && submitted" class="help-block">The First Name is required</p>
@@ -74,7 +74,7 @@
 								<p ng-show="addUserForm.companyName.$error.required  && submitted" class="help-block">The Company Name is required</p>
 							</div>-->
 
-							<div class="form-group" ng-if="user.role == 'user' || user.clientType == 'Individual'" ng-class="{'has-error': addUserForm.lastName.$error.required && submitted,'has-success': !addUserForm.lastName.$error.required && submitted}">
+							<div class="form-group" ng-if="user.roleName = 'User' || user.clientType == 'Individual'" ng-class="{'has-error': addUserForm.lastName.$error.required && submitted,'has-success': !addUserForm.lastName.$error.required && submitted}">
 								<label class="control-label" for="lastName">Last Name:</label>
 								<input type="text" id="lastName" name="lastName" ng-model="user.lastName" ng-required="user.role == 'user'" class="form-control"/>
 								<p ng-show="addUserForm.lastName.$error.required  && submitted" class="help-block">The Last Name is required</p>
@@ -116,13 +116,13 @@
 								<p class="help-block" ng-show="addUserForm.email.$error.mongoose">{{ errors.email }}</p>
 							</div>
 
-							<div class="form-group phone-number animate-show" ng-show="user.role == 'client'" ng-class="{'has-error': addUserForm.phoneNumber.$invalid && submitted,'has-success': !addUserForm.phoneNumber.$invalid && submitted}">
+							<div class="form-group phone-number animate-show" ng-show="user.roleName == 'client'" ng-class="{'has-error': addUserForm.phoneNumber.$invalid && submitted,'has-success': !addUserForm.phoneNumber.$invalid && submitted}">
 								<label class="control-label" for="phoneNumber">Phone Number:</label>
 								<input type="phoneNumber" id="phoneNumber" name="phoneNumber" type="phoneNumber" ng-model="user.phoneNumber" ng-required="user.role == 'client'" class="form-control" ui-mask="9999999999" ui-mask-placeholder ui-mask-placeholder-char="-"/>
 								<p ng-show="addUserForm.phoneNumber.$invalid && submitted" class="help-block">A Phone Number is required</p>
 							</div>
 
-							<div class="form-group" ng-show="user.role == 'client'">
+							<div class="form-group" ng-show="user.roleName = 'Client'">
 								<span maq-add-client-contact></span>
 							</div>
 
@@ -132,7 +132,7 @@
 								<p ng-show="addUserForm.clientLocation.$invalid && submitted" class="help-block">A Client Location is required</p>
 							</div>-->
 
-							<div class="form-group password animate-show" ng-show="user.role == 'user'" ng-class="{'has-error': (addUserForm.password.$error.minlength || addUserForm.password.$error.maxlength || addUserForm.password.$invalid) && submitted,'has-success': (!addUserForm.password.$error.minlength && !addUserForm.password.$error.maxlength && !addUserForm.password.$invalid) && submitted}">
+							<div class="form-group password animate-show" ng-show="user.roleName = 'User'" ng-class="{'has-error': (addUserForm.password.$error.minlength || addUserForm.password.$error.maxlength || addUserForm.password.$invalid) && submitted,'has-success': (!addUserForm.password.$error.minlength && !addUserForm.password.$error.maxlength && !addUserForm.password.$invalid) && submitted}">
 								<label class="control-label" for="password">Password:</label>
 								<input type="password" id="password" name="password" ng-model="user.password" ng-minlength="3" ng-maxlength="20" ng-required="user.role == 'user'" class="form-control"/>
 								<p ng-show="addUserForm.password.$error.minlength && submitted" class="help-block">Password is too short</p>
@@ -140,7 +140,7 @@
 								<p ng-show="addUserForm.password.$error.required && submitted" class="help-block">Password is required</p>
 							</div>
 
-							<div class="form-group confirm-password animate-show" ng-show="user.role == 'user'" ng-class="{'has-error': addUserForm.confirmPassword.$dirty && (addUserForm.confirmPassword.$error.passwordsMatch && submitted),'has-success': addUserForm.confirmPassword.$dirty && (!addUserForm.confirmPassword.$error.passwordsMatch && submitted)}">
+							<div class="form-group confirm-password animate-show" ng-show="user.roleName = 'User'" ng-class="{'has-error': addUserForm.confirmPassword.$dirty && (addUserForm.confirmPassword.$error.passwordsMatch && submitted),'has-success': addUserForm.confirmPassword.$dirty && (!addUserForm.confirmPassword.$error.passwordsMatch && submitted)}">
 								<label class="control-label" for="confirmPassword">Confirm Password:</label>
 								<input type="password" id="confirmPassword" name="confirmPassword" ng-model="user.confirmPassword" ui-validate="{passwordsMatch: 'passwordsMatch($value)'}" ui-validate-watch="'user.password'" ng-required="user.role == 'user'" class="form-control"/>
 								<p ng-show="addUserForm.confirmPassword.$dirty && (addUserForm.confirmPassword.$error.passwordsMatch && submitted)" class="help-block">Passwords don't match</p>

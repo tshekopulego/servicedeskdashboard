@@ -21,58 +21,57 @@
 				</a>
 			</div>
 		</div>
-		<div class="row">
-			<div>
-				<!-- This is the DOM element that the deck will be inserted into. -->
-	<!-- You can change the width and height and use a stylesheet to apply styling. -->
-	<iframe frameborder="0" width="100%" height="800" id="sd-deck-ef837eb6-46bb-4669-bfae-c96e085247c7"></iframe>
-	
-	<!-- To change a deck's variables after it has been inserted please use window.slamDataDeckUrl to create an new URI then update the deck iframe's src parameter. -->
-	<script type="text/javascript">
-		window.slamDataDeckUrl = function (options) {
-			var queryParts = function () {
-				var parts = [];
-				if (options.echartTheme) {
+	</div>
+		<div class="wrapper wrapper-content animated fadeIn">
+			<!-- This is the DOM element that the deck will be inserted into. -->
+			<!-- You can change the width and height and use a stylesheet to apply styling. -->
+			<iframe frameborder="0" width="90%" height="600" id="sd-deck-3b846c0a-6918-4078-87a7-6ed07be797c4"></iframe>
+
+			<!-- To change a deck's variables after it has been inserted please use window.slamDataDeckUrl to create an new URI then update the deck iframe's src parameter. -->
+			<script type="text/javascript">
+			  window.slamDataDeckUrl = function (options) {
+				var queryParts = function () {
+				  var parts = [];
+				  if (options.echartTheme) {
 					parts.push("echartTheme=" + encodeURIComponent(options.echartTheme));
-				}
-				if (options.permissionTokens && options.permissionTokens.length) {
+				  }
+				  if (options.permissionTokens && options.permissionTokens.length) {
 					parts.push("permissionTokens=" + options.permissionTokens.join(","));
-				}
-				if (options.stylesheetUrls && options.stylesheetUrls.length) {
+				  }
+				  if (options.stylesheetUrls && options.stylesheetUrls.length) {
 					parts.push("stylesheets=" + options.stylesheetUrls.map(encodeURIComponent).join(","));
+				  }
+				  return parts;
+				};
+				var queryString = "?" + queryParts().join("&");
+				var varsParam = options.vars ? "/?vars=" + encodeURIComponent(JSON.stringify(options.vars)) : "";
+				return options.slamDataUrl + queryString + "#" + options.deckPath + options.deckId + "/view" + varsParam;
+			  };
+			</script>
+
+			<!-- This is the script which performs SlamData deck insertion. -->
+			<script type="text/javascript">
+			  (function () {
+				var options = {
+				  slamDataUrl: "http://192.168.99.100/files/workspace.html",
+				  deckPath: "/servicedeskdb/RFC+Calls+Dashboard.slam/",
+				  deckId: "3b846c0a-6918-4078-87a7-6ed07be797c4",
+				  permissionTokens: [],
+				  stylesheetUrls: [], // An array of custom stylesheet URIs.
+				  echartTheme: undefined,
+				  vars: {}
+				};
+
+				var deckSelector = "iframe#sd-deck-" + options.deckId;
+				var deckElement = document.querySelector(deckSelector);
+
+				if (deckElement) {
+				  deckElement.src = window.slamDataDeckUrl(options);
+				} else {
+				  throw("SlamData: Couldn't locate " + deckSelector);
 				}
-				return parts;
-			};
-			var queryString = "?" + queryParts().join("&");
-			var varsParam = options.vars ? "/?vars=" + encodeURIComponent(JSON.stringify(options.vars)) : "";
-			return options.slamDataUrl + queryString + "#" + options.deckPath + options.deckId + "/view" + varsParam;
-		};
-	</script>
-	
-	<!-- This is the script which performs SlamData deck insertion. -->
-	<script type="text/javascript">
-	  (function () {
-		var options = {
-		  slamDataUrl: "http://192.168.99.100/files/workspace.html",
-		  deckPath: "/servicedeskdb/RFC+Calls+Dashboard.slam/",
-		  deckId: "ef837eb6-46bb-4669-bfae-c96e085247c7",
-		  permissionTokens: [],
-		  stylesheetUrls: [], // An array of custom stylesheet URIs.
-		  echartTheme: undefined,
-		  vars: {}
-		};
-
-		var deckSelector = "iframe#sd-deck-" + options.deckId;
-		var deckElement = document.querySelector(deckSelector);
-
-		if (deckElement) {
-		  deckElement.src = window.slamDataDeckUrl(options);
-		} else {
-		  throw("SlamData: Couldn't locate " + deckSelector);
-		}
-	  })();
-	</script>
-			</div>
+			  })();
+			</script>
 			
 		<!--<div class="col-md-2">
 								<div class="row">
@@ -113,7 +112,6 @@
 		<div class="col-md-3">
 			<label for="count">Number of calls:</label>
 			<label>{{count}}</label>
-		</div>
 		</div>
 	</div>
 </div>
