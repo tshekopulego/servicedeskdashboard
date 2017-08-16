@@ -13,13 +13,7 @@
         
 
 		<div ng-if="isAdmin()" class="row">
-			
-            
-            
-            
-            <div class="container-fluid">
-           
-
+			<div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats" >
@@ -27,18 +21,18 @@
                             <i class="fa fa-id-card"></i>
                         </div>
                         <div class="card-content">
-                            <p class="category"><a href="/issues">Issues</a></p>
-                            <h3 class="title">{{counts.New + counts.New}}</h3>
+                            <p class="category"><a href="/issues">ISSUES</a></p>
+                            <h3 class="title">{{totalIssues}}</h3>
                             
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                 <i class="material-icons"></i> New: {{counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
+                                 <i class="material-icons"></i> New: {{ counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
                             </div>
                         </div>
-                        <div class="card-footer">
+						<div class="card-footer">
                             <div class="stats">
-                                 <i class="material-icons"></i> Rejected: {{counts.New }} 	&nbsp;	&nbsp; Cancelled: {{counts.Approved }} 
+                                 <i class="material-icons"></i> Rejected: {{counts.Rejected }} 	&nbsp;	&nbsp; Cancelled: {{counts.Cancelled }} 
                             </div>
                         </div>
                     </div>
@@ -51,16 +45,16 @@
                         <div class="card-content">
                             <p class="category"><a href="/rfccalls">RFC</a></p>
                            
-                            <h3 class="title">{{counts.New + counts.New}}</h3>
+                            <h3 class="title">{{totalrfccalls}}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                 <i class="material-icons"></i> New: {{counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Approved:{{counts.Approved }} 
+                                 <i class="material-icons"></i> Standard: {{rfccounts.Standard }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Normal: {{rfccounts.Normal }} 
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                 <i class="material-icons"></i>  Rejected: {{counts.New }}  	&nbsp;	&nbsp; Cancelled: {{counts.Approved }} 
+                                 <i class="material-icons"></i>  Emergency: {{rfccounts.Emergency }}
                             </div>
                         </div>
                     </div>
@@ -108,6 +102,9 @@
                         </div>
                     </div>
                 </div>
+				<div class="col-lg-3 col-md-6 col-sm-6"><div ng-controller="MainController"> 
+        
+    </div></div>
             </div>
 				<div class="ibox">
 					<!-- This is the DOM element that the deck will be inserted into. -->

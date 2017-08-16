@@ -15,8 +15,7 @@ angular.module('serviceDeskApp')
                $scope.issuestatuses = issuestatuses;
            });
 
-
-           $http.get('/api/category').success(function (categories) {
+    $http.get('/api/category').success(function (categories) {
                categories.unshift({
                    categoryName: 'All',
                    _id: -1
