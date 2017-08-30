@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 exports.userConfirmation = require('./user_confirmation');
 

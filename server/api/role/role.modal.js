@@ -22,4 +22,4 @@ var RoleSchema = new Schema({
 });
 
 module.exports = mongoose.model('Role', RoleSchema);
-RoleSchema.pluin(autoIncrement.plugin, { model: 'Role', field: 'roleId' });
+RoleSchema.plugin(autoIncrement.plugin, { model: 'Role', field: 'roleId' });

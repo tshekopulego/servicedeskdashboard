@@ -37,43 +37,28 @@ exports.index = function(req, res) {
 	.populate('issuePriority','priorityName prioritySLA')
 	.populate('issueDivision','divisionName')
     .exec(function (err, issues) {
-        
-        
-        var itemsArray = []
-
-                var itemIds = issues
-
-                for (var i = 0; i < issues.length; i++) {
-                    var status =itemIds[i].issueStatus.issueStatusName
-                  
-                    itemsArray.push(status);
-
-                    if(itemIds.length === itemsArray.length){
-
-                        console.log(itemsArray)
-                              
-                        
-                        var counts = {}, i, value;
-                        for (i = 0; i < itemsArray.length; i++) {
-                        value = itemsArray[i];
-                        if (typeof counts[value] === "undefined") {
-                        counts[value] = 1;
-                        } else {
-                        counts[value]++;
-                        }
-                            }
-                        console.log(counts);
-                        
-                        
-
-                    }
-
-                    
-                };
-        
-        
-        
-        
+		
+		var itemsArray = []
+		var itemIds = issues
+		
+		for (var i = 0; i < issues.length; i++) {
+			var status =itemIds[i].issueStatus.issueStatusName
+			itemsArray.push(status);
+			if(itemIds.length === itemsArray.length){
+				console.log(itemsArray)
+				var counts = {}, i, value;
+				for (i = 0; i < itemsArray.length; i++) {
+					value = itemsArray[i];
+					if (typeof counts[value] === "undefined") {
+						counts[value] = 1;
+					} else {
+						counts[value]++;
+					}
+				}
+				console.log(counts);
+			}
+		};
+		
 		if(err) { return handleError(res, err); }
 		return res.json(200, issues);
 	});
