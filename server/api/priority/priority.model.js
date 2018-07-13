@@ -1,10 +1,12 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment');
 
 var PrioritySchema = new Schema({
+	priorityId: { type: Number },
 	priorityName: String,
 	priorityDescription: String,
-  prioritySLA: Number,
+  	prioritySLA: Number,
 	status: {
 		type: String,
 		default: 1
@@ -20,3 +22,4 @@ var PrioritySchema = new Schema({
 });
 
 module.exports = mongoose.model('Priority', PrioritySchema);
+PrioritySchema.plugin(autoIncrement.plugin, { model: 'Priority', field: 'priorityId'});

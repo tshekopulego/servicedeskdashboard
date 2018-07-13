@@ -12,9 +12,29 @@ exports.index = function(req, res) {
     .exec(function (err, rfccalls) {
 
         var count = Object.keys(rfccalls).length;
-
-		if(err) { return handleError(res, err); }       
-		return res.json(200, rfccalls);
+		var itemsArray = []
+		var itemIds = rfccalls
+		for (var i = 0; i < rfccalls.length; i++) {
+			var status = itemIds[i].changeRequestType.requesttypeName
+			
+			itemsArray.push(status);
+			if(itemIds.length === itemsArray.length){
+				console.log(itemsArray)
+				var counts = {}, i, value;
+				for (i = 0; i < itemsArray.length; i++) {
+					value = itemsArray[i];
+					if (typeof counts[value] === "undefined") {
+						counts[value] = 1;
+					} else {
+						counts[value]++;
+					}
+				}
+				console.log(counts);
+			}
+		};
+		
+	if(err) { return handleError(res, err); }
+	return res.json(200, rfccalls);
 	});
 };
 

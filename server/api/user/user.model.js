@@ -16,8 +16,9 @@ var UserSchema = new Schema({
 		default: 'admin'
 	},
     departmentName: {type: Schema.Types.ObjectId, ref: 'Department'},
+	departmentId: { type: Number, ref: 'Department' },
 	clientType: String,
-	clientPackage: {type: Schema.Types.ObjectId, ref: 'Packages' },
+	//clientPackage: {type: Schema.Types.ObjectId, ref: 'Packages' },
 	billingType: String,
 	companyName: String,
 	contactPerson: String,

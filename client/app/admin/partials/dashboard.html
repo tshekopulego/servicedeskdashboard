@@ -13,13 +13,7 @@
         
 
 		<div ng-if="isAdmin()" class="row">
-			
-            
-            
-            
-            <div class="container-fluid">
-           
-
+			<div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats" >
@@ -27,18 +21,18 @@
                             <i class="fa fa-id-card"></i>
                         </div>
                         <div class="card-content">
-                            <p class="category"><a href="/issues">Issues</a></p>
-                            <h3 class="title">{{counts.New + counts.New}}</h3>
+                            <p class="category"><a href="/issues">ISSUES</a></p>
+                            <h3 class="title">{{totalIssues}}</h3>
                             
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                 <i class="material-icons"></i> New: {{counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
+                                 <i class="material-icons"></i> New: {{ counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
                             </div>
                         </div>
-                        <div class="card-footer">
+						<div class="card-footer">
                             <div class="stats">
-                                 <i class="material-icons"></i> Rejected: {{counts.New }} 	&nbsp;	&nbsp; Cancelled: {{counts.Approved }} 
+                                 <i class="material-icons"></i> Rejected: {{counts.Rejected }} 	&nbsp;	&nbsp; Cancelled: {{counts.Cancelled }} 
                             </div>
                         </div>
                     </div>
@@ -51,16 +45,16 @@
                         <div class="card-content">
                             <p class="category"><a href="/rfccalls">RFC</a></p>
                            
-                            <h3 class="title">{{counts.New + counts.New}}</h3>
+                            <h3 class="title">{{totalrfccalls}}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                 <i class="material-icons"></i> New: {{counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Approved:{{counts.Approved }} 
+                                 <i class="material-icons"></i> Standard: {{rfccounts.Standard }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Normal: {{rfccounts.Normal }} 
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                 <i class="material-icons"></i>  Rejected: {{counts.New }}  	&nbsp;	&nbsp; Cancelled: {{counts.Approved }} 
+                                 <i class="material-icons"></i>  Emergency: {{rfccounts.Emergency }}
                             </div>
                         </div>
                     </div>
@@ -86,7 +80,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card card-stats" >
                         <div class="card-header" data-background-color="blue">
@@ -109,7 +102,61 @@
                         </div>
                     </div>
                 </div>
+				<div class="col-lg-3 col-md-6 col-sm-6"><div ng-controller="MainController"> 
+        
+    </div></div>
             </div>
+				<div class="ibox">
+					<!-- This is the DOM element that the deck will be inserted into. -->
+					<!-- You can change the width and height and use a stylesheet to apply styling. -->
+					<iframe frameborder="0" width="100%" height="800" id="sd-deck-659dcd49-4301-427a-aeca-bcc24247808a"></iframe>
+
+					<!-- To change a deck's variables after it has been inserted please use window.slamDataDeckUrl to create an new URI then update the deck iframe's src parameter. -->
+					<script type="text/javascript">
+					  window.slamDataDeckUrl = function (options) {
+						var queryParts = function () {
+						  var parts = [];
+						  if (options.echartTheme) {
+							parts.push("echartTheme=" + encodeURIComponent(options.echartTheme));
+						  }
+						  if (options.permissionTokens && options.permissionTokens.length) {
+							parts.push("permissionTokens=" + options.permissionTokens.join(","));
+						  }
+						  if (options.stylesheetUrls && options.stylesheetUrls.length) {
+							parts.push("stylesheets=" + options.stylesheetUrls.map(encodeURIComponent).join(","));
+						  }
+						  return parts;
+						};
+						var queryString = "?" + queryParts().join("&");
+						var varsParam = options.vars ? "/?vars=" + encodeURIComponent(JSON.stringify(options.vars)) : "";
+						return options.slamDataUrl + queryString + "#" + options.deckPath + options.deckId + "/view" + varsParam;
+					  };
+					</script>
+
+					<!-- This is the script which performs SlamData deck insertion. -->
+					<script type="text/javascript">
+					  (function () {
+						var options = {
+						  slamDataUrl: "http://198.199.68.250/files/workspace.html",
+						  deckPath: "/servicedeskdb/Issues+Category+Channel+Workspace.slam/",
+						  deckId: "659dcd49-4301-427a-aeca-bcc24247808a",
+						  permissionTokens: [],
+						  stylesheetUrls: [], // An array of custom stylesheet URIs.
+						  echartTheme: undefined,
+						  vars: {}
+						};
+
+						var deckSelector = "iframe#sd-deck-" + options.deckId;
+						var deckElement = document.querySelector(deckSelector);
+
+						if (deckElement) {
+						  deckElement.src = window.slamDataDeckUrl(options);
+						} else {
+						  throw("SlamData: Couldn't locate " + deckSelector);
+						}
+					  })();
+					</script>
+				</div>
 
      
         </div>

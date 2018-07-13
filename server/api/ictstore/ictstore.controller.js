@@ -8,7 +8,28 @@ exports.index = function (req, res) {
     ICTStore.find()
 	.populate('costCenter','costcenterName')
 	.populate('assetPriority','priorityName prioritySLA')
+	
 	.exec(function (err, ictstore){
+		var itemsArray = []
+		var itemIds = issues
+		
+		for (var i = 0; i < ictstore.length; i++) {
+			var status =itemIds[i].costCenter.costcenterName
+			itemsArray.push(status);
+			if(itemIds.length === itemsArray.length){
+				console.log(itemsArray)
+				var counts = {}, i, value;
+				for (i = 0; i < itemsArray.length; i++) {
+					value = itemsArray[i];
+					if (typeof counts[value] === "undefined") {
+						counts[value] = 1;
+					} else {
+						counts[value]++;
+					}
+				}
+				console.log(counts);
+			}
+		};
         if (err) {
             return handleError(res, err);
         }

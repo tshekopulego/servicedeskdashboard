@@ -6,6 +6,9 @@ var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var mail = require('../../mail');
 
+var nodemailer = require('nodemailer');
+//var smtpTransport = require('nodemailer-smtp-transport');
+
 var validationError = function(res, err) {
 	return res.json(422, err);
 };
@@ -25,7 +28,7 @@ var validationError = function(res, err) {
  	if(role == 'client') {
  		//console.log(req.body);
  		var newUser = new User(req.body);
-	 	newUser.provider = 'local';
+	 	newUser.provider = 'locals';
 	 	//newUser.role = 'user';
 	 	newUser.save(function(err, user) {
 	 		if (err) return validationError(res, err);
@@ -41,8 +44,28 @@ var validationError = function(res, err) {
  			res.json({ token: guestSessionToken });
 
  			var mailConfirmationToken = jwt.sign({firstName : req.body.firstName, lastName: req.body.lastName, email: req.body.email,  password: req.body.password }, config.secrets.mailConfirmation, {expiresInMinutes: 60 * 24 * 30});
+			
+			//sending emails confirmatiom 
+			var user = {
+               	name : req.body.lastName,
+                email : req.body.email
+			   };
+			//console.log(user);
+    
+			var locals = {
+				  email:user.email,
+				  name:user.name,
+				  COMPANY: 'Service Desk',
+				  CONFIRMATION_URL : 'http://localhost:8080/confirm',
+				  MAIL_CONFIRMATION_TOKEN : mailConfirmationToken
+				};
+			//console.log(locals)
+			var templateName = '/user_confirmation/html';
+			//mail.userConfirmation.sendMail(templateName, locals, null);
+			
+ 			//mail.userConfirmation.sendMail(req.body.firstName, req.body.email, mailConfirmationToken, null);
+			mail.userConfirmation.sendMail(user.name, user.email, mailConfirmationToken, null)
 
- 			mail.userConfirmation.sendMail(req.body.firstName, req.body.email, mailConfirmationToken, null);
  		});
  	}
 };
@@ -86,7 +109,7 @@ exports.registerClient = function(req, res, next) {
  			if (user) return res.send(403);
 
  			var newUser = new User(data);
- 			newUser.provider = 'local';
+ 			newUser.provider = 'locals';
  			newUser.role = 'admin';
  			newUser.confirmedEmail = true;
 
@@ -119,7 +142,7 @@ exports.registerClient = function(req, res, next) {
  */
  exports.create = function (req, res, next) {
  	var newUser = new User(req.body);
- 	newUser.provider = 'local';
+ 	newUser.provider = 'locals';
  	newUser.role = 'user';
      
      User.create(req.body, function(err, rfccall) {

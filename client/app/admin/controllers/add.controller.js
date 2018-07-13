@@ -13,29 +13,6 @@ angular.module('serviceDeskApp')
         value: "Company",
         name: "Company"
     }];
-
-    /*$scope.roles = [{
-        value: "user",
-        name: "User"
-    },{
-        value: "servicedeskagent",
-        name: "Service Desk Agent"
-    },{
-        value: "servicedeskmanager",
-        name: "Service Desk Manager"
-    },{
-        value: "servicedeskseniormanager",
-        name: "Service Desk Senior Manager"
-    },{
-        value: "changeauthority",
-        name: "Change Authority"
-    },{
-        value: "technician",
-        name: "Technician"
-    },{
-        value: "ictstoreagent",
-        name: "ICT Store Agent"
-    }];*/
     
     $http.get('/api/role').success(function(roles) {
         $scope.roles = roles;

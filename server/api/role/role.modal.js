@@ -1,9 +1,11 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment');
 
 var RoleSchema = new Schema({
+	roleId: { type: Number },
     roleName: String,
     roleDescription: String,
     userLastName: {type: Schema.Types.ObjectId, ref: 'User' },
@@ -20,3 +22,4 @@ var RoleSchema = new Schema({
 });
 
 module.exports = mongoose.model('Role', RoleSchema);
+RoleSchema.plugin(autoIncrement.plugin, { model: 'Role', field: 'roleId' });
