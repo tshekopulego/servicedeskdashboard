@@ -33,7 +33,7 @@ angular.module('serviceDeskApp')
 			$http.post('/api/ictstore',$scope.ictstore);
 			$http.put('/api/ictstore/' + $scope.ictstore_id,ictstore);
             $scope.ictstore = '';
-            $location.path('/ictstore');
+            $location.path('/ictstore/');
         }
     };
 

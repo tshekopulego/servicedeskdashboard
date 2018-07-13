@@ -12,7 +12,7 @@ var sendmail = function(name, email, mailConfirmationToken, callback){
     var locals = {
       name: user.name,
       COMPANY: 'Service Desk',
-      CONFIRMATION_URL : 'http://localhost/confirm/',
+      CONFIRMATION_URL : 'http://localhost:8080/confirm/',
       MAIL_CONFIRMATION_TOKEN : mailConfirmationToken
     };
 	//console.log(locals)

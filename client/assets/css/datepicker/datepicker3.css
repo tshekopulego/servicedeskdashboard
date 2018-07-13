@@ -95,6 +95,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  size: 50;
 }
 .datepicker table tr td,
 .datepicker table tr th {

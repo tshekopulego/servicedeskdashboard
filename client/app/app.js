@@ -14,6 +14,7 @@ angular.module('serviceDeskApp', [
       'wysiwyg.module',
       'angularUtils.directives.dirPagination'
 ])
+
 .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
         .otherwise({
@@ -26,7 +27,7 @@ angular.module('serviceDeskApp', [
 
 .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
     return {
-        // Add authorization token to headers
+        // Add authorization token to   `headers
         request: function (config) {
             config.headers = config.headers || {};
             if ($cookieStore.get('token')) {

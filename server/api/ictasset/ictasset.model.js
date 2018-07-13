@@ -9,8 +9,12 @@ var ICTAssetSchema = new Schema({
 	assetSerialNumber:String,
     comments: {},
 	assetCategory:{ type: Schema.Types.ObjectId, ref: 'Category' },
+
+	assetAssignedUser:{ type: Schema.Types.ObjectId, ref: 'User' },
 	assetType:{ type: Schema.Types.ObjectId, ref: 'Assettype' },
 	assetPriority: { type: Schema.Types.ObjectId, ref: 'Priority' },
+	assetStore: { type: Schema.Types.ObjectId, ref: 'ICTStore' },
+
 	assetCategoryId:{ type: Number, ref: 'Category' },
 	assetTypeId: { type: Number, ref: 'Assettype' },
 	assetPriority: { type: Number, ref: 'Priority' },

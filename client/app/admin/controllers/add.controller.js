@@ -10,6 +10,9 @@ angular.module('serviceDeskApp')
         value: "Individual",
         name: "Individual"
     },{
+        value: "User",
+        name: "userName"
+    },{
         value: "Company",
         name: "Company"
     }];
@@ -19,7 +22,6 @@ angular.module('serviceDeskApp')
         socket.syncUpdates('role', $scope.roles,function(event,role,roles){
         });
     });
-
     
     $http.get('/api/department').success(function(departments) {
         $scope.departments = departments;
@@ -32,16 +34,19 @@ angular.module('serviceDeskApp')
         $scope.user = user;
         if(isValid && $scope.submitted) {
 
-            if(user.departmentName)
-                user.departmentName = department.department._id;
+            if(user.departmentName) {
+                user.departmentName = $scope.departments._id;
+            }
 
-            if(!_.isEmpty($scope.extraContacts))
+            if(!_.isEmpty($scope.extraContacts)) {
                 user.extraContacts = $scope.extraContacts;
-
+            }
+            console.log($scope.user)
+            
             $http.post('/api/users',$scope.user)
-            .then(function($location) {
+            .then(function() {
                 $scope.user = '';
-                $location.path('/users');
+                $location.path('/confirm');
             }).catch(function(err) {
                 err = err.data;
                 $scope.errors = {};
@@ -59,23 +64,9 @@ angular.module('serviceDeskApp')
             });
         }
     };
-    $scope.addRfccall = function(rfccall,isValid) {
-        $scope.submitted = true;
-        $scope.rfccall = rfccall;
-        
-        if($scope.submitted) {
-            
-            $scope.rfccall.changeRequestType = rfccall.requesttype._id;
-            $scope.rfccall.callEvaluationOutcome = rfccall.evaluationoutcome._id;
-                
-            $http.post('/api/rfc-calls',$scope.rfccall);
-            $scope.rfccall = '';
-            $location.path('/rfccall');
-        }
-    };
 
     $scope.passwordsMatch = function(value) {
-        if($scope.submitted && $scope.user.role === 'user') {
+        if($scope.submitted && $scope.user.role === 'User') {
             if(value && value === $scope.user.password)
                 return true;
             else

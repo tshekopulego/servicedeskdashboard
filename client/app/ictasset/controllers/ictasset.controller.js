@@ -16,8 +16,6 @@ angular.module('serviceDeskApp')
                });
                $scope.categories = categories;
            });
-
-    
     
 	$http.get('/api/assettype').success(function (assettypes) {
                assettypes.unshift({
@@ -28,12 +26,56 @@ angular.module('serviceDeskApp')
            });
     
     
+    $http.get('/api/ictstore').success(function(ictstores) {
+        ictstores.unshift({
+                   assettypeName: 'All',
+                   _id: -1
+               });
+               $scope.ictstores = ictstores;
+    });
     
-	$http.get('/api/ictasset').success(function(ictassets) {
+	/*$http.get('/api/ictasset').success(function(ictassets) {
 		$scope.ictassets = ictassets;
 		socket.syncUpdates('ictasset', $scope.ictassets,function(event,ictasset,ictassets){
 		});
-	});
+	});*/
+    
+    $http.get('/api/ictasset').success(function(ictassets) {
+        $scope.ictassets = ictassets;
+       
+         $scope.counts={};
+        
+               var itemsArray = [];
+
+                var itemIds = ictassets
+
+                for (var i = 0; i < ictassets.length; i++) {
+                    var status =itemIds[i].assetCategory.categoryName
+                  
+                    itemsArray.push(status);
+
+                    if(itemIds.length === itemsArray.length){
+
+                        console.log(itemsArray)
+                              
+                        
+                         $scope.counts = {}, i, $scope.value;
+                        for (i = 0; i < itemsArray.length; i++) {
+                        $scope.value = itemsArray[i];
+                        if (typeof $scope.counts[$scope.value] === "undefined") {
+                        $scope.counts[$scope.value] = 1;
+                        } else {
+                        $scope.counts[$scope.value]++;
+                        }
+                            }
+                        console.log($scope.counts);
+
+                    }
+                };
+        
+        socket.syncUpdates('ictasset', $scope.ictassets,function(event,ictasset,ictassets){
+        });
+    });
 	
 	
 	

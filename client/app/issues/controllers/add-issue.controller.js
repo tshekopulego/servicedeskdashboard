@@ -44,14 +44,13 @@ angular.module('serviceDeskApp')
 			
 			$scope.issue.issueCategoryId = issue.category.categoryId;
             $scope.issue.issueChannelId = issue.channel._id;
-            $scope.issue.issuePriorityId = issue.priorityId;
-            $scope.issue.issueDivisionId = issue.divisionId;
+            $scope.issue.issuePriorityId = issue.priority.priorityId;
+            $scope.issue.issueDivisionId = issue.division.divisionId;
             $scope.issue.issueRefNumberId = (new Date).getTime();
-			$scope.issue.issueStatusId = issue.issuestatusesId.
 			
-            $http.post('/api/issues',$scope.issue);
+            $http.post('/api/issues',issue);
             $scope.issue = '';
-            $location.path('/issues');
+            $location.path('/issues/');
         }
     };
 

@@ -4,6 +4,9 @@ var  config = require('../config/environment');
 var nodemailer = require("nodemailer");
 var _ = require('lodash');
 var EmailTemplate = require('email-templates').EmailTemplate;
+var handlebars = require('handlebars');
+var fs = require('fs');
+
 
 var emailTemplates;
 require('email-templates')(__dirname, { open: '{{', close: '}}' }, function(err, _emailTemplates) {
@@ -13,6 +16,7 @@ require('email-templates')(__dirname, { open: '{{', close: '}}' }, function(err,
 		console.log(err);
 	} else {
 
+        console.log(__dirname);
 		emailTemplates = _emailTemplates;
 
 	}
@@ -35,11 +39,14 @@ var generateMail = function(templateName, locals, callback){
 };
 
 exports.sendMail = function(templateName, user, subject, locals, callback) {
-
 	var cb = callback || _.noop;
 	console.log(config.mail.auth.user + ' ' +config.mail.address);
+	console.log('Send ' + subject + ' Mail');
 
 	generateMail(templateName, locals, function(html){
+		var template = handlebars.compile(html);
+    	var replacements = locals
+    	var html = template(replacements);
 
 		var mailOptions = {
 			from: 'mthunziduze@gmail.com',
@@ -50,9 +57,17 @@ exports.sendMail = function(templateName, user, subject, locals, callback) {
 			subject: subject,
 			html: html,
 		};
-		//console.log('mailoptions= '+ mailOptions.from + ' '+ mailOptions.to.address + mailOptions.subject)
+		
+		transporter.sendMail(mailOptions, function(error, info){
+			if(error){
+				console.log('Error on sending' + subject + ' mail:');
+				console.log(error);
+			}else{
+				console.log(subject + ' Mail sent: ');
+				cb(info.response);
+			}
 
-		emailTemplates.render(locals, function (err, results) {
+		/*emailTemplates.render(locals, function (err, results) {
 			if (err) {
 				console.log('Error Rendering Template!');
 				return console.error(err)
@@ -61,15 +76,16 @@ exports.sendMail = function(templateName, user, subject, locals, callback) {
 			if(error){
 				console.log('Error on sending' + subject + ' mail:');
 				console.log(error);
+
 			}else{
 				console.log(subject + 'Mail sent: ');
 				cb(info.response);
 			}
 		});
+		});*/
 		});
-	});
+});
 };
-	
 exports.sendinvoice = function(templateName, client, subject, locals, callback) {
 
 	var cb = callback || _.noop;
