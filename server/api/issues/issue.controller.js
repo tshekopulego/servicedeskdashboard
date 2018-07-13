@@ -58,7 +58,9 @@ exports.index = function(req, res) {
 		var itemIds = issues
 		
 		for (var i = 0; i < issues.length; i++) {
+
 			var status = itemIds[i].issueStatus.issueStatusName
+
 			itemsArray.push(status);
 			if(itemIds.length === itemsArray.length){
 				console.log(itemsArray)

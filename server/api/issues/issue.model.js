@@ -11,6 +11,7 @@ var IssueSchema = new Schema({
     issuePriority: {type: Schema.Types.ObjectId, ref: 'Priority' },
     issueDivision: {type: Schema.Types.ObjectId, ref: 'Division' },
     issueAsset: {type: Schema.Types.ObjectId, ref: 'ICTAsset' },
+
 	issueCategoryId: {type: Number, ref: 'Category' },
     issueStatusId: {type: Number, ref: 'IssueStatus',  default: '4'},
     issueChannelId: {type: Number, ref: 'Channel' },

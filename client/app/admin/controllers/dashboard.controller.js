@@ -10,7 +10,9 @@ angular.module('serviceDeskApp')
     $http.get('/api/issues').success(function(issues) {
 		$scope.issues = issues;
 		$scope.counts={};
+
 		$scope.totalIssues = issues.length;
+
 		var itemsArray = [];
 		var itemIds = issues
 		
@@ -30,6 +32,7 @@ angular.module('serviceDeskApp')
 						$scope.counts[$scope.value]++;
 					}
 				}
+
                 
                 
                 
@@ -39,6 +42,7 @@ angular.module('serviceDeskApp')
                     {x: "Approved", value: $scope.counts.Approved},
                     {x: "Rejected", value: $scope.counts.Rejected}
                 ]
+
 			}
 		};
 		socket.syncUpdates('issue', $scope.issues,function(event,issue,issues){});
@@ -119,6 +123,7 @@ angular.module('serviceDeskApp')
 
         });
 });
+
     
     $http.get('/api/ictstore').success(function(ictstores) {
 		$scope.ictcalls = ictstores;
@@ -148,4 +153,5 @@ angular.module('serviceDeskApp')
 		};
 		socket.syncUpdates('ictstore', $scope.ictstore,function(event,ictstore,ictstores){});
     });
+
 	});

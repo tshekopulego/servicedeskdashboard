@@ -8,11 +8,13 @@ exports.index = function (req, res) {
     ICTStore.find()
 	.populate('costCenter','costcenterName')
 	.populate('assetPriority','priorityName prioritySLA')
+
 	.populate('assetPriority','priorityName prioritySLA')
 	
 	.exec(function (err, ictstore){
 		var itemsArray = []
 		var itemIds = ictstore
+
 		
 		for (var i = 0; i < ictstore.length; i++) {
 			var status =itemIds[i].costCenter.costcenterName

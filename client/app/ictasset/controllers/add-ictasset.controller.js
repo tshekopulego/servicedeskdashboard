@@ -44,7 +44,7 @@ angular.module('serviceDeskApp')
 			$scope.ictasset.assetCategoryId = ictasset.category.categoryId;
 			$scope.ictasset.assetTypeId = ictasset.assetType.assetTypeId; 
 			$scope.ictasset.assetPriorityId = ictasset.priority.priorityId;
-            
+
 			/* $scope.issue.issueRefNumber = (new Date).getTime();*/
 			$http.post('/api/ictasset',$scope.ictasset);
             $scope.ictasset = '';
