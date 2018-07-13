@@ -14,6 +14,7 @@ angular.module('serviceDeskApp')
                 firstName: $scope.user.firstName,
                 lastName: $scope.user.lastName,
                 email: $scope.user.email,
+                role: 'User',
                 password: $scope.user.password,
                 added: Date.now()
             })

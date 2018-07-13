@@ -1,7 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-Schema = mongoose.Schema;
+	Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment');
 
 var CostcenterSchema = new Schema({
 	costcenterName: String,
@@ -21,3 +22,4 @@ var CostcenterSchema = new Schema({
 });
 
 module.exports = mongoose.model('Costcenter', CostcenterSchema);
+CostcenterSchema.plugin(autoIncrement.plugin, { model: 'Costcenter', field: 'costcenterId' });

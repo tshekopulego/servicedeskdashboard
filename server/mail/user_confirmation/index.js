@@ -2,22 +2,23 @@
 
 var service = require('./../mail.service.js');
 
-var sendMail = function(name, email, mailConfirmationToken, callback){
+var sendmail = function(name, email, mailConfirmationToken, callback){
 
     var user = {
     	name : name,
     	email : email,
     };
-
+	//console.log(user);
     var locals = {
-      name:user.name,
+      name: user.name,
       COMPANY: 'Service Desk',
-      CONFIRMATION_URL : 'http://localhost/confirm/',
+      CONFIRMATION_URL : 'http://localhost:8080/confirm/',
       MAIL_CONFIRMATION_TOKEN : mailConfirmationToken
     };
+	//console.log(locals)
 
-    service.sendmail('user_confirmation', user, 'Activation', locals, callback);
+    service.sendMail('user_confirmation', user, 'Activation', locals, callback);
 
   };
 
-exports.sendMail = sendMail;
+exports.sendMail = sendmail;

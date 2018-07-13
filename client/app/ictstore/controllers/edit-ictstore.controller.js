@@ -22,13 +22,18 @@ angular.module('serviceDeskApp')
     $scope.editICTStore = function(ictstore,isValid) {
         $scope.submitted = true;
         $scope.ictstore = ictstore;
+		
         if(isValid && $scope.submitted) {
-           $scope.ictstore.costCenter = ictstore.costCenter._id;
+            $scope.ictstore.costCenter = ictstore.costCenter._id;
 			$scope.ictstore.assetPriority = ictstore.priority._id;
-			 $http.post('/api/ictstore',$scope.ictstore);
+			
+			$scope.ictstore.costCenter = ictstore.costCenter.costcenterId;
+			$scope.ictstore.assetPriority = ictstore.priority.priorityId;
+			
+			$http.post('/api/ictstore',$scope.ictstore);
 			$http.put('/api/ictstore/' + $scope.ictstore_id,ictstore);
             $scope.ictstore = '';
-            $location.path('/ictstore');
+            $location.path('/ictstore/');
         }
     };
 

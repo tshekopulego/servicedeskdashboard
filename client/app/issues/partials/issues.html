@@ -57,6 +57,15 @@
                                 </select>
 
                             </div>
+                                            
+                            <!--<div class="col-md-2">
+                                <label for="search">StartDate:</label>
+
+                                <select class="form-control" name="startDate" id="categoryName" ng-model="issue.added" ng-options="issue.added">
+
+                                </select>
+
+                            </div>-->
 
                             <div class="col-md-2">
 
@@ -77,6 +86,7 @@
                                 <th> Channel</th>
                                 <th> Priority</th>
                                 <th> Date</th>
+                                <th> Assigned User</th>
                                 <th> Over SLA?</th>
                               
 
@@ -92,9 +102,9 @@
                                 <td>{{issue.issuePriority.priorityName}}</td>
                                
 								<td>{{issue.added | date:'medium'}}</td>
-                               
+                               <td>{{issue.issueUser.firstName}}</td>
 								<td ng-if="isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
-												<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
+								<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
 							  </td>
 								<td ng-if="!isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
 												<span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>

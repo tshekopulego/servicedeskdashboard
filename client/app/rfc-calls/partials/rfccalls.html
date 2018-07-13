@@ -22,18 +22,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="wrapper wrapper-content animated fadeIn">
-		<maq-socket-disconnected></maq-socket-disconnected>
-		<maq-danger-alert></maq-danger-alert>
-		<maq-info-alert></maq-info-alert>
-
-
-		<div class="row">
-			<div class="col-md-12">
-				<div class="ibox">
-					<div class="ibox-title">
-						<div class="row">
-                            <!--<div class="col-md-2">
+		<div class="wrapper wrapper-content animated fadeIn">
+			
+			
+		<!--<div class="col-md-2">
 								<div class="row">
 
 									<div class="col-md-2" style="vertical-align: text-bottom; padding-left: 0; padding-top: 22px; text-align: left;">
@@ -41,51 +33,39 @@
 									</div>
 								</div>
 							</div>-->
-							<div class="col-md-3">
-								<label for="search">Search:</label>
-								<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
-							</div>
-							<div class="col-md-3">
-								<label for="search">Items Per Page:</label>
-								<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
-							</div>
-                            
-                            
-                            <div class="col-md-2">
-                                <label for="search">Request Type:</label>
-                                <select class="form-control" name="requesttypeName" id="requesttypeName" ng-model="requesttype._id" ng-options="requesttype._id as requesttype.requesttypeName for requesttype in requesttypes">
-                                </select>
-                            </div>
-                            
-                            
-                             <div class="col-md-2">
-                                <label for="search">Evaluation:</label>
-
-                                <select class="form-control" name="evaluationoutcomeName" id="evaluationoutcomeName" ng-model="evaluationoutcome._id" ng-options="evaluationoutcome._id as evaluationoutcome.evaluationoutcomeName for evaluationoutcome in evaluationoutcomes">
-
-                                </select>
-
-                            </div>
-                            
-                            
-                            <div class="col-md-2">
-
-                                <input type="button" name="" value="Go" ng-click="searchRfccall(requesttype._id,evaluationoutcome._id)" class="btn btn-small btn-primary">
-                            </div>
-                            
-                            
-                            
-							<div class="col-md-3 col-md-offset-3">
-								<dir-pagination-controls pagination-id="rfccall" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
-							</div>
-                            <div class="col-md-3">
-                                <label for="count">Number of calls:</label>
-                                <label>{{count}}</label>
-                            
-                            </div>
-						</div>
-					</div>
-					<div class="ibox-content table-responsive">
+		<div class="col-md-3">
+			<label for="search">Search:</label>
+			<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+		</div>
+		<div class="col-md-3">
+			<label for="search">Items Per Page:</label>
+			<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+		</div>
+		
+		<div class="col-md-2">
+			<label for="search">Request Type:</label>
+			<select class="form-control" name="requesttypeName" id="requesttypeName" ng-model="requesttype._id" ng-options="requesttype._id as requesttype.requesttypeName for requesttype in requesttypes">
+			</select>
+		</div>
+		
+		<div class="col-md-2">
+			<label for="search">Evaluation:</label>
+			<select class="form-control" name="evaluationoutcomeName" id="evaluationoutcomeName" ng-model="evaluationoutcome._id" ng-options="evaluationoutcome._id as evaluationoutcome.evaluationoutcomeName for evaluationoutcome in evaluationoutcomes">
+			</select>
+		</div>
+		
+		<div class="col-md-2">
+			<input type="button" name="" value="Go" ng-click="searchRfccall(requesttype._id,evaluationoutcome._id)" class="btn btn-small btn-primary">
+		</div>
+		
+		<div class="col-md-3 col-md-offset-3">
+			<dir-pagination-controls pagination-id="rfccall" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
+		</div>
+		<div class="col-md-3">
+			<label for="count">Number of calls:</label>
+			<label>{{count}}</label>
+		</div>
+			<div class="ibox-content table-responsive">
 						<table class="table" class="row-border hover">
 							<tr>
 								<th> Call Ref Number</th>
@@ -131,9 +111,6 @@
 								</td>
 							</tr>
 						</table>
-					</div><!-- /.box-body -->
-				</div><!-- /.box -->
-			</div>
-		</div>
+					</div>
 	</div>
 </div>
