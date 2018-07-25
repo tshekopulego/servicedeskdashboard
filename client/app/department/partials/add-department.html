@@ -48,12 +48,16 @@
                                 
                                 <label>Department Manager:</label>
                                 <ui-select id="users" name="users" ng-model="department.user" theme="bootstrap" required>
-                                    <ui-select-match placeholder="Select a Department Manager">{{$select.selected.departmentManager}}</ui-select-match>
+
+                                    <ui-select-match placeholder="Select a Department Manager">{{$select.selected.firstName}}</ui-select-match>
+
                                     <ui-select-choices repeat="user in users | filter: $select.search" value="{{user._id}}">
                                         <div ng-bind-html="users.firstName | highlight: $select.search"></div>
 
                                         <small>
-                                            Role: {{User.role}}
+
+                                            Role: {{user.role}}
+
 											</small>
                                     </ui-select-choices>
                                 </ui-select>

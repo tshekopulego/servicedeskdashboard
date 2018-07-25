@@ -77,6 +77,23 @@
                                 </ui-select>
                                 <p ng-show="editIssueForm.channel.$invalid && submitted" class="help-block">The Channel is required.</p>
                             </div>
+                            
+                            
+                            <div class="form-group" ng-class="{'has-error': editIssueForm.user.$invalid && submitted,'has-success': !editIssueForm.user.$invalid && submitted}">
+                                <label>Assign User:</label>
+                                <ui-select id="user" name="user" ng-model="issue.issueUser" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a User">{{$select.selected.firstName}}</ui-select-match>
+                                    <ui-select-choices repeat="user in users | filter: $select.search" value="{{user._id}}">
+                                        <div ng-bind-html="user.firstName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Description: {{user.email}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <p ng-show="editIssueForm.user.$invalid && submitted" class="help-block">Assign a user first.</p>
+                            </div>
+                            
 
                             <div class="form-group" ng-class="{'has-error': editIssueForm.division.$invalid && submitted,'has-success': !editIssueForm.division.$invalid && submitted}">
                                 <label>Division:</label>

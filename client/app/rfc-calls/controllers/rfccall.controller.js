@@ -7,12 +7,23 @@ angular.module('serviceDeskApp')
     $scope.currentPage = 1;
     $scope.pageSize = 10;
     
-    $http.get('/api/evaluation-outcome').success(function(evaluationoutcomes) {
-        $scope.evaluationoutcomes = evaluationoutcomes; 
-        socket.syncUpdates('evaluationoutcome',
-        $scope.evaluationoutcomes,function(event,evaluationoutcome,evaluationoutcomes){
-        });
-    });
+    
+    
+    $http.get('/api/request-type').success(function (requesttypes) {
+               requesttypes.unshift({
+                   requesttypeName: 'All',
+                   _id: -1
+               });
+               $scope.requesttypes = requesttypes;
+           });
+    
+    $http.get('/api/evaluation-outcome').success(function (evaluationoutcomes) {
+               evaluationoutcomes.unshift({
+                  evaluationoutcomeName: 'All',
+                   _id: -1
+               });
+               $scope.evaluationoutcomes = evaluationoutcomes;
+           });
     
     $http.get('/api/rfc-calls').success(function(rfccalls) {
         $scope.rfccalls = rfccalls;
@@ -24,6 +35,46 @@ angular.module('serviceDeskApp')
         $scope.count = count;
         
     });
+    
+    
+    $scope.searchRfccall = function (changerequesttype, callevaluationoutcome) {
+
+            if ((changerequesttype == "-1") && (callevaluationoutcome == "-1")) { //get all records
+                $http.get('/api/rfc-calls').success(function (rfccalls) {
+                    $scope.rfccalls = rfccalls;
+                    console.log('/api/rfc-calls/');
+                });
+
+            } else {
+
+                if ((changerequesttype != "-1" && !changerequesttype) && (callevaluationoutcome != "-1" && !callevaluationoutcome)) {
+                    $http.get('/api/rfc-calls/' + changerequesttype + '/' + callevaluationoutcome).success(function (rfccalls) {
+
+                        $scope.rfccalls = rfccalls;
+                    });
+                } else {
+
+                    if (changerequesttype != "-1" && !angular.isUndefined(changerequesttype)) {
+
+                        $http.get('/api/rfc-calls/' + changerequesttype + '/requesttypes').success(function (rfccalls) {
+
+                            $scope.rfccalls = rfccalls;
+
+                        });
+
+                    } else if (callevaluationoutcome != "-1") {
+
+                        $http.get('/api/rfc-calls/' + callevaluationoutcome + '/callEvaluationOutcomes').success(function (rfccalls) {
+
+                            $scope.rfccalls = rfccalls;
+
+                        });
+                    }
+
+                }
+
+            }
+        };
 
     $scope.open = function (rfccall) {
 
@@ -45,6 +96,19 @@ angular.module('serviceDeskApp')
         });
     };
 
+	
+	 $scope.isOverSLA = function (dateCaptured, sla) {
+
+            var now = moment(new Date()); //todays date
+            var duration = moment.duration(now.diff(dateCaptured));
+            var hours = duration.asHours();
+            console.log(hours > sla);
+
+            /*console.log(sla);
+*/
+            return hours > sla;
+    }
+	
     $scope.cancel = function() {
         $window.history.back();
     };

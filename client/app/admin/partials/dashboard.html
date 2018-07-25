@@ -8,242 +8,180 @@
 
 		<maq-danger-alert></maq-danger-alert>
 		<maq-info-alert></maq-info-alert>
+        
+        
+        
 
 		<div ng-if="isAdmin()" class="row">
-			<div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-user pull-right"></i>
-						<h5>Admin</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/dashboard">Dashboard</a></li>
-							<li><a href="/users">Users</a></li>
-							<li><a href="/admin/add">Add User</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-gift pull-right"></i>
-						<h5>Category</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/category">Category Dashboard</a></li>
-							<li><a href="/category/add">Add Category</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-gift pull-right"></i>
-						<h5>Channel</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/category">Channel Dashboard</a></li>
-							<li><a href="/category/add">Add Channel</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-            <div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-gift pull-right"></i>
-						<h5>Divisions</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/division">Divisions Dashboard</a></li>
-							<li><a href="/division/add">Add Division</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			<div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="orange">
+                            <i class="fa fa-id-card"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category"><a href="/issues">ISSUES</a></p>
+                            <h3 class="title">{{totalIssues}}</h3>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> New: {{ counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
+                            </div>
+                        </div>
+						<div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> Rejected: {{counts.Rejected }} 	&nbsp;	&nbsp; Cancelled: {{counts.Cancelled }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="red">
+                            <i class="fa fa-clone"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category"><a href="/rfccalls">RFC</a></p>
+                           
+                            <h3 class="title">{{totalrfccalls}}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> Standard: {{rfccounts.Standard }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Normal: {{rfccounts.Normal }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i>  Emergency: {{rfccounts.Emergency }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="green">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Fixed Issues</p>
+                            <h3 class="title">{{counts.Solved}}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> New: {{counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Approved: {{counts.Approved }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i>  Rejected: {{counts.New }}  	&nbsp;	&nbsp; Cancelled: {{counts.Approved }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="blue">
+                            <i class="fa fa-desktop"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category"><a href="/ictasset">ICT</a></p>
+                           
+                            <h3 class="title">{{totalICTcalls}}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons"></i> New: {{counts.New }} &nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i>  Rejected: {{counts.New }} &nbsp; &nbsp; Cancelled: {{counts.Approved }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-lg-3 col-md-6 col-sm-6"><div ng-controller="MainController"> 
+        
+    </div></div>
+            </div>
+				<div class="ibox">
+					<!-- This is the DOM element that the deck will be inserted into. -->
+					<!-- You can change the width and height and use a stylesheet to apply styling. -->
+					<iframe frameborder="0" width="100%" height="800" id="sd-deck-659dcd49-4301-427a-aeca-bcc24247808a"></iframe>
 
+					<!-- To change a deck's variables after it has been inserted please use window.slamDataDeckUrl to create an new URI then update the deck iframe's src parameter. -->
+					<script type="text/javascript">
+					  window.slamDataDeckUrl = function (options) {
+						var queryParts = function () {
+						  var parts = [];
+						  if (options.echartTheme) {
+							parts.push("echartTheme=" + encodeURIComponent(options.echartTheme));
+						  }
+						  if (options.permissionTokens && options.permissionTokens.length) {
+							parts.push("permissionTokens=" + options.permissionTokens.join(","));
+						  }
+						  if (options.stylesheetUrls && options.stylesheetUrls.length) {
+							parts.push("stylesheets=" + options.stylesheetUrls.map(encodeURIComponent).join(","));
+						  }
+						  return parts;
+						};
+						var queryString = "?" + queryParts().join("&");
+						var varsParam = options.vars ? "/?vars=" + encodeURIComponent(JSON.stringify(options.vars)) : "";
+						return options.slamDataUrl + queryString + "#" + options.deckPath + options.deckId + "/view" + varsParam;
+					  };
+					</script>
 
-			<div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-gift pull-right"></i>
-						<h5>Status</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/issuestatus">Status Dashboard</a></li>
-							<li><a href="/issuestatus/add">Add Status</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-            
-            <div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-gift pull-right"></i>
-						<h5>Requesttype</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/requesttype">Requesttype Dashboard</a></li>
-							<li><a href="/requesttype/add">Add Requesttype</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-motorcycle pull-right"></i>
-						<h5>Bikes</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/bikes">Bikes Dashboard</a></li>
-							<li><a href="/bikes/add">Add Bike</a></li>
-						</ul>
-					</div>
-				</div>
-			</div> -->
-			<!-- <div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-motorcycle pull-right"></i>
-						<h5>Issues</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/issues">Issues Dashboard</a></li>
-							<li><a href="/issues/add">Add Issue</a></li>
-						</ul>
-					</div>
-				</div>
-			</div> -->
-			<div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-motorcycle pull-right"></i>
-						<h5>Prorities</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/priority">Priorities Dashboard</a></li>
-							<li><a href="/priority/add">Add Priority</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="col-lg-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-hand-rock-o pull-right"></i>
-						<h5>Riders</h5>
-					</div>
-					<div class="ibox-content">
-						<ul class="nav nav-dashboard">
-							<li><a href="/riders">Riders Dashboard</a></li>
-							<li><a href="/riders/add">Add Rider</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<i class="fa fa-calendar pull-right"></i>
-						<h5>Errands</h5>
-					</div>
-					<div class="ibox-content">
-						<div class="row">
-							<ul class="nav nav-dashboard col-lg-6">
-								<li><a href="/errands">Errands Dashboard</a></li>
-								<li><a href="/errands/add">Add Errand</a></li>
-								<li><a href="/errands/status">Errand Statuses</a></li>
-								<li><a href="/errands/status/add">Add Errand Status</a></li>
-								<li><a href="/errands/generate-runsheet">Generate Runsheet</a></li>
-							</ul>
+					<!-- This is the script which performs SlamData deck insertion. -->
+					<script type="text/javascript">
+					  (function () {
+						var options = {
+						  slamDataUrl: "http://198.199.68.250/files/workspace.html",
+						  deckPath: "/servicedeskdb/Issues+Category+Channel+Workspace.slam/",
+						  deckId: "659dcd49-4301-427a-aeca-bcc24247808a",
+						  permissionTokens: [],
+						  stylesheetUrls: [], // An array of custom stylesheet URIs.
+						  echartTheme: undefined,
+						  vars: {}
+						};
 
-							<ul class="nav nav-dashboard col-lg-6">
-								<li><a href="/errands/attempted-delivery-reasons">Attempted Delivery Reasons</a></li>
-								<li><a href="/errands/attempted-delivery-reasons/add">Add Attempted Delivery Reason</a></li>
-								<li><a href="/errands/delivery-zones">Delivery Zones</a></li>
-								<li><a href="/errands/delivery-zones/add">Add Delivery Zone</a></li>
-								<li><a href="/errands/payment-status">Payment Statuses</a></li>
-								<li><a href="/errands/payment-status/add">Add Payment Status</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div> -->
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<div class="row">
-							<div class="col-md-3">
-								<label for="search">Search:</label>
-								<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
-							</div>
-							<div class="col-md-3">
-								<label for="search">Items Per Page:</label>
-								<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
-							</div>
-							<div class="col-md-3 col-md-offset-3">
-								<dir-pagination-controls pagination-id="issue" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
-							</div>
-						</div>
-					</div>
-					<div class="ibox-content table-responsive">
-						<table class="table" class="row-errand hover">
-							<tr>
-								<th><input type="checkbox" name="select-all" text="Select All" maq-select-all-errands></th>
-								<th>Ref Number</th>
-								<th>Category</th>
-								<th>Description</th>
-								<th>Status</th>
-								<th>Channel</th>
-								<th colspan="5">Actions</th>
-							</tr>
-							<tr dir-paginate="issue in issues | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="issue" ng-class="{'highlighted':issue.issueStatus == 'OnHold' }">
-								<td><input class="errand-checkbox" type="checkbox" name="{{issue._id}}" value="{{issue._id}}" maq-select-errand></td>
-								<td>{{issue.issueRefNumber}}</td>
-								<td>{{issue.issueCategory.categoryName}}</td>
-								<td>{{issue.issueDescription}}</td>
-								<td>{{issue.issueStatus.issueStatusName}}</td>
-								<td>{{issue.issueChannel.channelName}}</td>
-								<!--<td style="color:{{errand.status.statusColour}};" title="{{errand.status.statusName}}">
-									<span ng-if="errand.status.statusName == 'Open'" class="fa fa-hand-paper-o"></span>
-									<span ng-if="errand.status.statusName == 'Attempted Delivery'" class="fa fa-exchange"></span>
-									<span ng-if="errand.status.statusName == 'Cancelled'" class="fa fa-thumbs-down"></span>
-									<span ng-if="errand.status.statusName == 'Delivered'" class="fa fa-thumbs-up"></span>
-									<span ng-if="errand.status.statusName == 'In Transit'" class="fa fa-motorcycle"></span>
-								</td>-->
-								<td ng-click="open(issue)">
-									<a title="View Details"><span class="fa fa-list"></span></a>
-								</td>
-								<td ng-click="comments(issue)">
-									<a title="View Comments"><span class="fa fa-comments"></span></a>
-								</td>
-								<td ng-if="isAdminAsync">
-									<a href="issues/edit/{{issue._id}}" title="Edit"><span class="fa fa-pencil"></span></a>
-								</td>
-								<td ng-click="delete(issue)" ng-confirm-click="Are you sure you want to delete this issue?" ng-if="isAdminAsync && issue.role != 'admin'">
-									<a class="trash" title="Delete"><span class="fa fa-trash"></span></a>
-								</td>
-							</tr>
-						</table>
-					</div><!-- /.box-body -->
-				</div><!-- /.box -->
-			</div>
+						var deckSelector = "iframe#sd-deck-" + options.deckId;
+						var deckElement = document.querySelector(deckSelector);
 
-		</div>
-	</div>
+						if (deckElement) {
+						  deckElement.src = window.slamDataDeckUrl(options);
+						} else {
+						  throw("SlamData: Couldn't locate " + deckSelector);
+						}
+					  })();
+					</script>
+				</div>
+
+     
+        </div>
 </div>
+
+            
+   
+  
+	</div>
+
+
+<style>
+.info-box {
+  cursor: pointer;
+}
+.info-box-content {
+  text-align: center;
+  vertical-align: middle;
+  display: inherit;
+       
+   
+}
+.fullCanvas {
+  width: 100%;
+}
+</style>
+
+

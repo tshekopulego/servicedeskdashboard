@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('AddIssueCtrl', function ($scope, $http, $location, $window, socket) {
+.controller('AddIssueCtrl', function ($scope, $http, $location, $window, socket, Auth) {
 
     $scope.issue = {};
     $scope.submitted = false;
-
+    $scope.currentUser = Auth.getCurrentUser();
      $http.get('/api/channel').success(function(channels) {
         $scope.channels = channels;
         socket.syncUpdates('channel',
@@ -41,10 +41,15 @@ angular.module('serviceDeskApp')
             $scope.issue.issueChannel = issue.channel._id;
             $scope.issue.issuePriority = issue.priority._id;
             $scope.issue.issueDivision = issue.division._id;
+			$scope.issue.issueLoggedby = $scope.currentUser.firstName
+			$scope.issue.issueCategoryId = issue.category.categoryId;
+            $scope.issue.issueChannelId = issue.channel.channelId;
+            $scope.issue.issuePriorityId = issue.priority.priorityId;
+            $scope.issue.issueDivisionId = issue.division.divisionId;
             $scope.issue.issueRefNumber = (new Date).getTime();
-          
-
-            $http.post('/api/issues',$scope.issue);
+			var issues = $scope.issue;
+            
+            $http.post('/api/issues',issues);
             $scope.issue = '';
             $location.path('/issues');
         }

@@ -17,15 +17,29 @@ module.exports = function(app) {
   app.use('/api/issue-status', require('./api/issue-status'));
   app.use('/api/priority', require('./api/priority'));
   app.use('/api/channel', require('./api/channel'));
+  app.use('/api/costcenter', require('./api/costcenter'));
   app.use('/api/rfc-calls', require('./api/rfc-calls'));
   app.use('/api/ictstore', require('./api/ictstore'));
   app.use('/api/ictasset', require('./api/ictasset'));
+  app.use('/api/assettype', require('./api/assettype'));
   app.use('/api/request-type', require('./api/request-type'));
   app.use('/api/priority', require('./api/priority'));
   app.use('/api/department', require('./api/department'));
+  app.use('/api/role', require('./api/role'));
   app.use('/api/evaluation-outcome', require('./api/evaluation-outcome'));
+  app.use('/api/costcenter', require('./api/costcenter'));
+  app.use('/api/hardware', require('./api/hardware'));
+  app.use('/mail', require('./api/user'));
+
   	
   app.use('/auth', require('./auth'));
+    
+    
+const kue = require('kue');  
+//...
+app.use('/api/queue', kue.app);  
+//app.use('api/queue', require('./api/queue'));
+    
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

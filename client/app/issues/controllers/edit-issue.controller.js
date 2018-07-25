@@ -7,7 +7,7 @@ angular.module('serviceDeskApp')
     $scope.submitted = false;
     $scope.issue_id = $routeParams.id;
 
-     $http.get('/api/channel').success(function(channels) {
+    $http.get('/api/channel').success(function(channels) {
         $scope.channels = channels;
     });
 
@@ -28,21 +28,28 @@ angular.module('serviceDeskApp')
     });
 
     $http.get('/api/issues/' + $scope.issue_id).success(function (issue) {
-      console.log(issue);
-    $scope.issue = issue;
-});
+     // console.log(issue);
+        $scope.issue = issue;
+    });
+    
+    
+    $http.get('/api/users').success(function (users) {
+      console.log(users);
+        $scope.users = users;
+    });
 
     $scope.editIssue = function(issue,isValid) {
         $scope.submitted = true;
         $scope.issue = issue;
         if($scope.submitted) {
 
-            $scope.issue.issueCategory = issue.category._id;
-            $scope.issue.issueChannel = issue.channel._id;
-            $scope.issue.issuePriority = issue.priority._id;
-            $scope.issue.issueDivision = issue.division._id;
+            $scope.issue.issueCategory = issue.issueCategory._id;
+            $scope.issue.issueChannel = issue.issueChannel._id;
+            $scope.issue.issuePriority = issue.issuePriority._id;
+            $scope.issue.issueDivision = issue.issueDivision._id;
+            $scope.issue.issueUser = issue.issueUser._id;
 
-            $http.post('/api/issues',$scope.issue);
+            $http.put('/api/issues/' + $scope.issue._id,$scope.issue);
             $scope.issue = '';
             $location.path('/issues');
         }

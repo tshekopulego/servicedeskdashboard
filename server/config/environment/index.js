@@ -42,21 +42,15 @@ var all = {
 			}
 		}
 	},
-
-	mail: { //transport: process.env.MAIL_TRANSPORT_METHOD || 'mail_transport',
-	host: process.env.MAIL_HOST || 'mail_host',
-	port: process.env.MAIL_PORT || '465',
-	secure: true,
-	auth: {
-		user: process.env.MAIL_USER,
-		pass: process.env.MAIL_PASS
-	},
-	from : {
-		name : process.env.MAIL_FROM_NAME,
-		address : process.env.MAIL_FROM_ADDRESS
+	
+	mail: {
+		service: 'gmail',
+		secure: true,
+		auth: {
+			user: 'mthunziduze@gmail.com',
+			pass: 'mth957PAL?'
+		}
 	}
-}
-
 };
 
 // Export the config object based on the NODE_ENV

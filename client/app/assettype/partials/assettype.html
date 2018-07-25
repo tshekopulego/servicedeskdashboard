@@ -1,0 +1,77 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-md-10">
+			<h2>Assettypes</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li class="active">
+					<strong>Assettypes</strong>
+				</li>
+			</ol>
+		</div>
+		<div class="col-md-2 page-heading-actions">
+			<div class="pull-right">
+				<a href="/assettype/add" class="btn btn-block btn-success btn-md"> <i class="fa fa-plus"></i>
+					Add New
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="ibox">
+					<div class="ibox-title">
+						<div class="row">
+							<div class="col-md-3">
+								<label for="search">Search:</label>
+								<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+							</div>
+							<div class="col-md-3">
+								<label for="search">Items Per Page:</label>
+								<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+							</div>
+							<div class="col-md-3 col-md-offset-3">
+								<dir-pagination-controls pagination-id="assettype" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
+							</div>
+						</div>
+					</div>
+					<div class="ibox-content table-responsive">
+						<table class="table" class="row-border hover">
+							<tr>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Status</th>
+								<th colspan="5">Actions</th>
+							</tr>
+							<tr dir-paginate="assettype in assettypes | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="assettype">
+								<td>{{assettype.assettypeName}}</td>
+								<td>{{assettype.assettypeDescription}}</td>
+								<td>{{assettype.status}}</td>
+								<td ng-click="open(assettype)">
+									<a title="View Details"><span class="glyphicon glyphicon-list"></span></a>
+								</td>
+								<td>
+									<a href="assettype/edit/{{assettype._id}}" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+								</td>
+								<td ng-click="delete(assettype)" ng-confirm-click="Are you sure you want to delete this assettype?" ng-show="isAdmin()">
+									<a class="trash" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
