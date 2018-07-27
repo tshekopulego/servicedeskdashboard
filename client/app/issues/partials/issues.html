@@ -58,18 +58,30 @@
 
                             </div>
                                             
-                            <!--<div class="col-md-2">
-                                <label for="search">StartDate:</label>
+                                            
+                                <div class="input-group date" data-provide="datepicker" data-date-format="mm-dd-yyyy">
 
-                                <select class="form-control" name="startDate" id="categoryName" ng-model="issue.added" ng-options="issue.added">
+                                    <label for="search">Start Date:</label>
+                                    <input type="text" class="form-control" ng-model="startDate" >
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            
+                                            
+                                <div class="input-group date" data-provide="datepicker" data-date-format="mm-dd-yyyy">
 
-                                </select>
-
-                            </div>-->
+                                    <label for="endDate">End Date:</label>
+                                    <input type="text" class="form-control" ng-model="endDate">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            
 
                             <div class="col-md-2">
 
-                                <input type="button" name="" value="Go" ng-click="searchIssues(category._id,issuestatus._id)" class="btn btn-small btn-primary">
+                                <input type="button" name="" value="Go" ng-click="searchIssues(category._id,issuestatus._id,startDate,endDate)" class="btn btn-small btn-primary">
                             </div>
 							<div class="col-md-3 col-md-offset-3">
 								<dir-pagination-controls pagination-id="issue" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
@@ -85,6 +97,7 @@
                                 <th> Status</th>
                                 <th> Channel</th>
                                 <th> Priority</th>
+                                <th> Repoter Name</th>
                                 <th> Date</th>
                                 <th> Assigned User</th>
                                 <th> Over SLA?</th>
@@ -100,11 +113,11 @@
                                 <td>{{issue.issueStatus.issueStatusName}}</td>
                                 <td>{{issue.issueChannel.channelName}}</td>
                                 <td>{{issue.issuePriority.priorityName}}</td>
-                               
+                                <td>{{issue.reportedBy}}</td>
 								<td>{{issue.added | date:'medium'}}</td>
                                <td>{{issue.issueUser.firstName}}</td>
 								<td ng-if="isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
-								<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
+												<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
 							  </td>
 								<td ng-if="!isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
 												<span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>

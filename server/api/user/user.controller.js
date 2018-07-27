@@ -169,6 +169,21 @@ exports.registerClient = function(req, res, next) {
  		res.json(user.profile);
  	}).populate('clientPackage','packageName').populate('zone','deliveryZoneType deliveryZoneArea deliveryZoneAmount');
  };
+/**
+ * Get a single user all details
+ */
+ exports.showUser = function (req, res, next) {
+ 	var userId = req.params.id;
+     
+     
+ 	User.findById(userId, function (err, user) {
+ 		if (err) return next(err);
+ 		if (!user) return res.send(404);
+ 		res.json(user);
+    }).populate('clientPackage','packageName')
+        .populate('departmentName','departmentName')
+        .populate('zone','deliveryZoneType deliveryZoneArea deliveryZoneAmount');
+ };
 
  /**
   * Get all clients

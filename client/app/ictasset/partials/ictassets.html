@@ -83,8 +83,7 @@
 								<th>Asset Type</th>
 								<th>Priority</th>
 								<th> Date</th>
-								<th> Assigned To:</th><!--
-								<th> Over SLA?</th>-->
+								<th> Over SLA?</th>
 								<th colspan="5">Actions</th>
 							</tr>
 							<tr dir-paginate="ictasset in ictassets | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="ictasset">
@@ -96,13 +95,12 @@
 								<td>{{ictasset.assetType.assettypeName}}</td>
 								<td>{{ictasset.assetPriority.priorityName}}</td>
 								<td>{{ictasset.added | date:'medium'}}</td>
-                                <td>{{ictasset.assetAssignedUser.firstName}}</td>
-								<!--<td ng-if="isOverSLA(ictasset.added,ictasset.assetPriority.prioritySLA)">
+								<td ng-if="isOverSLA(ictasset.added,ictasset.assetPriority.prioritySLA)">
 												<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
 							  </td>
 								<td ng-if="!isOverSLA(ictasset.added,ictasset.assetPriority.prioritySLA)">
 												<span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>
-								</td>-->
+								</td>
 								<td ng-click="open(ictasset)">
 									<a title="View Details"><span class="glyphicon glyphicon-list"></span></a>
 								</td>

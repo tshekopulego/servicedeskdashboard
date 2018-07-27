@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('EditIssueCtrl', function ($scope, $http, $location, $window, $routeParams, socket) {
+.controller('EditIssueCtrl', function ($scope, $http, $location, $window, $routeParams, socket, Auth) {
 
     $scope.issue = {};
     $scope.submitted = false;
@@ -33,11 +33,42 @@ angular.module('serviceDeskApp')
     });
     
     
-    $http.get('/api/users').success(function (users) {
-      console.log(users);
+   
+    $http.get('/api/users').success(function(users) {
         $scope.users = users;
+        socket.syncUpdates('user', $scope.users,function(event,user,users){
+        });
     });
 
+    $scope.currentUser = Auth.getCurrentUser();
+    
+   console.log($scope.currentUser.role);
+    $http.get('/api/users/userD/594100614b80982c21fdb3cb').success(function(user) {
+            $scope.user = user;
+            console.log($scope.user);
+            socket.syncUpdates('user', $scope.users,function(event,user,users){
+            });
+        });
+        
+    $scope.escalateIssue = function(issue) {
+        
+        $scope.submitted = true;
+        $scope.issue = issue;
+        if($scope.submitted) {
+
+            $scope.issue.issueCategory = issue.issueCategory._id;
+            $scope.issue.issueChannel = issue.issueChannel._id;
+            $scope.issue.issuePriority = issue.issuePriority._id;
+            $scope.issue.issueDivision = issue.issueDivision._id;
+            $scope.issue.issueUser = $scope.user._id;
+
+            $http.put('/api/issues/' + $scope.issue._id,$scope.issue);
+            $scope.issue = '';
+            $location.path('/issues');
+        }
+        
+    }
+    
     $scope.editIssue = function(issue,isValid) {
         $scope.submitted = true;
         $scope.issue = issue;

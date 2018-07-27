@@ -10,9 +10,9 @@ router.get('/', auth.isAuthenticated(), controller.index);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.get('/:category/categories', auth.isAuthenticated(), controller.showIssuesByCategory);
 
-router.get('/:status/statuses', auth.isAuthenticated(), controller.showJobIssuesByStatus);
 router.get('/date/:dateRange', controller.showJobIssuesByDate);
 
+router.get('/:status/statuses', auth.isAuthenticated(), controller.showJobIssuesByStatus);
 
 router.get('/:category/:status', auth.isAuthenticated(), controller.searchIssues);
 router.post('/', auth.isAuthenticated(), controller.create);

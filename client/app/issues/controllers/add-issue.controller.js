@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('AddIssueCtrl', function ($scope, $http, $location, $window, socket) {
+.controller('AddIssueCtrl', function ($scope, $http, $location, $window, socket, Auth) {
 
     $scope.issue = {};
     $scope.submitted = false;
-
+    $scope.currentUser = Auth.getCurrentUser();
      $http.get('/api/channel').success(function(channels) {
         $scope.channels = channels;
         socket.syncUpdates('channel',
@@ -13,6 +13,14 @@ angular.module('serviceDeskApp')
         });
     });
 
+    
+    $http.get('/api/users').success(function(users) {
+        $scope.users = users;
+        socket.syncUpdates('user', $scope.users,function(event,user,users){
+        });
+    });
+
+    
     $http.get('/api/category').success(function(categories) {
         $scope.categories = categories;
         socket.syncUpdates('category',
@@ -22,7 +30,8 @@ angular.module('serviceDeskApp')
 
     $http.get('/api/division').success(function(divisions) {
         $scope.divisions = divisions;
-        socket.syncUpdates('division', $scope.divisions,function(event,division,divisions){
+        socket.syncUpdates('division', 
+        $scope.divisions,function(event,division,divisions){
         });
     });
 
@@ -41,16 +50,18 @@ angular.module('serviceDeskApp')
             $scope.issue.issueChannel = issue.channel._id;
             $scope.issue.issuePriority = issue.priority._id;
             $scope.issue.issueDivision = issue.division._id;
-			
+			$scope.issue.issueLoggedby = $scope.currentUser.firstName
 			$scope.issue.issueCategoryId = issue.category.categoryId;
-            $scope.issue.issueChannelId = issue.channel._id;
+            $scope.issue.issueChannelId = issue.channel.channelId;
             $scope.issue.issuePriorityId = issue.priority.priorityId;
             $scope.issue.issueDivisionId = issue.division.divisionId;
-            $scope.issue.issueRefNumberId = (new Date).getTime();
-			
-            $http.post('/api/issues',issue);
+            $scope.issue.reportedBy = issue.reportedBy;
+            $scope.issue.issueRefNumber = (new Date).getTime();
+			var issues = $scope.issue;
+            
+            $http.post('/api/issues',issues);
             $scope.issue = '';
-            $location.path('/issues/');
+            $location.path('/issues');
         }
     };
 

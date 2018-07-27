@@ -6,10 +6,8 @@ var ICTAsset = require('./ictasset.model');
 // Get list of ictasset
 exports.index = function (req, res) {
     ICTAsset.find()
-    .populate('assetAssignedUser','surname')
     .populate('assetCategory','categoryName')
 	.populate('assetType','assettypeName')
-	.populate('ICTStore','owningCompany')
 	.populate('assetPriority','priorityName prioritySLA')
 	.exec(function (err, ictassets) {
         if (err) {
@@ -19,17 +17,14 @@ exports.index = function (req, res) {
     });
 };
 
-
 // Get a single ictasset
 exports.show = function (req, res) {
     ICTAsset.findById({_id:req.params.id
 	}).sort({added:1})
-    .populate('assetAssignedUser','surname')
 	.populate('assetCategory','categoryName')
 	.populate('assetType','assettypeName')
-	.populate('ICTStore','owningCompany')
 	.populate('assetPriority','priorityName prioritySLA')
-	.exec(function (err, ictasset){
+	.exec(function (err, ictassets){
         if (err) {
             return handleError(res, err);
         }
@@ -38,7 +33,7 @@ exports.show = function (req, res) {
         }
         if (err) {
             return handleError(res, err); }
-	return res.json(200, ictasset)
+	return res.json(200, ictassets)
     });
 };
 	/*ICTAsset.findById(req.params.id, function (err, ictasset) {
@@ -89,10 +84,8 @@ exports.searchICTAssets = function(req, res) {
 		assetCategory:req.params.category,
 		assetType:req.params.assettype
 	}).sort({added:1})
-    .populate('assetAssignedUser','surname')
 	  .populate('assetCategory','categoryName')
 	.populate('assetType','assettypeName')
-	.populate('ICTStore','owningCompany')
 	/*.populate('assetPriority','priorityName prioritySLA')*/
     .exec(function (err, ictasset) {
 		if(err) { return handleError(res, err); }
@@ -112,7 +105,6 @@ exports.showICTAssetByCategory = function(req, res) {
 	}).sort({added:1})
 	.populate('assetCategory','categoryName')
 	.populate('assetType','assettypeName')
-	.populate('ICTStore','owningCompany')
 	/*.populate('assetPriority','priorityName prioritySLA')*/
 	.exec(function (err, ictasset) {
 		if(err) { return handleError(res, err); }
@@ -126,7 +118,6 @@ exports.showICTAssetByAssettype = function(req, res) {
 	}).sort({added:1})
 	.populate('assetCategory','categoryName')
 	.populate('assetType','assettypeName')
-	.populate('ICTStore','owningCompany')
 	.exec(function (err, ictasset) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, ictasset);

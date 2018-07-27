@@ -30,7 +30,7 @@ module.exports = function(app) {
   app.use('/api/costcenter', require('./api/costcenter'));
   app.use('/api/hardware', require('./api/hardware'));
   app.use('/mail', require('./api/user'));
-
+  app.use('/assest-management', require('/api/assest-management'))
   	
   app.use('/auth', require('./auth'));
     

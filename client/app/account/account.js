@@ -26,8 +26,8 @@ angular.module('serviceDeskApp')
 			})
 			.when('/confirm', {
 				templateUrl: 'app/account/confirm/confirm.html',
-				controller: 'ConfirmCtrl'
-				//authenticate: true
+				controller: 'ConfirmCtrl',
+				authenticate: true
 			})
 			.when('/confirm/:confirmToken', {
 				templateUrl: 'app/account/confirm/confirm.html',
@@ -42,3 +42,6 @@ angular.module('serviceDeskApp')
 				controller: 'PwdResetCtrl'
 			});
 	});
+
+
+

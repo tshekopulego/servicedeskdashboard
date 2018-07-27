@@ -52,7 +52,7 @@
                                 <label>Category:</label>
                                 <ui-select id="category" name="category" ng-model="issue.issueCategory" theme="bootstrap" required>
                                     <ui-select-match placeholder="Select a Category">{{$select.selected.categoryName}}</ui-select-match>
-                                    <ui-select-choices repeat="category in categories | filter: $select.search" value="{{category._id}}">
+                                    <ui-select-choices repeat="category in categories | filter: $select.search" value="{{category.categoryName}}">
                                         <div ng-bind-html="category.categoryName | highlight: $select.search"></div>
 
                                         <small>
@@ -61,6 +61,22 @@
                                     </ui-select-choices>
                                 </ui-select>
                                 <p ng-show="editIssueForm.category.$invalid && submitted" class="help-block">The Category is required.</p>
+                            </div>
+                            
+                            <div class="form-group" ng-show="issue.issueCategory == 'Hardware'" ng-class="{'has-error': addIssueForm.hardwareId.$invalid && submitted,'has-success': !addIssueForm.hardwareId.$invalid && submitted}">
+
+                                <label>Hardware ID :</label>
+                                <ui-select id="category" name="category" ng-model="issue.category" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a Category">{{$select.selected.categoryName}}</ui-select-match>
+                                    <ui-select-choices repeat="category in categories | filter: $select.search" value="{{category._id}}">
+                                        <div ng-bind-html="category.categoryName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Description: {{category.categoryDescription}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <p ng-show="addIssueForm.category.$invalid && submitted" class="help-block">The Category is required.</p>
                             </div>
 
                             <div class="form-group" ng-class="{'has-error': editIssueForm.channel.$invalid && submitted,'has-success': !editIssueForm.channel.$invalid && submitted}">
@@ -142,6 +158,7 @@
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-small btn-primary">Submit</button>
+                                <a ng-click="escalateIssue(issue)" class="btn btn-small">Escalate</a>
                                 <a ng-click="cancel()" class="btn btn-small">Cancel</a>
                             </div>
                         </form>

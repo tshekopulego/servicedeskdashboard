@@ -48,7 +48,7 @@ var all = {
 		secure: true,
 		auth: {
 			user: 'mthunziduze@gmail.com',
-			pass: 'Palesa01'
+			pass: 'mth957PAL?'
 		}
 	}
 };
