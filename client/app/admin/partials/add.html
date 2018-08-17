@@ -33,7 +33,7 @@
 							<div class="form-group" ng-class="{'has-error': addUserForm.role.$invalid && submitted,'has-success': !addUserForm.role.$invalid && submitted}">
 								<label>Role</label>
 								<select id="role" name="role" class="form-control" ng-model="user.role" required>
-									<option ng-repeat="role in roles" value="{{role._id}}">{{role.roleName}}</option>
+									<option ng-repeat="role in roles" value="{{role.roleName}}">{{role.roleName}}</option>
 								</select>
 								<p ng-show="addUserForm.role.$invalid && submitted" class="help-block">The role is required</p>
 							</div>
@@ -47,7 +47,6 @@
 								</select>
 								<p ng-show="addUserForm.billingType.$invalid && submitted" class="help-block">The Billing Type is required</p>
 							</div>
-
 							<div class="form-group" ng-show="user.billingType == 'Package'" ng-class="{'has-error': addUserForm.clientPackage.$invalid && submitted,'has-success': !addUserForm.clientPackage.$invalid && submitted}">
 								<label>Package</label>
 								<select id="clientPackage" name="clientPackage" class="form-control" ng-model="user.clientPackage" ng-required="user.billingType == 'Package'">
@@ -55,7 +54,6 @@
 								</select>
 								<p ng-show="addUserForm.clientPackage.$invalid && submitted" class="help-block">The Package is required</p>
 							</div>
-
 							<div class="form-group" ng-show="user.role == 'client'" ng-class="{'has-error': addUserForm.clientType.$invalid && submitted,'has-success': !addUserForm.clientType.$invalid && submitted}">
 								<label>Client Type</label>
 								<select id="clientType" name="clientType" class="form-control" ng-model="user.clientType" ng-required="user.role == 'client'">
@@ -101,13 +99,11 @@
 								<input type="text" id="contactPerson" name="contactPerson" ng-model="user.contactPerson" ng-required="user.clientType == 'Company'" class="form-control"/>
 								<p ng-show="addUserForm.contactPerson.$error.required  && submitted" class="help-block">The Contact Person is required</p>
 							</div>
-
 							<div class="form-group" ng-if="user.clientType == 'Company'" ng-class="{'has-error': addUserForm.contactPersonPhoneNumber.$error.required && submitted,'has-success': !addUserForm.contactPersonPhoneNumber.$error.required && submitted}">
 								<label class="control-label" for="contactPersonPhoneNumber">Contact Person Phone Number:</label>
 								<input type="text" id="contactPersonPhoneNumber" name="contactPersonPhoneNumber" ng-model="user.contactPersonPhoneNumber" ng-required="user.clientType == 'Company'" class="form-control" ui-mask="9999999999" ui-mask-placeholder ui-mask-placeholder-char="-"/>
 								<p ng-show="addUserForm.contactPersonPhoneNumber.$error.required  && submitted" class="help-block">The Contact Person Phone Number is required</p>
 							</div>
-
 							<div class="form-group" ng-show="user.role == 'client'">
 								<label for="needsWaybill">Needs Waybill?</label>
 								<input type="checkbox" name="needsWaybill" ng-model="user.needsWaybill" value="true"/>

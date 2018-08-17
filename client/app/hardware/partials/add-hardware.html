@@ -1,0 +1,61 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-lg-10">
+			<h2>Add Hardware</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/hardware">Hardware</a>
+				</li>
+				<li class="active">
+					<strong>Add Hardware</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="ibox">
+					<div class="ibox-content">
+						<form novalidate="novalidate" role="form" name="addHardwareForm" ng-submit="addHardware(hardware,addHardwareForm.$valid)">
+
+							<div class="form-group" ng-class="{'has-error': addHardwareForm.hardwareName.$invalid && submitted}">
+								<label>Hardware Name:</label>
+								<input class="form-control" type="text" ng-model="hardware.hardwareName" name="hardwareName" id="hardwareName" required/>
+								<p ng-show="addHardwareForm.hardwareName.$invalid && submitted" class="help-block">The hardware name is required.</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': addHardwareForm.divisionAddress.$invalid && submitted}">
+								<label>Hardware Description:</label>
+								<input class="form-control" type="text" ng-model="division.divisionAddress" name="divisionAddress" id="divisionAddress" required/>
+								<p ng-show="addHardwareForm.divisionAddress.$invalid && submitted" class="help-block">The Address is required.</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': addHardwareForm.divisionContact.$invalid && submitted}">
+								<label>Contact:</label>
+								<input class="form-control" type="text" ng-model="division.divisionContact" name="divisionContact" id="divisionContact" required/>
+								<p ng-show="addHardwareForm.divisionContact.$invalid && submitted" class="help-block">The Contact is required.</p>
+							</div>
+
+							<div class="box-footer">
+								<button type="submit" class="btn btn-small btn-primary">Save</button>
+								<a ng-click="cancel()" class="btn btn-small">Cancel</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -10,10 +10,10 @@
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/issue">Issues</a>
+                    <a href="/issue">INCIDENTS</a>
                 </li>
                 <li class="active">
-                    <strong>Add Issue</strong>
+                    <strong>Add Incident</strong>
                 </li>
             </ol>
         </div>
@@ -62,6 +62,12 @@
                                 </ui-select>
                                 <p ng-show="addIssueForm.category.$invalid && submitted" class="help-block">The Category is required.</p>
                             </div>
+							<div class="form-group" ng-if="issue.category.categoryName == 'Hardware'" ng-class="{'has-error': addIssueForm.hardwareId.$invalid && submitted,'has-success': !addIssueForm.hardwareId.$invalid && submitted}">
+
+                                <label>Hardware ID :</label>
+                                <input id="hardwareID" name="hardwareID" type="text" ng-model="issue.hardwareID" class="form-control" required/>
+                                <p ng-show="addIssueForm.hardwareID.$invalid && submitted" class="help-block">Hardware ID is required.</p>
+                            </div>
 
                             <div class="form-group" ng-class="{'has-error': addIssueForm.channel.$invalid && submitted,'has-success': !addIssueForm.channel.$invalid && submitted}">
                                 <label>Channel:</label>
@@ -83,11 +89,11 @@
                                 <ui-select id="division" name="division" ng-model="issue.division" theme="bootstrap" required>
                                     <ui-select-match placeholder="Select a Division">{{$select.selected.divisionName}}</ui-select-match>
                                     <ui-select-choices repeat="division in divisions | filter: $select.search" value="{{division._id}}">
-                                        <div ng-bind-html="division.priorityName | highlight: $select.search"></div>
+                                        <div ng-bind-html="division.divisionName | highlight: $select.search"></div>
 
                                         <small>
-                                            Address: {{division.divisionAddress}}
-											Contact: {{division.divisionContact}}
+                                            Name: {{division.divisionName}}
+											Description: {{division.divisionDescription}}
 											</small>
                                     </ui-select-choices>
                                 </ui-select>
@@ -101,10 +107,16 @@
                             </div>
 
 
+                            <div class="form-group" ng-class="{'has-error': addIssueForm.reportedBy.$invalid && submitted,'has-success': !addIssueForm.reportedBy.$invalid && submitted}">
+                                <label class="control-label" for="reportedBy">Reported By:</label>
+                                <input id="reportedBy" name="reportedBy" type="text" ng-model="issue.reportedBy" class="form-control" required/>
+                                <p ng-show="addIssueForm.reportedBy.$invalid && submitted" class="help-block">Field is required.</p>
+                            </div>
+
                             <div class="form-group" ng-class="{'has-error': addIssueForm.contactNumber.$invalid && submitted,'has-success': !addIssueForm.contactNumber.$invalid && submitted}">
                                 <label class="control-label" for="contactNumber">Contact Number:</label>
                                 <input id="contactNumber" name="contactNumber" type="text" ng-model="issue.issueContactNumber" class="form-control" required/>
-                                <p ng-show="addIssueForm.contactNumber.$invalid && submitted" class="help-block">The Contact Number is required.</p>
+                                <p ng-show="addIssueForm.contactNumber.$invalid && submitted" class="help-block">Contact Number is required.</p>
                             </div>
 
 

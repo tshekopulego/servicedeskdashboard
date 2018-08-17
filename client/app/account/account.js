@@ -42,6 +42,3 @@ angular.module('serviceDeskApp')
 				controller: 'PwdResetCtrl'
 			});
 	});
-
-
-

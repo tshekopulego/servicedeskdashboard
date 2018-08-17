@@ -9,6 +9,10 @@ var router = express.Router();
 router.get('/', auth.isAuthenticated(), controller.index);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.get('/:category/categories', auth.isAuthenticated(), controller.showIssuesByCategory);
+router.get('/assignedUser/:assignedUser', auth.isAuthenticated(), controller.getIssueByUser);
+router.get('/date/:dateRange', controller.showJobIssuesByDate);
+
+router.get('/issuedata', controller.issuesData);
 
 router.get('/:status/statuses', auth.isAuthenticated(), controller.showJobIssuesByStatus);
 

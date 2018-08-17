@@ -1,30 +1,48 @@
 'use strict';
+var kue = require('kue'); 
+var queue = kue.createQueue();
 
 var _ = require('lodash');
 var Issue = require('./issue.model');
 
+
+//kue
+
+
+
+
+
 // Get list of visitors
 exports.index = function(req, res) {
-	Issue.find()
-    .populate('issueCategory','categoryName')
-    .populate('issueStatus','issueStatusName')
-    .populate('issueChannel','channelName')
-    .populate('issuePriority','priorityName prioritySLA')
-    .populate('issueDivision','divisionName')
+	Issue.find().sort(
+    { 
+        issuePriorityId : -1.0
+    })
+    .populate('issueCategory','categoryName categoryId')
+    .populate('issueStatus','issueStatusName issueStatusId')
+    .populate('issueChannel','channelName channelId')
+    .populate('issuePriority','priorityName prioritySLA priorityId')
+    .populate('issueDivision','divisionName divisionId')
+    .populate('issueUser','firstName')
     .exec(function (err, issues) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, issues);
 	});
 };
-
-// Get list of visitors
-exports.index = function(req, res) {
-	Issue.find()
-	.populate('issueCategory','categoryName')
-	.populate('issueStatus','issueStatusName')
-	.populate('issueChannel','channelName')
-	.populate('issuePriority','priorityName prioritySLA')
-	.populate('issueDivision','divisionName')
+// Get list of Incidents By User
+exports.getIssueByUser = function(req, res) {
+	Issue.find({
+        issueUser : req.params.assignedUser
+    }).sort(
+    { 
+        issuePriorityId : -1.0
+    })
+    .populate('issueCategory','categoryName categoryId')
+    .populate('issueStatus','issueStatusName issueStatusId')
+    .populate('issueChannel','channelName channelId')
+    .populate('issuePriority','priorityName prioritySLA priorityId')
+    .populate('issueDivision','divisionName divisionId')
+    .populate('issueUser','firstName')
     .exec(function (err, issues) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, issues);
@@ -37,10 +55,11 @@ exports.show = function(req, res) {
 		_id:req.params.id
 	}).sort({added:1})
 	.populate('issueCategory','categoryName')
-	.populate('issueStatus','issueStatusName')
-	.populate('issueChannel','channelName')
-	.populate('issuePriority','priorityName prioritySLA')
-	.populate('issueDivision','divisionName')
+    .populate('issueStatus','issueStatusName')
+    .populate('issueChannel','channelName')
+    .populate('issuePriority','priorityName prioritySLA')
+    .populate('issueDivision','divisionName')
+    .populate('issueUser','firstName')
 	.exec(function (err, issues) {
 	if(err) { return handleError(res, err); }
 	return res.json(200, issues)
@@ -50,6 +69,21 @@ exports.show = function(req, res) {
 // Creates a new issue in the DB.
 exports.create = function(req, res) {
 	Issue.create(req.body, function(err, issue) {
+        
+        queue.create('mduze@skhomotech.co.za', {  
+
+        title: 'Testing Issues',
+
+        to: 'mduze@skhomotech.co.za',
+
+        template: 'checking the issue '+ req.body.issueDescription
+
+            
+
+        }).priority('high').attempts(5).save();
+        
+        
+        
 		if(err) { return handleError(res, err); }
 		return res.json(201, issue);
 	});
@@ -94,17 +128,22 @@ exports.destroy = function(req, res) {
 	});
 };
 
+
 // Search Issue
 exports.searchIssues = function(req, res) {
 	Issue.find({
 		issueCategory:req.params.category,
 		issueStatus:req.params.status
-	}).sort({added:1})
-	  .populate('issueCategory','categoryName')
-	  .populate('issueStatus','issueStatusName')
-	  .populate('issueChannel','channelName')
-	  .populate('issuePriority','priorityName prioritySLA')
-	  .populate('issueDivision','divisionName')
+	}).sort(
+    { 
+        "issuePriorityId" : -1.0
+    })
+	  .populate('issueCategory','categoryName categoryId')
+    .populate('issueStatus','issueStatusName issueStatusId')
+    .populate('issueChannel','channelName channelId')
+    .populate('issuePriority','priorityName prioritySLA priorityId')
+    .populate('issueDivision','divisionName divisionId')
+    .populate('issueUser','firstName')
     .exec(function (err, issues) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, issues);
@@ -116,12 +155,16 @@ exports.searchIssues = function(req, res) {
 exports.showIssuesByCategory = function(req, res) {
 	Issue.find({
 		issueCategory:req.params.category
-	}).sort({added:1})
-	.populate('issueCategory','categoryName')
-	.populate('issueStatus','issueStatusName')
-	.populate('issueChannel','channelName')
-	.populate('issuePriority','priorityName prioritySLA')
-  .populate('issueDivision','divisionName')
+	}).sort(
+    { 
+        "issuePriorityId" : -1.0
+    })
+	.populate('issueCategory','categoryName categoryId')
+    .populate('issueStatus','issueStatusName issueStatusId')
+    .populate('issueChannel','channelName channelId')
+    .populate('issuePriority','priorityName prioritySLA priorityId')
+    .populate('issueDivision','divisionName divisionId')
+    .populate('issueUser','firstName')
   .exec(function (err, issues) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, issues);
@@ -132,17 +175,80 @@ exports.showIssuesByCategory = function(req, res) {
 exports.showJobIssuesByStatus = function(req, res) {
 	Issue.find({
 		issueStatus:req.params.status
-	}).sort({added:1})
-	  .populate('issueCategory','categoryName')
-	  .populate('issueStatus','issueStatusName')
-	  .populate('issueChannel','channelName')
-	  .populate('issuePriority','priorityName prioritySLA')
-	  .populate('issueDivision','divisionName')
+	}).sort(
+    { 
+        "issuePriorityId" : -1.0
+    })
+    .populate('issueCategory','categoryName categoryId')
+    .populate('issueStatus','issueStatusName issueStatusId')
+    .populate('issueChannel','channelName channelId')
+    .populate('issuePriority','priorityName prioritySLA priorityId')
+    .populate('issueDivision','divisionName divisionId')
+    .populate('issueUser','firstName')
     .exec(function (err, issues) {
 		if(err) { return handleError(res, err); }
 		return res.json(200, issues);
 	});
 };
+
+// Search Issues By Date
+exports.showJobIssuesByDate = function(req, res) {
+    var dateRange = JSON.parse(req.params.dateRange);
+    var startDate = new Date(dateRange[0]),
+        endDate = new Date(dateRange[1]);
+	Issue.find({
+        added: {
+            $gte: new Date(startDate),
+            $lt: new Date(endDate)
+        }
+	}).sort(
+    { 
+        "issuePriorityId" : -1.0
+    })
+    .populate('issueCategory','categoryName categoryId')
+    .populate('issueStatus','issueStatusName issueStatusId')
+    .populate('issueChannel','channelName channelId')
+    .populate('issuePriority','priorityName prioritySLA priorityId')
+    .populate('issueDivision','divisionName divisionId')
+    .populate('issueUser','firstName')
+    .exec(function (err, issues) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, issues);
+	});
+};
+
+var mapFunction1 = function() {
+                       emit(this.issuePriorityId, this._id);
+                   };
+var reduceFunction1 = function(priorityId, values) {
+                          return Array.sum(values);
+                      };
+/*
+var mapFunc = function() {
+    for(i=0; i < this.priorityId.length; i++) {
+        var issueData = this.issues[i];
+        emit(issueData.priorityId +" "+issueData._id, 1);
+    }
+};
+var reduceFunc = function (issueData, values){
+    count = 0;
+    for(i=0; i<values.length; i++){
+        count +=values[i];
+    }
+    return count;
+};
+*/
+
+exports.issuesData = function (req, res) {
+    
+    Issue.mapReduce(
+    mapFunction1,
+    reduceFunction1,
+        {
+            out: "issueData"
+        }
+    )
+}
 
 function handleError(res, err) {
 	return res.send(500, err);

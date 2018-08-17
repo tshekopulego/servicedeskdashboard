@@ -10,6 +10,9 @@ angular.module('serviceDeskApp')
         value: "Individual",
         name: "Individual"
     },{
+        value: "User",
+        name: "userName"
+    },{
         value: "Company",
         name: "Company"
     }];

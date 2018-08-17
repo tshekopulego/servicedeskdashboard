@@ -2,13 +2,13 @@
     <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
     <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
     <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-    <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <!--[if gt IE 8]><!--> 
+<html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="UTF-8">
         <base href="/">
         <title>Skhomo Service Desk</title>
-        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'><!---->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 
@@ -23,12 +23,15 @@
         <link rel="stylesheet" href="app/category/category.css">
         <link rel="stylesheet" href="app/channel/channel.css">
         <link rel="stylesheet" href="app/division/division.css">
-        <link rel="stylesheet" href="app/ictasset/ictasset.css">
+		<link rel="stylesheet" href="app/costcenter/costcenter.css">
+        <link rel="stylesheet" href="app/ictasset/ictassets.css">
         <link rel="stylesheet" href="app/ictstore/ictstore.css">
         <link rel="stylesheet" href="app/issues/issues.css">
         <link rel="stylesheet" href="app/officeparks/officeparks.css">
         <link rel="stylesheet" href="app/priority/priority.css">
         <link rel="stylesheet" href="app/status/issuestatus.css">
+		<link rel="stylesheet" href="app/assettype/assettype.css">
+        
         <link rel="stylesheet" href="assets/css/morris/morris.css">
         <link rel="stylesheet" href="assets/css/jvectormap/jquery-jvectormap-1.2.2.css">
         <link rel="stylesheet" href="assets/css/datepicker/datepicker3.css">
@@ -37,7 +40,19 @@
         <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css">
         <link rel="stylesheet" href="assets/css/inspinia/animate.css">
         <link rel="stylesheet" href="assets/css/inspinia/style.css">
+        
+    
+        <!--<link rel="stylesheet" href="bower_components/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css">-->
+        <!--<link rel="stylesheet" href="bower_components/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css">-->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <!--<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">-->
+<!--        <link rel="stylesheet" href="assets/css/inspinia/animate.css">-->
+        <link rel="stylesheet" href="assets/css/inspinia/style.css">
+		
         <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
+        
+        <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css">
+        
         <!-- endinjector -->
         <!-- endbuild -->
 
@@ -84,13 +99,23 @@
         <script src="../bower_components/ng-table/dist/ng-table.min.js"></script>
         <script src="../bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
         <script src="../bower_components/angular-wysiwyg/angular-wysiwyg.js"></script>
-        <script src="../bower_components/angular-utils-pagination/dirPagination.js"></script>
+        <script src="../bower_components/angular-utils-pagination/dirPagination.js"></script><!--
+        <script src="bower_components/angularjs-datepicker/src/js/angular-datepicker.js"></script>-->
         <!-- endbower -->
         <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
         <!-- injector:js -->
+        
+         <script src="https://static.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+        <script src="https://static.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
+        
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+         <script src="app/report/controllers/reports.js"></script>
+        <script src="app/report/report.js"></script>
+
         <script src="app/account/account.js"></script>
         <script src="app/account/confirm/confirm.controller.js"></script>
         <script src="app/account/login/login.controller.js"></script>
@@ -117,20 +142,27 @@
         <script src="app/category/controllers/category.controller.js"></script>
         <script src="app/category/controllers/edit-category.controller.js"></script>
         <script src="app/category/controllers/modal-instance.controller.js"></script>
-        <script src="app/category/controllers/category.controller.js"></script>
-        <script src="app/category/category.js"></script>
+		
+		<script src="app/assettype/assettype.js"></script>
+        <script src="app/assettype/controllers/add-assettype.controller.js"></script>
+        <script src="app/assettype/controllers/assettype.controller.js"></script>
+        <script src="app/assettype/controllers/edit-assettype.controller.js"></script>
+        <script src="app/assettype/controllers/modal-instance.controller.js"></script>
+        <script src="app/ictasset/controllers/ictasset-comments.modal.controller.js"></script>
+		
 
-        <script src="app/department/controllers/add-department.controller.js"></script>
-        <script src="app/department/controllers/department-model-instance.controller.js"></script>
-        <script src="app/department/controllers/department.controller.js"></script>
-        <script src="app/department/department.js"></script>
-
-		<script src="app/channel/controllers/add-channel.controller.js"></script>
         <script src="app/channel/channel.js"></script>
         <script src="app/channel/controllers/add-channel.controller.js"></script>
         <script src="app/channel/controllers/channel.controller.js"></script>
         <script src="app/channel/controllers/edit-channel.controller.js"></script>
         <script src="app/channel/controllers/modal-instance.controller.js"></script>
+		
+		<script src="app/costcenter/costcenter.js"></script>
+        <script src="app/costcenter/controllers/add-costcenter.controller.js"></script>
+        <script src="app/costcenter/controllers/costcenter.controller.js"></script>
+        <script src="app/costcenter/controllers/edit-costcenter.controller.js"></script>
+        <script src="app/costcenter/controllers/modal-instance.controller.js"></script>
+		
         <script src="app/division/controllers/add-division.controller.js"></script>
         <script src="app/division/controllers/division.controller.js"></script>
         <script src="app/division/controllers/edit-division.controller.js"></script>
@@ -139,6 +171,15 @@
         <script src="app/ictasset/controllers/edit-ictasset.controller.js"></script>
         <script src="app/ictasset/controllers/ictasset.controller.js"></script>
         <script src="app/ictasset/controllers/modal-instance.controller.js"></script>
+
+        <script src="app/assest-management/controllers/assestmanagement.controller.js"></script>
+         <script src="app/assest-management/controllers/add-assestmanagement.controller.js"></script>
+         <script src="app/assest-management/controllers/edit-assestmanagement.controller.js"></script>
+         <script src="app/assest-management/controllers/modal-instance.controller.js"></script>
+         <script src="app/assest-management/assestmanagement.js"></script>
+
+        
+        
         <script src="app/ictasset/ictasset.js"></script>
 
         <script src="app/ictstore/controllers/add-ictstore.controller.js"></script>
@@ -172,11 +213,8 @@
         <script src="app/priority/controllers/modal-instance.controller.js"></script>
         <script src="app/priority/controllers/priority.controller.js"></script>
         <script src="app/priority/priority.js"></script>
-        
-        <script src="app/request-type/controllers/add-requesttype.controller.js"></script>
         <script src="app/request-type/controllers/request-type.controller.js"></script>
         <script src="app/request-type/requesttype.js"></script>
-        
         <script src="app/rfc-calls/controllers/add-rfccall.controller.js"></script>
         <script src="app/rfc-calls/controllers/edit-rfccall.controller.js"></script>
         <script src="app/rfc-calls/controllers/rfccall-modal-instance.controller.js"></script>
@@ -204,6 +242,7 @@
         <script src="components/navbar/navbar.controller.js"></script>
         <script src="components/navbar/treeview-toggle.directive.js"></script>
         <script src="components/socket/socket.service.js"></script>
+        
         <script src="assets/js/plugins/daterangepicker/daterangepicker.js"></script>
         <script src="assets/js/plugins/datepicker/bootstrap-datepicker.js"></script>
         <script src="assets/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
@@ -213,6 +252,10 @@
         <!-- endinjector -->
         <!-- endbuild -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        
+        <script src="../bower_components/d3/d3.js"></script>
+        <script src="../bower_components/nvd3/build/nv.d3.js"></script> <!-- or use another assembly -->
+        <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
 
     </body>
 </html>

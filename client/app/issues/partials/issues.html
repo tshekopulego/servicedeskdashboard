@@ -4,13 +4,13 @@
 
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="col-md-10">
-			<h2>Issues</h2>
+			<h2>Incidents</h2>
 			<ol class="breadcrumb">
 				<li>
 					<a href="/">Home</a>
 				</li>
 				<li class="active">
-					<strong>Issues</strong>
+					<strong>Incidents</strong>
 				</li>
 			</ol>
 		</div>
@@ -22,6 +22,9 @@
 			</div>
 		</div>
 	</div>
+    <div>
+        <nvd3 options='options' data='data' api='api'></nvd3>
+    </div>
 	<div class="wrapper wrapper-content animated fadeIn">
 		<maq-socket-disconnected></maq-socket-disconnected>
 		<maq-danger-alert></maq-danger-alert>
@@ -36,6 +39,7 @@
 
 							<div class="col-md-2">
 								<label for="search">Search:</label>
+                                
 								<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
 							</div>
 							<div class="col-md-2">
@@ -56,41 +60,77 @@
                                 </select>
 
                             </div>
+                                            
+                               
 
                             <div class="col-md-2">
+                                    
+                                <div class="input-group date" data-provide="datepicker" data-date-format="mm-dd-yyyy">
 
-                                <input type="button" name="" value="Go" ng-click="searchIssues(category._id,issuestatus._id)" class="btn btn-small btn-primary">
+                                    <label for="search">Start Date:</label>
+                                    <input type="text" class="form-control" ng-model="startDate" >
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                            
+                                            
+                                
+                                       
+                                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group date" data-provide="datepicker" data-date-format="mm-dd-yyyy">
+
+                                    <label for="endDate">End Date:</label>
+                                    <input type="text" class="form-control" ng-model="endDate">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                            </div>
+                            <div class="col-md-2">
+
+                                <input type="button" name="" value="Go" ng-click="searchIssues(category._id,issuestatus._id,startDate,endDate)" class="btn btn-small btn-primary">
                             </div>
 							<div class="col-md-3 col-md-offset-3">
 								<dir-pagination-controls pagination-id="issue" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
 							</div>
 						</div>
+                                     
+                                
 					</div>
 					<div class="ibox-content table-responsive">
 						<table class="table" class="row-border hover">
 							<tr>
+                                <th> Date</th>
 								<th> Ref Number</th>
 								<th> Description</th>
 								<th> Category</th>
-                <th> Status</th>
-                <th> Channel</th>
-								<th> Priority</th>
-                <th> Date</th>
-								<th> Over SLA?</th>
+                                <th> Status</th>
+                                <th> Channel</th>
+                                <th> Priority</th>
+                                <th> Repoter Name</th>
+                                <th> Assigned User</th>
+                                <th> Over SLA?</th>
+                              
+
+                                
 								<th colspan="5">Actions</th>
 							</tr>
 							<tr dir-paginate="issue in issues | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="issue">
-                <td>{{issue.issueRefNumber}}</td>
+								<td>{{issue.added | date:'medium'}}</td>
+                                <td>{{issue.issueRefNumber}}</td>
 								<td>{{issue.issueDescription}}</td>
 								<td>{{issue.issueCategory.categoryName}}</td>
-                <td>{{issue.issueStatus.issueStatusName}}</td>
-                <td>{{issue.issueChannel.channelName}}</td>
-                <td>{{issue.issuePriority.priorityName}}</td>
-								<td>{{issue.added | date:'medium'}}</td>
-								<td ng-if="isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
+                                <td>{{issue.issueStatus.issueStatusName}}</td>
+                                <td>{{issue.issueChannel.channelName}}</td>
+                                <td>{{issue.issuePriority.priorityName}}</td>
+                                <td>{{issue.reportedBy}}</td>
+                               <td>{{issue.issueUser.firstName}}</td>
+								<td ng-if="isOverSLACopy(issue.modified,issue.issuePriority.prioritySLA,issue)">
 												<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
 							  </td>
-								<td ng-if="!isOverSLA(issue.added,issue.issuePriority.prioritySLA)">
+								<td ng-if="!isOverSLACopy(issue.modified,issue.issuePriority.prioritySLA,issue)">
 												<span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>
 								</td>
 
@@ -114,3 +154,4 @@
 		</div>
 	</div>
 </div>
+<nvd3 options="options" data="data" config="{ extended: true, disabled: true }"></nvd3>

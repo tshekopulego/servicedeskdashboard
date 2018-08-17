@@ -17,8 +17,6 @@ angular.module('serviceDeskApp')
                $scope.requesttypes = requesttypes;
            });
     
-    
-    
     $http.get('/api/evaluation-outcome').success(function (evaluationoutcomes) {
                evaluationoutcomes.unshift({
                   evaluationoutcomeName: 'All',
@@ -27,8 +25,6 @@ angular.module('serviceDeskApp')
                $scope.evaluationoutcomes = evaluationoutcomes;
            });
     
-    
-
     $http.get('/api/rfc-calls').success(function(rfccalls) {
         $scope.rfccalls = rfccalls;
         socket.syncUpdates('rfccall', $scope.rfccalls,function(event,rfccall,rfccalls){
@@ -41,7 +37,7 @@ angular.module('serviceDeskApp')
     });
     
     
-     $scope.searchRfccall = function (changerequesttype, callevaluationoutcome) {
+    $scope.searchRfccall = function (changerequesttype, callevaluationoutcome) {
 
             if ((changerequesttype == "-1") && (callevaluationoutcome == "-1")) { //get all records
                 $http.get('/api/rfc-calls').success(function (rfccalls) {
@@ -79,10 +75,6 @@ angular.module('serviceDeskApp')
 
             }
         };
-    
-
-    
-    
 
     $scope.open = function (rfccall) {
 
@@ -104,6 +96,19 @@ angular.module('serviceDeskApp')
         });
     };
 
+	
+	 $scope.isOverSLA = function (dateCaptured, sla) {
+
+            var now = moment(new Date()); //todays date
+            var duration = moment.duration(now.diff(dateCaptured));
+            var hours = duration.asHours();
+            console.log(hours > sla);
+
+            /*console.log(sla);
+*/
+            return hours > sla;
+    }
+	
     $scope.cancel = function() {
         $window.history.back();
     };

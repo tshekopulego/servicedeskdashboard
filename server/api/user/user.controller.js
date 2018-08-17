@@ -6,6 +6,9 @@ var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var mail = require('../../mail');
 
+var nodemailer = require('nodemailer');
+//var smtpTransport = require('nodemailer-smtp-transport');
+
 var validationError = function(res, err) {
 	return res.json(422, err);
 };
@@ -20,12 +23,12 @@ var validationError = function(res, err) {
  	var lastName = req.body.lastName;
  	var password = req.body.password;
  	var role = req.body.role;
-    var department = req.body.departments;
+    var department = req.body.department;
 
  	if(role == 'client') {
  		//console.log(req.body);
  		var newUser = new User(req.body);
-	 	newUser.provider = 'local';
+	 	newUser.provider = 'locals';
 	 	//newUser.role = 'user';
 	 	newUser.save(function(err, user) {
 	 		if (err) return validationError(res, err);
@@ -38,12 +41,31 @@ var validationError = function(res, err) {
  			if (user) return validationError(res, {message:'The specified email address is already in use.'});
 
  			var guestSessionToken = jwt.sign({email: email, firstName : req.body.firstName, department : req.body.department, role : 'guest' , password: password }, config.secrets.session, { expiresInMinutes: 60*5 });
- 			//res.json({ token3: guestSessionToken });
+ 			res.json({ token: guestSessionToken });
 
  			var mailConfirmationToken = jwt.sign({firstName : req.body.firstName, lastName: req.body.lastName, email: req.body.email,  password: req.body.password }, config.secrets.mailConfirmation, {expiresInMinutes: 60 * 24 * 30});
-            res.json({ mailConfirmationToken: mailConfirmationToken });
-            console.log(mailConfirmationToken)
- 			/*mail.userConfirmation.sendMail(req.body.firstName, req.body.email, mailConfirmationToken, null);*/
+			
+			//sending emails confirmatiom 
+			var user = {
+               	name : req.body.lastName,
+                email : req.body.email
+			   };
+			//console.log(user);
+    
+			var locals = {
+				  email:user.email,
+				  name:user.name,
+				  COMPANY: 'Service Desk',
+				  CONFIRMATION_URL : 'http://localhost:8080/confirm',
+				  MAIL_CONFIRMATION_TOKEN : mailConfirmationToken
+				};
+			//console.log(locals)
+			var templateName = '/user_confirmation/html';
+			//mail.userConfirmation.sendMail(templateName, locals, null);
+			
+ 			//mail.userConfirmation.sendMail(req.body.firstName, req.body.email, mailConfirmationToken, null);
+			mail.userConfirmation.sendMail(user.name, user.email, mailConfirmationToken, null)
+
  		});
  	}
 };
@@ -73,7 +95,7 @@ exports.registerClient = function(req, res, next) {
  /**
  * Confirm mail address
  */
-exports.createUser = function(req, res, next) {
+ exports.createUser = function(req, res, next) {
  	var mailConfirmationToken = req.param('mailConfirmationToken');
 
  	jwt.verify(mailConfirmationToken, config.secrets.mailConfirmation, function(error, data) {
@@ -87,14 +109,14 @@ exports.createUser = function(req, res, next) {
  			if (user) return res.send(403);
 
  			var newUser = new User(data);
- 			newUser.provider = 'local';
+ 			newUser.provider = 'locals';
+ 			newUser.role = 'admin';
  			newUser.confirmedEmail = true;
 
  			newUser.save(function(err, user) {
  				if (err) return validationError(res, err);
  				var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
  				res.json({ token: token });
-                
  			});
 
  		});
@@ -120,8 +142,13 @@ exports.createUser = function(req, res, next) {
  */
  exports.create = function (req, res, next) {
  	var newUser = new User(req.body);
- 	newUser.provider = 'local';
- 	//newUser.role = 'admin';
+ 	newUser.provider = 'locals';
+ 	newUser.role = 'user';
+     
+     User.create(req.body, function(err, rfccall) {
+                 if(err) { return handleRrror(res,err); }
+                 return res.json(201, user);
+                 });
      
  	newUser.save(function(err, user) {
  		if (err) return validationError(res, err);
@@ -143,6 +170,21 @@ exports.createUser = function(req, res, next) {
  	}).populate('clientPackage','packageName').populate('zone','deliveryZoneType deliveryZoneArea deliveryZoneAmount');
  };
 
+/**
+ * Get a single user all details
+ */
+ exports.showUser = function (req, res, next) {
+ 	var userId = req.params.id;
+     
+     
+ 	User.findById(userId, function (err, user) {
+ 		if (err) return next(err);
+ 		if (!user) return res.send(404);
+ 		res.json(user);
+    }).populate('clientPackage','packageName')
+        .populate('departmentName','departmentName')
+        .populate('zone','deliveryZoneType deliveryZoneArea deliveryZoneAmount');
+ };
  /**
   * Get all clients
   */

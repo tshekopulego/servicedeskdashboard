@@ -3,9 +3,33 @@
 var _ = require('lodash');
 var ICTStore = require('./ictstore.model');
 
-// Get list of category
+// Get list of ictstore
 exports.index = function (req, res) {
-    ICTStore.find(function (err, ictstore) {
+    ICTStore.find()
+	.populate('costCenter','costcenterName')
+	.populate('assetPriority','priorityName prioritySLA')
+	
+	.exec(function (err, ictstore){
+		var itemsArray = []
+		var itemIds = ictstore
+		
+		for (var i = 0; i < ictstore.length; i++) {
+			var status =itemIds[i].costCenter.costcenterName
+			itemsArray.push(status);
+			if(itemIds.length === itemsArray.length){
+				console.log(itemsArray)
+				var counts = {}, i, value;
+				for (i = 0; i < itemsArray.length; i++) {
+					value = itemsArray[i];
+					if (typeof counts[value] === "undefined") {
+						counts[value] = 1;
+					} else {
+						counts[value]++;
+					}
+				}
+				console.log(counts);
+			}
+		};
         if (err) {
             return handleError(res, err);
         }
@@ -13,9 +37,14 @@ exports.index = function (req, res) {
     });
 };
 
-// Get a single category
+// Get a single ictstore
 exports.show = function (req, res) {
-    ICTStore.findById(req.params.id, function (err, ictstore) {
+    ICTStore.findById({_id:req.params.id
+	}).sort({added:1})
+	
+	.populate('costCenter','costcenterName')
+	.populate('assetPriority','priorityName prioritySLA')
+	.exec(function (err, ictstore){
         if (err) {
             return handleError(res, err);
         }
@@ -26,7 +55,7 @@ exports.show = function (req, res) {
     });
 };
 
-// Creates a new category in the DB.
+// Creates a new ictstore in the DB.
 exports.create = function (req, res) {
     ICTStore.create(req.body, function (err, ictstore) {
         if (err) {
@@ -36,7 +65,7 @@ exports.create = function (req, res) {
     });
 };
 
-// Updates an existing category in the DB.
+// Updates an existing ictstore in the DB.
 exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id;
@@ -58,7 +87,7 @@ exports.update = function (req, res) {
     });
 };
 
-// Deletes a category from the DB.
+// Deletes a ictstore from the DB.
 exports.destroy = function (req, res) {
     ICTStore.findById(req.params.id, function (err, ictstore) {
 

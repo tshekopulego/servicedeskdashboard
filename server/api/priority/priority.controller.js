@@ -26,6 +26,16 @@ exports.show = function (req, res) {
     });
 };
 
+// Get Priority by PriorityId
+exports.getByPrioritID = function(req, res) {
+	Priority.find({
+		priorityId:req.params.prioritID
+	}).exec(function (err, priority) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, priority);
+	});
+};
+
 // Creates a new priority in the DB.
 exports.create = function (req, res) {
     Priority.create(req.body, function (err, priority) {

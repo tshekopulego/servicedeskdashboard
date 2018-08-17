@@ -1,0 +1,153 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+    <maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Edit Issue</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/issue">Issues</a>
+                </li>
+                <li class="active">
+                    <strong>Edit Issue</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeIn">
+        <maq-socket-disconnected></maq-socket-disconnected>
+        <maq-danger-alert></maq-danger-alert>
+        <maq-info-alert></maq-info-alert>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+
+                        <form name="editIssueForm" ng-submit="editIssue(issue,editIssueForm.$invalid)" role="form" novalidate>
+
+                             <div class="form-group" ng-class="{'has-error': editIssueForm.priority.$invalid && submitted,'has-success': !editIssueForm.priority.$invalid && submitted}">
+                                <label>Priority:</label>
+                                <ui-select id="priority" name="priority" ng-model="issue.issuePriority" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a Priority">{{$select.selected.priorityName}}</ui-select-match>
+                                    <ui-select-choices repeat="priority in priorities | filter: $select.search" value="{{priority._id}}">
+                                        <div ng-bind-html="priority.priorityName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Description: {{priority.priorityDescription}}
+                      											SLA (Hours): {{priority.prioritySLA}}
+                      								  </small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <p ng-show="editIssueForm.priority.$invalid && submitted" class="help-block">The Priority is required.</p>
+                            </div>
+                            
+                             <div class="form-group" ng-class="{'has-error': editIssueForm.user.$invalid && submitted,'has-success': !editIssueForm.user.$invalid && submitted}">
+
+                                <label>Select User:</label>
+                                <ui-select id="user" name="user" ng-model="issue.issueUser" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a User">{{$select.selected.lastName}}</ui-select-match>
+                                    <ui-select-choices repeat="user in users | filter: $select.search" value="{{user._id}}">
+                                        <div ng-bind-html="user.email | highlight: $select.search"></div>
+
+                                        <small>
+                                            Description: {{user.lastName}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <p ng-show="editIssueForm.user.$invalid && submitted" class="help-block">The user is required.</p>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': editIssueForm.category.$invalid && submitted,'has-success': !editIssueForm.category.$invalid && submitted}">
+
+                                <label>Category:</label>
+                                <ui-select id="category" name="category" ng-model="issue.issueCategory" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a Category">{{$select.selected.categoryName}}</ui-select-match>
+                                    <ui-select-choices repeat="category in categories | filter: $select.search" value="{{category._id}}">
+                                        <div ng-bind-html="category.categoryName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Surname: {{category.categoryDescription}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <p ng-show="editIssueForm.category.$invalid && submitted" class="help-block">The Category is required.</p>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': editIssueForm.channel.$invalid && submitted,'has-success': !editIssueForm.channel.$invalid && submitted}">
+                                <label>Channel:</label>
+                                <ui-select id="channel" name="channel" ng-model="issue.issueChannel" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a Channel">{{$select.selected.channelName}}</ui-select-match>
+                                    <ui-select-choices repeat="channel in channels | filter: $select.search" value="{{channel._id}}">
+                                        <div ng-bind-html="channel.channelName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Description: {{channel.channelDescription}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <p ng-show="editIssueForm.channel.$invalid && submitted" class="help-block">The Channel is required.</p>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': editIssueForm.division.$invalid && submitted,'has-success': !editIssueForm.division.$invalid && submitted}">
+                                <label>Division:</label>
+                                <ui-select id="division" name="division" ng-model="issue.issueDivision" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a Division">{{$select.selected.divisionName}}</ui-select-match>
+                                    <ui-select-choices repeat="division in divisions | filter: $select.search" value="{{division._id}}">
+                                        <div ng-bind-html="division.priorityName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Address: {{division.divisionAddress}}
+											                      Contact: {{division.divisionContact}}
+											                  </small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <p ng-show="editIssueForm.division.$invalid && submitted" class="help-block">The Division is required.</p>
+                            </div>
+
+                            <div class="form-group" ng-class="{ 'has-error' : editIssueForm.issueDescription.$invalid && submitted,'has-success': !editIssueForm.issueDescription.$invalid && submitted}">
+                                <label class="control-label" for="issueDescription">Description:</label>
+                                <textarea type="text" id="issueDescription" name="issueDescription" ng-model="issue.issueDescription" class="form-control" required></textarea>
+                                <p ng-show="editIssueForm.issueDescription.$invalid && submitted" class="help-block">The Description is required.</p>
+                            </div>
+
+
+                            <div class="form-group" ng-class="{'has-error': editIssueForm.contactNumber.$invalid && submitted,'has-success': !editIssueForm.contactNumber.$invalid && submitted}">
+                                <label class="control-label" for="contactNumber">Contact Number:</label>
+                                <input id="contactNumber" name="contactNumber" type="text" ng-model="issue.issueContactNumber" class="form-control" required/>
+                                <p ng-show="editIssueForm.contactNumber.$invalid && submitted" class="help-block">The Contact Number is required.</p>
+                            </div>
+
+                            <div class="form-group" ng-class="{'has-error': editIssueForm.issueStatus.$invalid && submitted,'has-success': !editIssueForm.issueStatus.$invalid && submitted}">
+                                <label>Status:</label>
+                                <ui-select id="issueStatus" name="issueStatus" ng-model="issue.issueStatus" theme="bootstrap" required>
+                                    <ui-select-match placeholder="Select a Status">{{$select.selected.issueStatusName}}</ui-select-match>
+                                    <ui-select-choices repeat="issuestatus in issuestatuses | filter: $select.search" value="{{issueStatus._id}}">
+                                        <div ng-bind-html="issuestatus.issueStatusName | highlight: $select.search"></div>
+
+                                        <small>
+                                            Description: {{issuestatus.issueStatusDescription}}
+											</small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <p ng-show="editIssueForm.issueStatus.$invalid && submitted" class="help-block">The Status is required.</p>
+                            </div>
+
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-small btn-primary">Submit</button>
+                                <a ng-click="cancel()" class="btn btn-small">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </div>
+</div>

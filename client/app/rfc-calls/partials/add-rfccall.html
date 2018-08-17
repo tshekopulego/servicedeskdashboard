@@ -48,13 +48,14 @@
                                 
                                 <label>Priority:</label>
                                 <ui-select id="priorities" name="priorities" ng-model="rfccall.priority" theme="bootstrap" required>
-                                    <ui-select-match placeholder="Select a priorityName">{{$select.selected.priorityName}}</ui-select-match>
-                                    <ui-select-choices repeat="priority in priorities | filter: $select.search" value="{{priorities._id}}">
-                                        <div ng-bind-html="priorities.priorities | highlight: $select.search"></div>
+                                    <ui-select-match placeholder="Select a Priority">{{$select.selected.priorityName}}</ui-select-match>
+                                    <ui-select-choices repeat="priority in priorities | filter: $select.search" value="{{priority._id}}">
+                                        <div ng-bind-html="priority.priorityName | highlight: $select.search"></div>
 
                                         <small>
-                                            Priority: {{priority.priorityDescription}}
-											</small>
+                                            Description: {{priority.priorityDescription}}
+                      											SLA (Hours): {{priority.prioritySLA}}
+                      								  </small>
                                     </ui-select-choices>
                                 </ui-select>
                                 
@@ -80,9 +81,9 @@
                                 <div class="form-group" ng-class="{'has-error': addUserForm.departments.$invalid && submitted,'has-success': !addUserForm.departments.$invalid && submitted}">
                                 
                                 <label>Department Name:</label>
-                                <ui-select id="departments" name="departments" ng-model="user.department" theme="bootstrap" required>
+                                <ui-select id="department" name="department" ng-model="rfccall.department" theme="bootstrap" required>
                                     <ui-select-match placeholder="Select a Department">{{$select.selected.departmentName}}</ui-select-match>
-                                    <ui-select-choices repeat="departments in department | filter: $select.search" value="{{department._id}}">
+                                    <ui-select-choices repeat="department in departments | filter: $select.search" value="{{department._id}}">
                                         <div ng-bind-html="department.departmentName | highlight: $select.search"></div>
 
                                         <small>

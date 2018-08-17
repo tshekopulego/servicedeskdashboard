@@ -1,0 +1,123 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-md-10">
+			<h2>ICTAsset</h2>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li class="active">
+					<strong>ICTAssets</strong>
+				</li>
+			</ol>
+		</div>
+		<div class="col-md-2 page-heading-actions">
+			<div class="pull-right">
+				<a href="/ictasset/add" class="btn btn-block btn-success btn-md"> <i class="fa fa-plus"></i>
+					Add New
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="ibox">
+					<div class="ibox-title">
+						<div class="row">
+							<div class="col-md-3">
+								<label for="search">Search:</label>
+								<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+							</div>
+							<div class="col-md-3">
+								<label for="search">Items Per Page:</label>
+								<input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+							</div>
+                            
+                            <div class="col-md-2">
+                                <label for="search">Asset Category:</label>
+                                <select class="form-control" name="categoryName" id="categoryName" ng-model="category._id" ng-options="category._id as category.categoryName for category in categories">
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <label for="search">Asset Type:</label>
+
+                                <select class="form-control" name="assettypeName" id="assettypeName" ng-model="assettype._id" ng-options="assettype._id as assettype.assettypeName for assettype in assettypes">
+
+                                </select>
+
+                            </div>
+                            
+                            
+                            
+                            <div class="col-md-2">
+
+                                <input type="button" name="" value="Go" ng-click="searchICTAssets(category._id,assettype._id)" class="btn btn-small btn-primary">
+                            </div>
+                            
+                            
+							<div class="col-md-3 col-md-offset-3">
+								
+																
+								<dir-pagination-controls pagination-id="ictasset" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
+							</div>
+						</div>
+					</div>
+					<div class="ibox-content table-responsive">
+						<table class="table" class="row-border hover">
+							<tr>
+								<th> Date</th>
+								<th>Asset Config Number</th>
+								<th>IT Number</th>
+								<th>Asset Description</th>
+								<th>Asset Serial Number</th>
+								<th>Asset Category</th>
+								<th>Asset Type</th>
+								<th>Priority</th><!--
+								<th> Over SLA?</th>-->
+								<th colspan="5">Actions</th>
+							</tr>
+							<tr dir-paginate="ictasset in ictassets | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="ictasset">
+								<td>{{ictasset.added | date:'medium'}}</td>
+								<td>{{ictasset.assetConfigNumber}}</td>
+								<td>{{ictasset.itNumber}}</td>
+								<td>{{ictasset.assetDescription}}</td>
+								<td>{{ictasset.assetSerialNumber}}</td>
+								<td>{{ictasset.assetCategory.categoryName}}</td>
+								<td>{{ictasset.assetType.assettypeName}}</td>
+								<td>{{ictasset.assetPriority.priorityName}}</td>
+								<!--<td ng-if="isOverSLA(ictasset.added,ictasset.assetPriority.prioritySLA)">
+												<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
+							  </td>
+								<td ng-if="!isOverSLA(ictasset.added,ictasset.assetPriority.prioritySLA)">
+												<span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>
+								</td>-->
+								<td ng-click="open(ictasset)">
+									<a title="View Details"><span class="glyphicon glyphicon-list"></span></a>
+								</td>
+								<td>
+									<a href="ictasset/edit/{{ictasset._id}}" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+								</td>
+								  <td ng-click="comments(ictasset)">
+                                    <a title="View Comments"><span class="fa fa-comments"></span></a>
+                                  </td>
+								<!--<td><a class="trash" title="Delete"><span class="glyphicon glyphicon-trash"></span></a></td>-->
+
+
+							</tr>
+						</table>
+					</div><!-- /.box-body -->
+				</div><!-- /.box -->
+			</div>
+		</div>
+	</div>
+</div>

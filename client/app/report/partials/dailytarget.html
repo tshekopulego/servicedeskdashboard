@@ -1,0 +1,475 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+<div id="page-wrapper" class="gray-bg">
+	<maq-inspinia-top-nav></maq-inspinia-top-nav>
+	<div class="wrapper wrapper-content animated fadeIn">
+		<maq-socket-disconnected></maq-socket-disconnected>
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+
+		<maq-danger-alert></maq-danger-alert>
+		<maq-info-alert></maq-info-alert>
+        
+        
+        
+
+		<div ng-if="isAdmin()" class="row">
+			
+            
+            
+            
+<!--
+            <div class="container-fluid">
+           
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="orange">
+                            <i class="fa fa-id-card"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category"><a href="/issues">Issues</a></p>
+                            <h3 class="title">{{counts.New + counts.Approved +counts.Rejected +counts.Cancelled }}</h3>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                
+                                 <i class="material-icons"></i> New: {{counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> Rejected: {{counts.Rejected }} 	&nbsp;	&nbsp; Cancelled: {{counts.Cancelled }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="red">
+                            <i class="fa fa-clone"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category"><a href="/rfccalls">RFC</a></p>
+                           
+                            <h3 class="title">{{counts.New + counts.Approved +counts.Rejected +counts.Cancelled }}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> New: {{counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Approved:{{counts.Approved }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i>  Rejected: {{counts.Rejected }}  	&nbsp;	&nbsp; Cancelled: {{counts.Cancelled }} 
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                
+                
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="blue">
+                            <i class="fa fa-desktop"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category"><a href="/ictasset">ICT</a></p>
+                           
+                            <h3 class="title">{{counts.New + counts.Approved +counts.Rejected +counts.Cancelled }}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons"></i> New: {{counts.New }} &nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i>  Rejected: {{counts.Rejected }} &nbsp; &nbsp; Cancelled: {{counts.Cancelled }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="green">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Fixed Issues</p>
+                            <h3 class="title">{{counts.New + counts.Approved +counts.Rejected +counts.Cancelled }}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> New: {{counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Approved: {{counts.Approved }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i>  Rejected: {{counts.Rejected }}  	&nbsp;	&nbsp; Cancelled: {{counts.Cancelled }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+     
+        </div>
+            
+            
+-->
+            
+            	<div class="container-fluid">
+                
+                
+                
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="orange">
+                            <i class="fa fa-id-card"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category"><a href="/issues">ISSUES</a></p>
+                            <h3 class="title">{{totalIssues}}</h3>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> New: {{ counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
+                            </div>
+                        </div>
+						<div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> Rejected: {{counts.Rejected }} 	&nbsp;	&nbsp; Cancelled: {{counts.Cancelled }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="red">
+                            <i class="fa fa-clone"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category"><a href="/rfccalls">RFC</a></p>
+                           
+                            <h3 class="title">{{totalrfccalls}}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> Standard: {{rfccounts.Standard }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Normal: {{rfccounts.Normal }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i>  Emergency: {{rfccounts.Emergency }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="green">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Fixed Issues</p>
+                            <h3 class="title">75</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i> New: {{counts.New }} 	&nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp; Approved: {{counts.Approved }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i>  Rejected: {{counts.New }}  	&nbsp;	&nbsp; Cancelled: {{counts.Approved }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats" >
+                        <div class="card-header" data-background-color="blue">
+                            <i class="fa fa-desktop"></i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category"><a href="/ictasset">ICT</a></p>
+                           
+                            <h3 class="title">245</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons"></i> New: {{counts.New }} &nbsp;	&nbsp;  &nbsp; &nbsp; &nbsp;&nbsp;  Approved: {{counts.Approved }} 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                 <i class="material-icons"></i>  Rejected: {{counts.New }} &nbsp; &nbsp; Cancelled: {{counts.Approved }} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-lg-3 col-md-6 col-sm-6"><div ng-controller="MainController"> 
+        
+    </div></div>
+            </div>
+				
+        </div>
+            
+            
+            
+            
+            
+</div>
+
+           <div id="loader-wrapper" class="anychart-loader">
+    <div class="rotating-cover">
+        <div class="rotating-plane">
+            <div class="chart-row"><span class="chart-col green"></span><span class="chart-col orange"></span><span
+                    class="chart-col red"></span></div>
+        </div>
+    </div>
+</div>
+<div class="wrapper">
+    <div class="row">
+        <div class="col-xs-12">
+            <nav class="navbar navbar-default" id="container-timeline">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#nav-date-time" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                  
+                </div><!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="chart_container">
+                 <div id="container33" style="height: 300px; width: 100%;"></div>
+                <div class="chart" id="chart3"></div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="chart_container">
+                <div id="container34" style="height: 300px; width: 100%;"></div>
+                <div class="chart" id="chart4"></div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="chart_container">
+                <div id="container8" style="height: 300px; width: 100%;"></div>
+                <div class="chart" id="chart5"></div>
+            </div>
+        </div>
+        
+         <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="chart_container">
+                <div id="container33" style="height: 300px; width: 100%;"></div>
+                <div class="chart" id="chart5"></div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="chart_container">
+                
+                <div class="chart" id="container1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+       
+        
+        
+        
+   
+  
+	</div>
+  
+    <style>
+#container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+        
+        
+        
+        
+        
+</style>
+
+<!-- Resources -->
+
+    
+<script>
+    
+anychart.onDocumentReady(function() {
+
+  // set the data
+  var data = [
+  {x: "Issues resolved within SLA", value: 637166},
+  {x: "High Priority Issues solved within SLA", value: 721630},
+  {x: "High Priority Issues NOT Resolved within SLA", value: 148662},
+  {x: "Normal Priority Issues solved within SLA", value: 78662},
+  {x: "All SLA not resolved", value: 90000}
+];
+    
+    
+    
+    
+    
+    
+
+  // create the chart
+  var chart = anychart.pie();
+    
+    
+
+  // set the chart title
+  chart.title("SLA Targets ");
+    
+    
+     chart.labels().position('outside');
+  // set legend title settings
+  chart.legend().title()
+    .enabled(true)
+    .text('SLA Category')
+    .padding([0, 0, 10, 0]);
+
+  // add the data
+  chart.data(data);
+
+  // display the chart in the container
+  chart.container('container8');
+  chart.draw();
+
+});
+    
+   anychart.onDocumentReady(function() {
+
+  // set the data
+  var data = [
+      {x: "Jan", value: 223553265},
+      {x: "Feb", value: 38929319},
+      {x: "March", value: 2932248},
+      {x: "April", value: 14674252},
+      {x: "May", value: 540013}
+//      {x: "Pending", value: 19107368},
+//      {x: "Two or More Races", value: 9009073}
+  ];
+
+  // create the chart
+  var chart = anychart.pie();
+
+  // set the chart title
+  chart.title("Monthly SLA overdue ");
+       
+        chart.labels().position('outside');
+  // set legend title settings
+  chart.legend().title()
+    .enabled(true)
+ .text('SLA Category')
+    .padding([0, 0, 10, 0]);
+       
+       
+
+  // add the data
+  chart.data(data);
+
+  // display the chart in the container
+  chart.container('container34');
+  chart.draw();
+
+});
+    
+    
+     anychart.onDocumentReady(function() {
+
+  // set the data
+  var data = [
+      {x: "Resolved ", value: 223553265},
+      {x: "NOT Resolved ", value: 38929319}
+     
+//      {x: "Pending", value: 19107368},
+//      {x: "Two or More Races", value: 9009073}
+  ];
+
+  // create the chart
+  var chart = anychart.pie();
+
+  // set the chart title
+  chart.title("Critical issues resolved within SLA ");
+       
+        chart.labels().position('outside');
+  // set legend title settings
+  chart.legend().title()
+    .enabled(true)
+.text('SLA Category')
+    .padding([0, 0, 10, 0]);
+       
+       
+
+  // add the data
+  chart.data(data);
+
+  // display the chart in the container
+  chart.container('container33');
+  chart.draw();
+
+});
+    
+    
+</script>
+    
+<!--    <div id="container34" style="height: 423px; width: 100%;"></div>-->
+    
+<!--  <div id="chartContainer89" style="height: 300px; width: 100%;"></div>-->
+
+<!--<div id="container8" style="height: 423px; width: 100%;"></div>-->
+   
+    
+
+    
+
+
+<style>
+.info-box {
+  cursor: pointer;
+}
+.info-box-content {
+  text-align: center;
+  vertical-align: middle;
+  display: inherit;
+       
+   
+}
+.fullCanvas {
+  width: 100%;
+}
+</style>
+    
+    
+
+

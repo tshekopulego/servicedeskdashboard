@@ -49,7 +49,7 @@
 				</ul>
 			</li>
 
-			<!-- <li class="treeview" ng-show="isAdmin()">
+			 <li class="treeview" ng-show="isAdmin()">
 				<a href="/packages" maq-sidebar-menu>
 					<i class="fa fa-gift"></i>
 					<span>Category</span>
@@ -59,6 +59,7 @@
 					<li><a href="/category">Category Dashboard</a></li>
 				</ul>
 			</li>
+            <!--
 			<li class="treeview" ng-show="isAdmin()">
 				<a href="/packages" maq-sidebar-menu>
 					<i class="fa fa-gift"></i>
@@ -66,10 +67,8 @@
 					<span class="fa fa-angle-left pull-right"></span>
 				</a>
 				<ul class="nav nav-second-level">
-
 					<li><a href="/department">Department Dashboard</a></li>
 					<li><a href="/department/add">Add department</a></li>
-
 				</ul>
 			</li> -->
             <li class="treeview" ng-show="isAdmin()">
@@ -85,7 +84,7 @@
 			</li>
 
 
-			<li class="treeview" ng-show="isAdmin()">
+			<!--<li class="treeview" ng-show="isAdmin()">
 				<a href="/packages" maq-sidebar-menu>
 					<i class="fa fa-shopping-bag"></i>
 					<span>ICT Store</span>
@@ -109,7 +108,7 @@
 					<li><a href="/ictasset/add">Add ICT Asset</a></li>
 				</ul>
 
-			</li>
+			</li>-->
 
 			<!-- <li class="treeview" ng-show="isAdmin()">
 				<a href="/bikes" maq-sidebar-menu>
@@ -122,15 +121,16 @@
 				</ul>
 			</li> -->
 
-			<li class="treeview" ng-show="isAdmin()">
+			<li class="treeview" ng-show="isAdmin() || getCurrentUser().role == 'Customer'">
 				<a href="/visitors" maq-sidebar-menu>
 					<i class="fa fa-id-card"></i>
-					<span>Issue</span>
+					<span>Incident</span>
 					<span class="fa fa-angle-left pull-right"></span>
 				</a>
 				<ul class="nav nav-second-level">
-					<li><a href="/issues">Issue Dashboard</a></li>
-                    <li><a href="/issues/add">Add Issue</a></li>
+					<li><a href="/issues">Incident Dashboard</a></li>
+                    <li><a href="/issues/add">Add Incident</a></li>
+                    <li><a>Total Incidents: {{totalIssues}}</a></li>
 				</ul>
 			</li>
 
@@ -144,7 +144,7 @@
 				<ul class="nav nav-second-level">
 					<li><a href="/rfccalls">Change Management Dashboard</a></li>
                     <li><a href="/rfccalls/add">Add RFC Call</a></li>
-                    <li><a>No of RFC Calls: {{$scope.count}}</a></li>
+                    <li><a>No of RFC Calls: {{$scope.totalrfccalls}}</a></li>
                     
 				</ul>
 			</li>
@@ -159,7 +159,6 @@
 					<li><a href="/officeparks">Office Parks Dashboard</a></li>
 				</ul>
 			</li>
-
 			<li class="treeview" ng-show="isAdmin()">
 				<a href="/companies" maq-sidebar-menu>
 					<i class="fa fa-building"></i>
@@ -170,7 +169,6 @@
 					<li><a href="/companies">Companies Dashboard</a></li>
 				</ul>
 			</li>
-
 			<li class="treeview" ng-show="isAdmin()">
 				<a href="/riders" maq-sidebar-menu>
 					<i class="fa fa-hand-rock-o"></i>
@@ -181,7 +179,6 @@
 					<li><a href="/riders">Riders Dashboard</a></li>
 				</ul>
 			</li>
-
 			 <li class="treeview" ng-show="isAdmin()">
 				<a href="/errands" maq-sidebar-menu>
 					<i class="fa fa-calendar"></i>
@@ -199,6 +196,18 @@
 					<li><a href="/errands/reports">Generate Errand Reports</a></li>
 				</ul>
 			</li> -->
+            <li class="treeview" ng-show="isAdmin()">
+            <a href="/visitors" maq-sidebar-menu>
+            <i class="fa fa-id-card"></i>
+            <span>Asset Management</span>
+            <span class="fa fa-angle-left pull-right"></span>
+            </a>
+            <ul class="nav nav-second-level">
+            <li><a href="/assestmanagement">Assets Dashboard</a></li>
+                                <li><a href="/assestmanagement/add">Add Asset</a></li>
+            </ul>
+            </li>
+
 		</ul>
 	</div>
 </nav>

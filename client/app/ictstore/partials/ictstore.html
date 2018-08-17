@@ -23,6 +23,15 @@
 		</div>
 	</div>
 	<div class="wrapper wrapper-content animated fadeIn">
+		<div class="col-md-10">
+		</div>
+		
+	</div>
+    
+    <div>
+        <nvd3 options='options' data='data'></nvd3>
+    </div>
+	<div class="wrapper wrapper-content animated fadeIn">
 		<maq-socket-disconnected></maq-socket-disconnected>
 		<maq-danger-alert></maq-danger-alert>
 		<maq-info-alert></maq-info-alert>
@@ -44,26 +53,39 @@
 							<div class="col-md-3 col-md-offset-3">
 								<dir-pagination-controls pagination-id="ictstore" template-url="components/pagination/dirPagination.tpl.html" class="pull-right"></dir-pagination-controls>
 							</div>
+							
 						</div>
 					</div>
 					<div class="ibox-content table-responsive">
 						<table class="table" class="row-border hover">
 							<tr>
+								<th> Date</th>
 								<th>Control Number</th>
 								<th>Name Surname</th>
 								<th>Location</th>
 								<th>Cost Center</th>
 								<th>Reason for Use</th>
 								<th>Owning Company</th>
+								<th> Priority</th>
+								<!--<th> Over SLA?</th>-->
 								<th colspan="5">Actions</th>
 							</tr>
 							<tr dir-paginate="ictstore in ictstores | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="ictstore">
+								<td>{{ictstore.added | date:'medium'}}</td>
 								<td>{{ictstore.controlNumber}}</td>
 								<td>{{ictstore.nameSurname}}</td>
 								<td>{{ictstore.location}}</td>
-								<td>{{ictstore.costCenter}}</td>
+								<td>{{ictstore.costCenter.costcenterName}}</td>
 								<td>{{ictstore.reasonForUse}}</td>
 								<td>{{ictstore.owningCompany}}</td>
+								<td>{{ictstore.assetPriority.priorityName}}</td>
+								<!--<td ng-if="isOverSLA(ictstore.added,ictstore.assetPriority.prioritySLA)">
+									<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
+							  </td>
+								<td ng-if="!isOverSLA(ictstore.added,ictstore.assetPriority.prioritySLA)">
+									<span class="label" style="background-color:#16a085; color: #ffffff; font-family: sans-serif;">NO</span>
+								</td>-->
+								
 								<td ng-click="open(ictstore)">
 									<a title="View Details"><span class="glyphicon glyphicon-list"></span></a>
 								</td>
