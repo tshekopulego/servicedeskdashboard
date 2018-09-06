@@ -29,6 +29,37 @@ angular.module('serviceDeskApp')
         $scope.rfccalls = rfccalls;
         socket.syncUpdates('rfccall', $scope.rfccalls,function(event,rfccall,rfccalls){
         });
+    
+    anychart.onDocumentReady(function() {
+        
+        
+        $http.get('/api/rfc-calls/rfccallreport').success(function(issues) {
+            var data = issues;
+            // create the chart
+            var chart = anychart.pie();
+            
+            // set the chart title
+            chart.title("Request for Change Report");
+            
+            // add the data
+            chart.data(data);
+            
+            // display the chart in the container
+            chart.container('container2');
+
+            chart.draw();
+            //download chart in pdf
+            $scope.PrioritisationReportPdf = function(){
+                chart.saveAsPdf();
+            };
+            
+            $scope.PrioritisationReportCsv = function(){
+                chart.saveAsXlsx();
+            };
+        });
+        
+    })
+    
         
         var count = rfccalls.length;
         

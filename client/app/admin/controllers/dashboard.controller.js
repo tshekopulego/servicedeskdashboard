@@ -10,9 +10,7 @@ angular.module('serviceDeskApp')
     $http.get('/api/issues').success(function(issues) {
 		$scope.issues = issues;
 		$scope.counts={};
-
 		$scope.totalIssues = issues.length;
-
 		var itemsArray = [];
 		var itemIds = issues
 		
@@ -32,21 +30,13 @@ angular.module('serviceDeskApp')
 						$scope.counts[$scope.value]++;
 					}
 				}
-
-                
-                
-                
 				console.log($scope.counts);
-                $scope.data1 = [
-                    {x: "New", value: $scope.counts.New},
-                    {x: "Approved", value: $scope.counts.Approved},
-                    {x: "Rejected", value: $scope.counts.Rejected}
-                ]
-
 			}
 		};
 		socket.syncUpdates('issue', $scope.issues,function(event,issue,issues){});
     });
+    
+    
 	$http.get('/api/rfc-calls').success(function(rfccalls) {
         $scope.rfccalls = rfccalls;
         socket.syncUpdates('rfccall', $scope.rfccalls,function(event,rfccall,rfccalls){
@@ -123,7 +113,6 @@ angular.module('serviceDeskApp')
 
         });
 });
-
     
     $http.get('/api/ictstore').success(function(ictstores) {
 		$scope.ictcalls = ictstores;
@@ -133,7 +122,7 @@ angular.module('serviceDeskApp')
 		var itemIds = ictstores
 		
 		for (var i = 0; i < ictstores.length; i++) {
-			var status =itemIds[i].assetPriority.prioritySLA
+			var status =itemIds[i].assetPriority.priorityName
 			
 			itemsArray.push(status);
 			
@@ -153,5 +142,134 @@ angular.module('serviceDeskApp')
 		};
 		socket.syncUpdates('ictstore', $scope.ictstore,function(event,ictstore,ictstores){});
     });
+    
+    
+    anychart.onDocumentReady(function() {
+        
+        $http.get('/api/issues/data').success(function(issues) {
 
+        var data = issues;
+
+         // create the chart
+         var chart = anychart.pie();
+         // set the chart title
+         chart.title("Issues by Status ");
+
+         // add the data
+         chart.data(data);
+         // display the chart in the container
+
+         chart.container('container1');
+
+         chart.draw();
+
+        
+         chart.listen("pointClick",function(e){
+                chart.title(e.point.get("x") + " " + e.point.getIndex());
+                var selectedData = data[e.point.getIndex()].x;
+                console.log('Data Selected :  ' + selectedData)
+                
+            });
+         });
+        
+        $http.get('api/rfc-calls/rfccallreport').success(function (rfccalls) {
+            var data = rfccalls;
+            // create the chart
+            var chart = anychart.pie();
+            
+            // set the chart title
+            chart.title("Request for Change Report");
+            
+            // add the data
+            chart.data(data);
+            
+            // display the chart in the container
+            chart.container('container2');
+
+            chart.draw();
+            //download chart in pdf
+            $scope.PrioritisationReportPdf = function(){
+                chart.saveAsPdf();
+            };
+            
+            $scope.PrioritisationReportCsv = function(){
+                chart.saveAsXlsx();
+            };
+    });
+        
+        $http.get('/api/issues/prioritisation/59673b1434c441b43f3995b4').success(function(repo) {
+
+           var data = repo;
+
+    
+
+             // create the chart
+             var chart = anychart.pie();
+
+    
+
+             // set the chart title
+             chart.title("Incident Prioritisation Report");
+
+             // add the data
+             chart.data(data);
+
+             // display the chart in the container
+             chart.container('container3');
+             chart.draw();
+        });
+
+        
+    });
+    
+    $scope.options = {
+            chart: {
+                type: 'multiBarHorizontalChart',
+                height: 450,
+                x: function(d){return d.label;},
+                y: function(d){return d.value;},
+                //yErr: function(d){ return [-Math.abs(d.value * Math.random() * 0.3), Math.abs(d.value * Math.random() * 0.3)] },
+                showControls: true,
+                showValues: true,
+                duration: 500,
+                xAxis: {
+                    showMaxMin: false
+                },
+                yAxis: {
+                    axisLabel: 'Values',
+                    tickFormat: function(d){
+                        return d3.format(',.2f')(d);
+                    }
+                }
+            }
+        };
+    $scope.tableData = function (){
+        
+    }
+        $scope.data = [
+            {
+                "key": "Issues",
+                "color": "#d62728",
+                "values": [
+                    {
+                        "label" : "New" ,
+                        "value" : -1.8746444827653
+                    }
+                ]
+            },
+            {
+                "key": "ICTCalls",
+                "color": "#1f77b4",
+                "values": [
+                    {
+                        "label" : "New" ,
+                        "value" : 25.307646510375
+                    },
+                    {
+                        "label" : "Old" ,
+                        "value" : 25.307646510375
+                    }
+                ]
+            }
+        ]
 	});

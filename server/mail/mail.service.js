@@ -7,7 +7,6 @@ var EmailTemplate = require('email-templates').EmailTemplate;
 var handlebars = require('handlebars');
 var fs = require('fs');
 
-
 var emailTemplates;
 require('email-templates')(__dirname, { open: '{{', close: '}}' }, function(err, _emailTemplates) {
 
@@ -42,7 +41,7 @@ exports.sendMail = function(templateName, user, subject, locals, callback) {
 	var cb = callback || _.noop;
 	console.log(config.mail.auth.user + ' ' +config.mail.address);
 	console.log('Send ' + subject + ' Mail');
-
+	
 	generateMail(templateName, locals, function(html){
 		var template = handlebars.compile(html);
     	var replacements = locals
@@ -76,7 +75,6 @@ exports.sendMail = function(templateName, user, subject, locals, callback) {
 			if(error){
 				console.log('Error on sending' + subject + ' mail:');
 				console.log(error);
-
 			}else{
 				console.log(subject + 'Mail sent: ');
 				cb(info.response);

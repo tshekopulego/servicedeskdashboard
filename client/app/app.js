@@ -12,7 +12,9 @@ angular.module('serviceDeskApp', [
       'ui.select',
       'ngTable',
       'wysiwyg.module',
-      'angularUtils.directives.dirPagination'
+      'angularUtils.directives.dirPagination',
+      'nvd3',
+      'ngJsonExportExcel'
 ])
 
 .config(function ($routeProvider, $locationProvider, $httpProvider) {

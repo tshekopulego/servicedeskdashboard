@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyApp">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Anychart AngularJS plugin demo.</title>
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/anychart/dist/js/anychart-base.min.js"></script>
+    <script src="../node_modules/anychart/dist/js/anychart-ui.min.js"></script>
+    <script src="../node_modules/anychart/dist/js/anychart-exports.min.js"></script>
+    <script src="../dist/anychart-angularjs.min.js"></script>
+    <link rel="stylesheet" href="../node_modules/anychart/dist/css/anychart-ui.min.css">
+    <link rel="stylesheet" href="../node_modules/anychart/dist/fonts/css/anychart-font.min.css">
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <script>
+        (function() {
+            'use strict';
+            angular
+                    .module('MyApp', ['anychart-angularjs'])
+                    .controller('MyCtrl', ['$scope', 'AnychartService', function($scope, AnychartService) {
+                        var data = [
+                            ["Chocolate", 5],
+                            ["Rhubarb compote", 2],
+                            ["Crêpe Suzette", 2],
+                            ["American blueberry", 2],
+                            ["Buttermilk", 1]
+                        ];
+
+                        var pie = anychart.pie(data);
+                        pie.title("Top 5 pancake fillings");
+                        pie.bounds(0, 0, '50%', '100%');
+
+                        var line = anychart.line(data);
+                        line.title("Top 5 pancake fillings");
+                        line.bounds('50%', 0, '50%', '100%');
+
+                        var afterDrawCallback = function(chart) {
+                            chart.title('After Draw Title');
+                        };
+
+                        AnychartService.charts.push(
+                                {
+                                    chart: pie,
+                                    chartDraw: afterDrawCallback
+                                },
+//                                {
+//                                    chart: line,
+//                                    chartDraw: afterDrawCallback
+//                                },
+                                line
+                        );
+
+                    }]);
+        })();
+    </script>
+
+</head>
+<body ng-controller="MyCtrl">
+    <div anychart-stage style="width: 1200px; height: 400px"></div>
+</body>
+</html>

@@ -40,6 +40,7 @@ angular.module('serviceDeskApp')
 
         if(form.$valid) {
             Auth.registerClient({
+                email: $scope.user.email,
                 phoneNumber: $scope.user.phoneNumber,
                 password: $scope.user.password,
                 added: Date.now()

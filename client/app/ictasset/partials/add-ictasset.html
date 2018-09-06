@@ -30,23 +30,6 @@
 					<div class="ibox-content">
 						<form novalidate="novalidate" name="addICTAssetForm" ng-submit="addICTAsset(ictasset,addICTAssetForm.$valid)" role="form" novalidate>
 
-                            
-                            
-							 <div class="form-group" ng-class="{'has-error': addICTAssetForm.category.$invalid && submitted,'has-success': !addICTAssetForm.category.$invalid && submitted}">
-
-                                <label>Asset Store:</label>
-                                <ui-select id="ictstore" name="ictstore" ng-model="ictasset.owningCompany" theme="bootstrap" required>
-                                    <ui-select-match placeholder="Select Store">{{$select.selected.owningCompany}}</ui-select-match>
-                                    <ui-select-choices repeat="ictstore in ictstores | filter: $select.search" value="{{ictstore._id}}">
-                                        <div ng-bind-html="ictstore.owningCompany | highlight: $select.search"></div>
-
-                                        <small>
-                                            Description: {{ictstore.owningCompany}}
-											</small>
-                                    </ui-select-choices>
-                                </ui-select>
-                                <p ng-show="addICTAssetForm.ictstore.$invalid && submitted" class="help-block">Owning Company is required.</p>
-                            </div>
 
 							<div class="form-group" ng-class="{'has-error': ICTAsset.assetConfigNumber.$invalid && submitted,'has-success': !ICTAsset.assetConfigNumber.$invalid && submitted}">
 								<label class="control-label" for="assetConfigNumber">Asset Config Number:</label>

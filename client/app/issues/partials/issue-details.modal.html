@@ -1,6 +1,6 @@
 <div>
 	<div class="modal-header">
-		<h3 class="modal-title">Issue Details</h3>
+		<h3 class="modal-title">Incident Details</h3>
 	</div>
 	<div class="modal-body">
 		<ul>
@@ -8,8 +8,9 @@
 			<li>Category: {{issue.issueCategory.categoryName}}</li>
 			<li>Description: {{issue.issueDescription}}</li>
 			<li>Status: {{issue.issueStatus.issueStatusName}}</li>
-			<li>Priority: {{issue.issuePriority}}</li>
-			<li>Channel: {{issue.issueChannel}}</li>
+			<li>Priority: {{issue.issuePriority.priorityName}}</li>
+            <li>Priority SLA: {{issue.issuePriority.prioritySLA}}</li>
+			<li>Channel: {{issue.issueChannel.channelName}}</li>
 			<li>Added: {{issue.added | date:'medium'}}</li>
 		</ul>
 	</div>

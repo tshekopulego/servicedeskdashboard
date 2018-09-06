@@ -45,9 +45,9 @@ var ngTableDoc = angular.module('ngTableDoc', ['ui.router', 'ngMessages'])
             }
         }
     })
-    .controller('MainController', function ($scope) {
+    /*.controller('MainController', function ($scope) {
         $scope.vm = {};
-    })
+    })*/
     .controller('NavController', function ($scope,$location, NAVSERVICE, NavStateService) {
         var model = {};
         var currentView = NavStateService.getView();

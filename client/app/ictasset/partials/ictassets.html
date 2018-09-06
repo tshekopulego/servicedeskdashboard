@@ -75,19 +75,19 @@
 					<div class="ibox-content table-responsive">
 						<table class="table" class="row-border hover">
 							<tr>
+								<th> Date</th>
 								<th>Asset Config Number</th>
 								<th>IT Number</th>
 								<th>Asset Description</th>
 								<th>Asset Serial Number</th>
 								<th>Asset Category</th>
 								<th>Asset Type</th>
-								<th>Priority</th>
-								<th> Date</th>
-								<th> Assigned To:</th><!--
+								<th>Priority</th><!--
 								<th> Over SLA?</th>-->
 								<th colspan="5">Actions</th>
 							</tr>
 							<tr dir-paginate="ictasset in ictassets | filter:q | itemsPerPage: pageSize" current-page="currentPage" pagination-id="ictasset">
+								<td>{{ictasset.added | date:'medium'}}</td>
 								<td>{{ictasset.assetConfigNumber}}</td>
 								<td>{{ictasset.itNumber}}</td>
 								<td>{{ictasset.assetDescription}}</td>
@@ -95,8 +95,6 @@
 								<td>{{ictasset.assetCategory.categoryName}}</td>
 								<td>{{ictasset.assetType.assettypeName}}</td>
 								<td>{{ictasset.assetPriority.priorityName}}</td>
-								<td>{{ictasset.added | date:'medium'}}</td>
-                                <td>{{ictasset.assetAssignedUser.firstName}}</td>
 								<!--<td ng-if="isOverSLA(ictasset.added,ictasset.assetPriority.prioritySLA)">
 												<span class="label" style="background-color:#e74c3c; color: #ffffff; font-family: sans-serif;">YES</span>
 							  </td>

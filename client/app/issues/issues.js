@@ -18,5 +18,9 @@ angular.module('serviceDeskApp')
     .when('/issues/edit/:id', {
         templateUrl: 'app/issues/partials/edit-issue.html',
         controller: 'EditIssueCtrl'
+    })
+    .when('/issues/comments/:id', {
+        templateUrl: 'app/issues/partials/issue-comments.modal.html',
+        controller: 'IssueCommentsModalInstanceCtrl'
     });
 });

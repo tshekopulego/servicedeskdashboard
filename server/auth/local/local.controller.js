@@ -32,6 +32,8 @@ exports.root = function(req, res, next) {
   if (user.role !== 'guest') return res.send(403);
 
   var mailConfirmationToken = jwt.sign({name : user.name, email: user.email,  password: user.password }, config.secrets.mailConfirmation, {expiresInMinutes: 60 * 24 * 30});
+     
+     console.log(mailConfirmationToken);
 
   mail.userConfirmation.sendMail(user.name, user.email, mailConfirmationToken, function(){
     res.send(200);

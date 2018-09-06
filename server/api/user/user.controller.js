@@ -43,7 +43,7 @@ var validationError = function(res, err) {
  			var guestSessionToken = jwt.sign({email: email, firstName : req.body.firstName, department : req.body.department, role : 'guest' , password: password }, config.secrets.session, { expiresInMinutes: 60*5 });
  			res.json({ token: guestSessionToken });
 
- 			var mailConfirmationToken = jwt.sign({firstName : req.body.firstName, lastName: req.body.lastName, email: req.body.email,  password: req.body.password }, config.secrets.mailConfirmation, {expiresInMinutes: 60 * 24 * 30});
+ 			var mailConfirmationToken = jwt.sign({firstName : req.body.firstName, lastName: req.body.lastName, email: req.body.email, role: req.body.role, password: req.body.password }, config.secrets.mailConfirmation, {expiresInMinutes: 60 * 24 * 30});
 			
 			//sending emails confirmatiom 
 			var user = {
@@ -87,11 +87,15 @@ exports.registerClient = function(req, res, next) {
  			}
 
  		} else {
- 			res.send(403);
+            var newUser = new User(user);
+            newUser.save(function(err, user) {
+ 				if (err) return validationError(res, err);
+ 				var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+ 				res.json({ token: token });
+ 			});
  		}
 	});
 };
-
  /**
  * Confirm mail address
  */
@@ -105,12 +109,17 @@ exports.registerClient = function(req, res, next) {
  		if (data.exp < Date.now()) return res.send(403);
 
  		User.findOne({email: data.email}, function(error, user){
+            console.log(data)
  			if (error) return res.send(403);
  			if (user) return res.send(403);
 
  			var newUser = new User(data);
  			newUser.provider = 'locals';
- 			newUser.role = 'admin';
+            if (!data.role){
+                newUser.role = 'admin';
+            } else {
+                newUser.role = data.role;
+            }
  			newUser.confirmedEmail = true;
 
  			newUser.save(function(err, user) {
@@ -170,6 +179,21 @@ exports.registerClient = function(req, res, next) {
  	}).populate('clientPackage','packageName').populate('zone','deliveryZoneType deliveryZoneArea deliveryZoneAmount');
  };
 
+/**
+ * Get a single user all details
+ */
+ exports.showUser = function (req, res, next) {
+ 	var userId = req.params.id;
+     
+     
+ 	User.findById(userId, function (err, user) {
+ 		if (err) return next(err);
+ 		if (!user) return res.send(404);
+ 		res.json(user);
+    }).populate('clientPackage','packageName')
+        .populate('departmentName','departmentName')
+        .populate('zone','deliveryZoneType deliveryZoneArea deliveryZoneAmount');
+ };
  /**
   * Get all clients
   */

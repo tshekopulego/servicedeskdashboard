@@ -4,6 +4,37 @@ var _ = require('lodash');
 var Rfccall = require('./rfccall.modal');
 
 // Get list of RFC Calls
+exports.rfccallReport = function(req, res) {
+	Rfccall.find()
+    .populate('changeRequestType','requesttypeName')
+    .populate('callEvaluationOutcome','evaluationoutcomeName')
+	.populate('rfccallPriority','priorityName prioritySLA')
+    .exec(function (err, rfccalls) {
+        var items = rfccalls;
+		if(err) { return handleError(res, err); }
+        else {
+            var temp = items.reduce(function(p,c){
+                var defaultValue = {
+                    x: c.changeRequestType.requesttypeName,
+                    y: 0
+                };
+                p[c.changeRequestType.requesttypeName] = p[c.changeRequestType.requesttypeName] || defaultValue
+                p[c.changeRequestType.requesttypeName].y++;
+                
+                return p;
+            }, {});
+            
+            var result = [];
+            for( var k in temp ){
+                result.push(temp[k]);
+            }
+            console.log(result)
+            return res.json(200, result);
+        }
+                                   
+    })
+}
+// Get list of RFC Calls
 exports.index = function(req, res) {
 	Rfccall.find()
     .populate('changeRequestType','requesttypeName')

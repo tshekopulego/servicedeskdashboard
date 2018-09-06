@@ -12,8 +12,7 @@ var UserSchema = new Schema({
 	email: { type: String, lowercase: true },
 	clientLocation: String,
 	role: {
-		type: String,
-		default: 'admin'
+		type: String
 	},
     departmentName: {type: Schema.Types.ObjectId, ref: 'Department'},
 	departmentId: { type: Number, ref: 'Department' },

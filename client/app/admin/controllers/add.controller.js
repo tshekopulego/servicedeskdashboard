@@ -1,5 +1,5 @@
 angular.module('serviceDeskApp')
-.controller('AddCtrl', function ($scope, $http, $location, $window, socket) {
+.controller('AddCtrl', function ($scope, $http, $location, $window, socket, Auth) {
 
     $scope.submitted = false;
     $scope.errors = {};
@@ -35,18 +35,63 @@ angular.module('serviceDeskApp')
         if(isValid && $scope.submitted) {
 
             if(user.departmentName) {
-                user.departmentName = $scope.departments._id;
+                user.departmentName = user.departmentName._id;
             }
 
             if(!_.isEmpty($scope.extraContacts)) {
                 user.extraContacts = $scope.extraContacts;
             }
             console.log($scope.user)
+            if($scope.user.role != 'admin'){
+                Auth.registerClient({
+                email: $scope.user.email,
+                phoneNumber: $scope.user.phoneNumber,
+                password: $scope.user.password,
+                role: $scope.user.role,
+                added: Date.now()
+            })
+            .then( function() {
+                // Account created, redirect to home
+                $location.path('/');
+            })
+            .catch( function(err) {
+                err = err.data;
+                $scope.errors = {};
+
+                // Update validity of form fields that match the mongoose errors
+                angular.forEach(err.errors, function(error, field) {
+                    form[field].$setValidity('mongoose', false);
+                    $scope.errors[field] = error.message;
+                });
+            });
+            }
+            Auth.createGuest({
+                firstName: $scope.user.firstName,
+                lastName: $scope.user.lastName,
+                email: $scope.user.email,
+                role: $scope.user.role,
+                password: $scope.user.password,
+                added: Date.now()
+            })
+            .then( function() {
+                // Account created, redirect to home
+                $location.path('/');
+            })
+            .catch( function(err) {
+                err = err.data;
+                $scope.errors = {};
+
+                // Update validity of form fields that match the mongoose errors
+                angular.forEach(err.errors, function(error, field) {
+                    form[field].$setValidity('mongoose', false);
+                    $scope.errors[field] = error.message;
+                });
+            });
             
             $http.post('/api/users',$scope.user)
             .then(function() {
                 $scope.user = '';
-                $location.path('/confirm');
+                $location.path('/');
             }).catch(function(err) {
                 err = err.data;
                 $scope.errors = {};

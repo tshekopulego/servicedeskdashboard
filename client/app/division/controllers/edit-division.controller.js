@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('serviceDeskApp')
-.controller('EditDivisionCtrl', function ($scope, $http, $window, $location, $routeParams) {
+.controller('EditEvaluatiionCtrl', function ($scope, $http, $window, $location, $routeParams) {
 
     $scope.division = {};
     $scope.division_id = $routeParams.id;

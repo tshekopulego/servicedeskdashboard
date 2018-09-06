@@ -5,13 +5,13 @@ angular.module('serviceDeskApp')
 
     $scope.division = {};
 
-    $scope.addDivision = function(division,isValid) {
+    $scope.addEvaluation = function(evaluation,isValid) {
         $scope.submitted = true;
         console.log(division);
         if(isValid && $scope.submitted) {
-            $http.post('/api/division',division);
+            $http.post('/api/evaluation',evaluation);
             $scope.division = {};
-            $location.path('/division');
+            $location.path('/evaluation');
         }
     };
 

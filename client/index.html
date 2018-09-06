@@ -8,20 +8,11 @@
         <meta charset="UTF-8">
         <base href="/">
         <title>Skhomo Service Desk</title>
-        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'><!---->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <!--<link href="../client/assets/css/ionicframework/ionicons.min.css" rel="stylesheet" type="text/css" />-->
 
-        
-        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker-standalone.css">
-	
-        
-        
-        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <!-- build:css({.tmp,client}) app/app.css -->
@@ -41,22 +32,28 @@
         <link rel="stylesheet" href="app/priority/priority.css">
         <link rel="stylesheet" href="app/status/issuestatus.css">
 		<link rel="stylesheet" href="app/assettype/assettype.css">
+        
         <link rel="stylesheet" href="assets/css/morris/morris.css">
         <link rel="stylesheet" href="assets/css/jvectormap/jquery-jvectormap-1.2.2.css">
         <link rel="stylesheet" href="assets/css/datepicker/datepicker3.css">
         <link rel="stylesheet" href="assets/css/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" href="assets/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
         <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.css">
-        <link rel="stylesheet" href="bower_component/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="bower_components/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
+        <link rel="stylesheet" href="assets/css/inspinia/animate.css">
+        <link rel="stylesheet" href="assets/css/inspinia/style.css">
+        
+    
+        <!--<link rel="stylesheet" href="bower_components/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css">-->
+        <!--<link rel="stylesheet" href="bower_components/angularjs-datepicker/src/css/angular-datepicker.css" rel="stylesheet" type="text/css">-->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <!--<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">-->
 <!--        <link rel="stylesheet" href="assets/css/inspinia/animate.css">-->
         <link rel="stylesheet" href="assets/css/inspinia/style.css">
 		
         <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
         
-        
+        <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css">
+       
         <!-- endinjector -->
         <!-- endbuild -->
 
@@ -79,12 +76,7 @@
         <script src="socket.io/socket.io.js"></script>
         <!-- build:js(client) app/vendor.js -->
         <!-- bower:js -->
-        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
-		<script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
-		<script type="text/javascript" src="../bower_components/moment/locale/ru.js"></script>
-		<script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-		<script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/angular/angular.js"></script>
         <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="../bower_components/angular-resource/angular-resource.js"></script>
@@ -109,13 +101,12 @@
         <script src="../bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
         <script src="../bower_components/angular-wysiwyg/angular-wysiwyg.js"></script>
         <script src="../bower_components/angular-utils-pagination/dirPagination.js"></script>
-        <script src="bower_components/angularjs-datepicker/src/js/angular-datepicker.js"></script>
-        
-        
-        
-        
-        
-        
+        <script src="bower_components/json-export-excel/dest/json-export-excel.js"></script>
+        <script src="bower_components/json-export-excel/dest/json-export-excel.min.js"></script>
+        <script src="bower_components/file-saver/bower.json"></script>
+        <script src="bower_components/file-saver/FileSaver.js"></script>
+                <!--
+        <script src="bower_components/angularjs-datepicker/src/js/angular-datepicker.js"></script>-->
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -123,20 +114,23 @@
         <script src="app/app.js"></script>
         <!-- injector:js -->
         
-         <script src="https://static.anychart.com/js/8.0.1/anychart-core.min.js"></script>
-        <script src="https://static.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
         
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
          <script src="app/report/controllers/reports.js"></script>
+         <script src="app/report/controllers/general-report.js"></script>
+         <script src="app/report/controllers/incident-prioririty.controller.js"></script>
+         <script src="app/report/controllers/incident-resolution.controller.js"></script>
+         <script src="app/report/controllers/asset-report.controller.js"></script>
         <script src="app/report/report.js"></script>
-
+        
         <script src="app/account/account.js"></script>
         <script src="app/account/confirm/confirm.controller.js"></script>
         <script src="app/account/login/login.controller.js"></script>
         <script src="app/account/pwdreset/pwdreset.controller.js"></script>
         <script src="app/account/settings/settings.controller.js"></script>
         <script src="app/account/signup/signup.controller.js"></script>
+        
         <script src="app/admin/admin.js"></script>
         <script src="app/admin/controllers/add.controller.js"></script>
         <script src="app/admin/controllers/admin.controller.js"></script>
@@ -152,6 +146,7 @@
         <script src="app/admin/directives/select-client.directive.js"></script>
         <script src="app/admin/directives/sidebar.menu.directive.js"></script>
         <script src="app/admin/directives/update-extra-contacts.directive.js"></script>
+        
         <script src="app/category/category.js"></script>
         <script src="app/category/controllers/add-category.controller.js"></script>
         <script src="app/category/controllers/category.controller.js"></script>
@@ -182,11 +177,20 @@
         <script src="app/division/controllers/division.controller.js"></script>
         <script src="app/division/controllers/edit-division.controller.js"></script>
         <script src="app/division/division.js"></script>
+        
         <script src="app/ictasset/controllers/add-ictasset.controller.js"></script>
         <script src="app/ictasset/controllers/edit-ictasset.controller.js"></script>
         <script src="app/ictasset/controllers/ictasset.controller.js"></script>
         <script src="app/ictasset/controllers/modal-instance.controller.js"></script>
 
+        <script src="app/assest-management/controllers/assestmanagement.controller.js"></script>
+         <script src="app/assest-management/controllers/add-assestmanagement.controller.js"></script>
+         <script src="app/assest-management/controllers/edit-assestmanagement.controller.js"></script>
+         <script src="app/assest-management/controllers/modal-instance.controller.js"></script>
+         <script src="app/assest-management/assestmanagement.js"></script>
+
+        
+        
         <script src="app/ictasset/ictasset.js"></script>
 
         <script src="app/ictstore/controllers/add-ictstore.controller.js"></script>
@@ -220,21 +224,34 @@
         <script src="app/priority/controllers/modal-instance.controller.js"></script>
         <script src="app/priority/controllers/priority.controller.js"></script>
         <script src="app/priority/priority.js"></script>
-        <script src="app/request-type/controllers/request-type.controller.js"></script>
+        
+        <script src="app/request-type/controllers/edit-requesttype.controller.js"></script>
+        <script src="app/request-type/controllers/requesttype.controller.js"></script>
+        <script src="app/request-type/controllers/add-requesttype.controller.js"></script>
         <script src="app/request-type/requesttype.js"></script>
+        
         <script src="app/rfc-calls/controllers/add-rfccall.controller.js"></script>
         <script src="app/rfc-calls/controllers/edit-rfccall.controller.js"></script>
         <script src="app/rfc-calls/controllers/rfccall-modal-instance.controller.js"></script>
         <script src="app/rfc-calls/controllers/rfccall.controller.js"></script>
         <script src="app/rfc-calls/rfccalls.js"></script>
+        
         <script src="app/department/controllers/add-department.controller.js"></script>
         <script src="app/department/controllers/department-model-instance.controller.js"></script>
         <script src="app/department/controllers/department.controller.js"></script>
+        <script src="app/department/controllers/edit-department.controller.js"></script>
         <script src="app/department/department.js"></script>
+        
+        <script src="app/evaluation-outcome/controllers/add-evaluation.controller.js"></script>
+        <script src="app/evaluation-outcome/controllers/edit-evaluation.controller.js"></script>
+        <script src="app/evaluation-outcome/controllers/evaluation.controller.js"></script>
+        <script src="app/evaluation-outcome/evaluationoutcome.js"></script>
+        
         <script src="app/status/controllers/add-issuestatus.controller.js"></script>
         <script src="app/status/controllers/edit-issuestatus.controller.js"></script>
         <script src="app/status/controllers/issuestatus.controller.js"></script>
         <script src="app/status/issuestatus.js"></script>
+        
         <script src="components/auth/auth.service.js"></script>
         <script src="components/auth/local.service.js"></script>
         <script src="components/auth/user.service.js"></script>
@@ -249,6 +266,7 @@
         <script src="components/navbar/navbar.controller.js"></script>
         <script src="components/navbar/treeview-toggle.directive.js"></script>
         <script src="components/socket/socket.service.js"></script>
+        
         <script src="assets/js/plugins/daterangepicker/daterangepicker.js"></script>
         <script src="assets/js/plugins/datepicker/bootstrap-datepicker.js"></script>
         <script src="assets/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
@@ -258,6 +276,15 @@
         <!-- endinjector -->
         <!-- endbuild -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        
+        <script src="../bower_components/d3/d3.js"></script>
+        <script src="../bower_components/nvd3/build/nv.d3.js"></script> <!-- or use another assembly -->
+        <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+        
+        <script src="components/any-chart/anychart-bundle.min.js"></script>
+        <script src="components/any-chart/anychart-data-adapter.min.js"></script>
+        <script src="components/any-chart/anychart-core.min.js"></script>
+        <script src="components/any-chart/anychart-pie.min.js"></script>
 
     </body>
 </html>

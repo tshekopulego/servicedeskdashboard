@@ -29,6 +29,7 @@ module.exports = function(app) {
   app.use('/api/evaluation-outcome', require('./api/evaluation-outcome'));
   app.use('/api/costcenter', require('./api/costcenter'));
   app.use('/api/hardware', require('./api/hardware'));
+  app.use('/api/assestmanagement', require('./api/assest-management'))
   app.use('/mail', require('./api/user'));
 
   	

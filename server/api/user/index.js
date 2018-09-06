@@ -7,7 +7,7 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-router.get('/', auth.hasRole('admin'), controller.index);
+router.get('/', controller.index);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.get('/clients', controller.clients);
@@ -17,6 +17,7 @@ router.put('/:id', auth.isAuthenticated(), controller.updateUser);
 router.get('/:id', controller.show);
 router.post('/', controller.createGuest);
 router.put('/', controller.createUser);
+router.get('/userD/:id', controller.showUser);
 router.post('/register-client', controller.registerClient);
 
 module.exports = router;

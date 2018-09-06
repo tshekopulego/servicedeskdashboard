@@ -1,0 +1,45 @@
+{
+  "name": "anychart-angularjs",
+  "version": "1.2.1",
+  "description": "AngularJS v1.x directives for AnyChart",
+  "main": "dist/anychart-angularjs.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnyChart/AnyChart-AngularJS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AnyChart/AnyChart-AngularJS/issues"
+  },
+  "keywords": [
+    "anychart",
+    "anystock",
+    "anygantt",
+    "anymap",
+    "charts",
+    "javascript charts",
+    "ajax charts",
+    "plots",
+    "line charts",
+    "bar charts",
+    "pie charts",
+    "javascript plots",
+    "ajax plots",
+    "javascript",
+    "SVG",
+    "HTML5",
+    "framework",
+    "VML",
+    "angular",
+    "angularjs"
+  ],
+  "author": "AnyChart <contact@anychart.com> (http://anychart.com)",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/AnyChart/AnyChart-AngularJS.git",
+  "dependencies": {
+    "angular": "^1.6.7",
+    "anychart": "^8.0.0"
+  }
+}

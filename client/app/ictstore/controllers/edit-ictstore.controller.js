@@ -28,7 +28,7 @@ angular.module('serviceDeskApp')
 			$scope.ictstore.assetPriority = ictstore.priority._id;
 			
 			$scope.ictstore.costCenter = ictstore.costCenter.costcenterId;
-			$scope.ictstore.assetPriority = ictstore.priority.priorityId;
+			$scope.ictstore.assetPriorityId = ictstore.priority.priorityId;
 			
 			$http.post('/api/ictstore',$scope.ictstore);
 			$http.put('/api/ictstore/' + $scope.ictstore_id,ictstore);

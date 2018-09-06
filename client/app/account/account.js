@@ -26,7 +26,7 @@ angular.module('serviceDeskApp')
 			})
 			.when('/confirm', {
 				templateUrl: 'app/account/confirm/confirm.html',
-				controller: 'ConfirmCtrl'
+				controller: 'ConfirmCtrl',
 				//authenticate: true
 			})
 			.when('/confirm/:confirmToken', {

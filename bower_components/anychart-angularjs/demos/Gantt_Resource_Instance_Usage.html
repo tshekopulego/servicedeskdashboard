@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Anychart AngularJS plugin demo.</title>
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/anychart/dist/js/anychart-base.min.js"></script>
+    <script src="../node_modules/anychart/dist/js/anychart-gantt.min.js"></script>
+    <script src="../node_modules/anychart/dist/js/anychart-ui.min.js"></script>
+    <script src="../node_modules/anychart/dist/js/anychart-exports.min.js"></script>
+    <script src="../dist/anychart-angularjs.min.js"></script>
+    <link rel="stylesheet" href="../node_modules/anychart/dist/css/anychart-ui.min.css">
+    <link rel="stylesheet" href="../node_modules/anychart/dist/fonts/css/anychart-font.min.css">
+    <script src="res/resources-simple.js"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <script>
+        (function() {
+            'use strict';
+            angular
+                    .module('MyApp', ['anychart-angularjs'])
+                    .controller('MyCtrl', ['$scope', function($scope) {
+                        $scope.myData = anychart.data.tree(getData(), 'as-table');
+
+                        // create resource gantt chart
+                        var chart = anychart.ganttResource();
+
+                        function log(eventType, message) {
+                            console.log(eventType + '. ' + message);
+                        }
+
+                        // External events
+                        chart.listen('rowClick', function(e) {
+                            var msg = e['item'].get('name');
+                            if (e['period']) msg += ', Period #' + (e['periodIndex'] + 1);
+                            log('rowClick', msg);
+                        });
+
+                        chart.listen('rowSelect', function(e) {
+                            var msg = e['item'].get('name');
+                            log('rowSelect', msg);
+                        });
+
+                        chart.listen('rowDblClick', function(e) {
+                            var msg = e['item'].get('name');
+                            if (e['period']) msg += ', Period #' + (e['periodIndex'] + 1);
+                            log('rowDblClick', msg);
+                        });
+
+                        chart.listen('rowMouseOver', function(e) {
+                            var msg = e['item'].get('name');
+                            if (e['period']) msg += ', Period #' + (e['periodIndex'] + 1);
+                            log('rowMouseOver', msg);
+                        });
+
+                        chart.listen('rowMouseMove', function(e) {
+                            var msg = e['item'].get('name');
+                            if (e['period']) msg += ', Period #' + (e['periodIndex'] + 1);
+                            log('rowMouseMove', msg);
+                        });
+
+                        chart.listen('rowMouseOut', function(e) {
+                            var msg = e['item'].get('name');
+                            if (e['period']) msg += ', Period #' + (e['periodIndex'] + 1);
+                            log('rowMouseOut', msg);
+                        });
+
+                        chart.listen('rowMouseUp', function(e) {
+                            var msg = e['item'].get('name');
+                            if (e['period']) msg += ', Period #' + (e['periodIndex'] + 1);
+                            log('rowMouseUp', msg);
+                        });
+
+                        chart.listen('rowMouseDown', function(e) {
+                            var msg = e['item'].get('name');
+                            if (e['period']) msg += ', Period #' + (e['periodIndex'] + 1);
+                            log('rowMouseDown', msg);
+                        });
+
+                        $scope.ch = chart;
+
+                        $scope.decorate = function(chart) {
+                            chart.zoomTo(Date.UTC(2014, 3, 8), Date.UTC(2014, 3, 13));
+
+                            chart.title().padding().top(15);
+
+                            var dataGrid = chart.dataGrid();
+
+                            // styling the data grid
+                            dataGrid.rowEvenFill('#e3f2fd');
+                            dataGrid.rowOddFill('#f6fbfe');
+                            dataGrid.rowHoverFill('#fff8e1');
+                            dataGrid.rowSelectedFill('#ffecb3');
+                            dataGrid.columnStroke('2 #90caf9');
+                            // disabling default 0-column
+                            dataGrid.column(0, false);
+
+                            // getting chart's timeline
+                            var timeline = chart.getTimeline();
+
+                            // styling the timeline
+                            timeline.rowEvenFill('#e4e5ea 0.5');
+                            timeline.rowOddFill('#fff');
+                            timeline.rowHoverFill('#f4e8ec');
+                            timeline.rowSelectedFill('#d1b8bf');
+                            timeline.columnStroke('2 #90caf9');
+                        }
+                    }]);
+        })();
+    </script>
+</head>
+<body ng-controller="MyCtrl">
+<div
+        anygantt
+        ac-data="myData"
+        ac-title="External Events example, see browser console for details."
+        ac-splitter-position="171"
+        ac-instance="ch"
+        ac-chart-draw="decorate"
+        style="width: 100%; height: 100%">
+</div>
+</body>
+</html>

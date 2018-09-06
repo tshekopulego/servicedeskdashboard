@@ -1,0 +1,593 @@
+<maq-inspinia-nav></maq-inspinia-nav>
+
+<div id="page-wrapper" class="gray-bg">
+
+    <maq-inspinia-top-nav></maq-inspinia-top-nav>
+
+    <div class="wrapper wrapper-content animated fadeIn">
+
+        <maq-socket-disconnected></maq-socket-disconnected>
+
+        <maq-danger-alert></maq-danger-alert>
+
+        <maq-info-alert></maq-info-alert>
+
+
+
+        <maq-danger-alert></maq-danger-alert>
+
+        <maq-info-alert></maq-info-alert>
+
+
+
+
+
+
+        <div ng-if="isAdmin()" class="row">
+
+            
+
+
+
+<!--
+
+
+<div class="container-fluid">
+
+
+
+
+<div class="row">
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+
+<div class="card card-stats" >
+
+<div class="card-header" data-background-color="orange">
+
+<i class="fa fa-id-card"></i>
+
+</div>
+
+<div class="card-content">
+
+<p class="category"><a href="/issues">Issues</a></p>
+
+<h3 class="title">{{counts.New + counts.Approved +counts.Rejected +counts.Cancelled }}</h3>
+
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+
+<i class="material-icons"></i> New: {{counts.New }}    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Approved: {{counts.Approved }} 
+
+</div>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> Rejected: {{counts.Rejected }}  &nbsp;  &nbsp; Cancelled: {{counts.Cancelled }} 
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+
+<div class="card card-stats" >
+
+<div class="card-header" data-background-color="red">
+
+<i class="fa fa-clone"></i>
+
+</div>
+
+<div class="card-content">
+
+<p class="category"><a href="/rfccalls">RFC</a></p>
+
+
+<h3 class="title">{{counts.New + counts.Approved +counts.Rejected +counts.Cancelled }}</h3>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> New: {{counts.New }}    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Approved:{{counts.Approved }} 
+
+</div>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> Rejected: {{counts.Rejected }}    &nbsp;  &nbsp; Cancelled: {{counts.Cancelled }} 
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+
+<div class="card card-stats" >
+
+<div class="card-header" data-background-color="blue">
+
+<i class="fa fa-desktop"></i>
+
+</div>
+
+<div class="card-content">
+
+<p class="category"><a href="/ictasset">ICT</a></p>
+
+
+<h3 class="title">{{counts.New + counts.Approved +counts.Rejected +counts.Cancelled }}</h3>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> New: {{counts.New }} &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Approved: {{counts.Approved }} 
+
+</div>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> Rejected: {{counts.Rejected }} &nbsp; &nbsp; Cancelled: {{counts.Cancelled }} 
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+
+<div class="card card-stats" >
+
+<div class="card-header" data-background-color="green">
+
+<i class="fa fa-check"></i>
+
+</div>
+
+<div class="card-content">
+
+<p class="category">Fixed Issues</p>
+
+<h3 class="title">{{counts.New + counts.Approved +counts.Rejected +counts.Cancelled }}</h3>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> New: {{counts.New }}    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Approved: {{counts.Approved }} 
+
+</div>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> Rejected: {{counts.Rejected }}    &nbsp;  &nbsp; Cancelled: {{counts.Cancelled }} 
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+</div>
+
+
+
+-->
+
+
+
+
+    <div class="container-fluid">
+
+
+
+
+<div class="row">
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+
+<div class="card card-stats" >
+
+<div class="card-header" data-background-color="orange">
+
+<i class="fa fa-id-card"></i>
+
+</div>
+
+<div class="card-content">
+
+<p class="category"><a href="/issues">ISSUES</a></p>
+
+<h3 class="title">{{totalIssues}}</h3>
+
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> New: {{ counts.New }}   &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Approved: {{counts.Approved }} 
+
+</div>
+
+</div>
+
+                        <div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> Rejected: {{counts.Rejected }}  &nbsp;  &nbsp; Cancelled: {{counts.Cancelled }} 
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+
+<div class="card card-stats" >
+
+<div class="card-header" data-background-color="red">
+
+<i class="fa fa-clone"></i>
+
+</div>
+
+<div class="card-content">
+
+<p class="category"><a href="/rfccalls">RFC</a></p>
+
+
+<h3 class="title">{{totalrfccalls}}</h3>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> Standard: {{rfccounts.Standard }}   &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Normal: {{rfccounts.Normal }} 
+
+</div>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> Emergency: {{rfccounts.Emergency }}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+
+<div class="card card-stats" >
+
+<div class="card-header" data-background-color="green">
+
+<i class="fa fa-check"></i>
+
+</div>
+
+<div class="card-content">
+
+<p class="category">Fixed Issues</p>
+
+<h3 class="title">75</h3>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> New: {{counts.New }}    &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Approved: {{counts.Approved }} 
+
+</div>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> Rejected: {{counts.New }}     &nbsp;  &nbsp; Cancelled: {{counts.Approved }} 
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+
+<div class="card card-stats" >
+
+<div class="card-header" data-background-color="blue">
+
+<i class="fa fa-desktop"></i>
+
+</div>
+
+<div class="card-content">
+
+<p class="category"><a href="/ictasset">ICT</a></p>
+
+
+<h3 class="title">245</h3>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> New: {{counts.New }} &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Approved: {{counts.Approved }} 
+
+</div>
+
+</div>
+
+<div class="card-footer">
+
+<div class="stats">
+
+<i class="material-icons"></i> Rejected: {{counts.New }} &nbsp; &nbsp; Cancelled: {{counts.Approved }} 
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6"><div ng-controller="MainController"> 
+
+
+</div></div>
+
+</div>
+
+                
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+<style>
+
+#container {
+
+width: 100%;
+
+height: 100%;
+
+margin: 0;
+
+padding: 0;
+
+}
+
+
+
+
+
+
+</style>
+
+
+
+<!-- Resources -->
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+
+<div class="col-lg-4 col-md-4 col-sm-4">
+
+<div class="box-footer">
+
+<button ng-click="StatusPdf()" class="btn btn-small btn-primary">Download PDF</button>
+
+<button ng-click="StatusCsv()" class="btn btn-small btn-primary">Download CSV</button>
+
+</div>
+
+<div class="chart_container">
+
+<div id="container1" style="height: 423px; width: 100%;"></div>
+
+<div class="chart" id="chart3"></div>
+
+</div>
+
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-4">
+
+<div class="box-footer">
+
+<button ng-click="PrioritisationReportPdf()" class="btn btn-small btn-primary">Download PDF</button>
+
+<button ng-click="PrioritisationReportCsv()" class="btn btn-small btn-primary">Download CSV</button>
+
+</div>
+
+<div class="chart_container">
+
+<div id="container2" style="height: 423px; width: 100%;"></div>
+
+<div class="chart" id="chart3"></div>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-4 col-md-4 col-sm-4">
+
+<div class="box-footer">
+
+<button ng-click="sourceReportPdf()" class="btn btn-small btn-primary">Download PDF</button>
+
+<button ng-click="sourceReportCsv()" class="btn btn-small btn-primary">Download CSV</button>
+
+</div>
+
+<div class="chart_container">
+
+<div id="container3" style="height: 423px; width: 100%;"></div>
+
+<div class="chart" id="chart5"></div>
+
+</div>
+
+</div> 
+
+
+<!-- <div class="col-lg-4 col-md-4 col-sm-4">
+
+<div class="chart_container">
+
+<div id="container" style="height: 300px; width: 100%;"></div>
+
+<div class="chart" id="chart5"></div>
+
+</div>
+
+</div> -->
+
+
+
+
+</div> 
+
+
+
+
+
+
+
+
+<style>
+
+.info-box {
+
+cursor: pointer;
+
+}
+
+.info-box-content {
+
+text-align: center;
+
+vertical-align: middle;
+
+display: inherit;
+
+
+
+}
+
+.fullCanvas {
+
+width: 100%;
+
+}
+
+</style>
